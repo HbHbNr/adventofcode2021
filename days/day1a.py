@@ -1,6 +1,6 @@
 import fileinput
 
-inputfile = "day1_input.txt"
+inputfile = "inputfiles/day1_input.txt"
 
 firstline = True
 lastvalue = 0
