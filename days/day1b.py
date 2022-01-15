@@ -2,11 +2,11 @@ import fileinput
 
 inputfile = "day1_input.txt"
 
-lastwindow =[]
+lastwindow = []
 increments = 0
 for line in fileinput.input(inputfile):
     value = int(line)
-    if len(lastwindow)<3:
+    if len(lastwindow) < 3:
         lastwindow.append(value)
     else:
         currentwindow = lastwindow[1:]
@@ -14,6 +14,6 @@ for line in fileinput.input(inputfile):
         if(sum(currentwindow) > sum(lastwindow)):
             increments += 1
         lastwindow = currentwindow
-    #print(lastwindow)
+    # print(lastwindow)
 
 print(increments)
