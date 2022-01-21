@@ -39,8 +39,6 @@ class BingoMatch:
             index += 6
 
     def play(self):
-        # pickednumbers = [22]
-        # pickednumbers = [7, 4, 9, 5, 11, 17]
         pickednumbers = self._pickednumbers
         for numberindex, pickednumber in enumerate(pickednumbers):
             for boardindex, bingoboard in enumerate(self._bingoboards):
@@ -60,19 +58,9 @@ class BingoMatch:
 if __name__ == '__main__':
     import util
 
-    # lines = util.readinputfile('inputfiles/day4_example.txt')
     lines = util.readinputfile('inputfiles/day4_input.txt')
     bingomatch = BingoMatch(lines)
-    # for bingoboard in bingomatch.bingoboards:
-    #     bingoboard.print()
-    #     print()
     result = bingomatch.play()
     print(result)
     if result is not None:
         print(result['pickednumber'] * result['boardsum'])
-    # for bingoboard in bingomatch.bingoboards:
-    #     bingoboard.print()
-    #     print()
-#    print('oxygen: {} -> {}'.format(oxygen, int(oxygen, 2)))
-#    print('co2: {} -> {}'.format(co2, int(co2, 2)))
-#    print('oxygen * co2: {}'.format(int(oxygen, 2) * int(co2, 2)))
