@@ -27,7 +27,6 @@ class Map:
         else:
             self.drawlined(x1, y1, x2, y2)
 
-
     def drawlined(self, x1, y1, x2, y2):
         if x2 < x1:
             # always draw from left to right
