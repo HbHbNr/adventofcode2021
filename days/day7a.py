@@ -12,7 +12,7 @@ class Aligner:
         bestx = None
         totalfuels = {}
         for testpos in range(min(self._crabs), max(self._crabs) + 1):
-            distances = [int(abs(testpos - crab)) for crab in self._crabs]
+            distances = [abs(testpos - crab) for crab in self._crabs]
             totalfuels[testpos] = sum(distances)
             if bestx is None or totalfuels[bestx] > totalfuels[testpos]:
                 bestx = testpos
