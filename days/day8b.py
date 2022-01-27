@@ -1,12 +1,12 @@
 # steps to determine all numbers
-# 7 - 1 -> a
+# distinct string lengths: 1, 7, 8, 8
+# (7 - 1 -> a)
 # 6c contains 4 -> 9, rest: 6c2
 # 6c2 contains 1 -> 0, rest: 6
-# 8 - 9 -> e
+# (8 - 9 -> e)
 # (8 - 0 -> d)
 # (8 - 6 -> c)
-# 6 - e -> 5  or without intermediate step:  6 - (8 - 9) -> 5
-# 5c remove 5 -> 5c2
+# 5c contained in 6 -> 5, rest: 5c2
 # 5c2 contains 1 -> 3, rest: 2
 
 class DigitMap:
@@ -24,20 +24,107 @@ class DigitMap:
         return cls._mapnumberofcharstodigits[numberofchars]
 
     @classmethod
+    def isdictinctstring(cls, string):
+        return cls.isdictinctnumberofchars(len(string))
+
+    @classmethod
     def isdictinctnumberofchars(cls, numberofchars):
         return len(cls.numberofcharstodigits(numberofchars)) == 1
+
+
+class Pattern:
+    def __init__(self, string):
+        self._string = tuple(string)
+        self._chars = frozenset(string)
+
+    def __str__(self):
+        return str(self._chars)
+
+    def __repr__(self):
+        return repr(self._chars)
+
+    def string(self):
+        return str(''.join(self._string))
+
+    def chars(self):
+        return self._chars
+
+
+class PatternMap:
+    def __init__(self, patternstrings):
+        self._patternmap = PatternMap._evaluate(patternstrings)
+
+    @staticmethod
+    def _evaluate(patternstrings):
+        patternmap = {}
+        g5c = []
+        g6c = []
+        for patternstring in patternstrings:
+            digits = DigitMap.numberofcharstodigits(len(patternstring))
+            pattern = Pattern(patternstring)
+            if len(digits) == 1:
+                digit = digits[0]
+                patternmap[patternstring] = digit
+                patternmap[digit] = pattern
+            elif len(patternstring) == 5:
+                g5c.append(pattern)
+            elif len(patternstring) == 6:
+                g6c.append(pattern)
+        PatternMap._evaluateg6c(patternmap, g6c)
+        PatternMap._evaluateg5c(patternmap, g5c)
+        return patternmap
+
+    @staticmethod
+    def _evaluateg6c(patternmap, g6c):
+        for pattern in g6c:
+            # 6c contains 4 -> 9, rest: 6c2
+            if pattern.chars().issuperset(patternmap[4].chars()):
+                patternmap[pattern.string()] = 9
+                patternmap[9] = pattern
+            # 6c2 contains 1 -> 0, rest: 6
+            elif pattern.chars().issuperset(patternmap[1].chars()):
+                patternmap[pattern.string()] = 0
+                patternmap[0] = pattern
+            # 6
+            else:
+                patternmap[pattern.string()] = 6
+                patternmap[6] = pattern
+
+    @staticmethod
+    def _evaluateg5c(patternmap, g5c):
+        for pattern in g5c:
+            # 5c contained in 6 -> 5, rest: 5c2
+            if pattern.chars().issubset(patternmap[6].chars()):
+                patternmap[pattern.string()] = 5
+                patternmap[5] = pattern
+            # 5c2 contains 1 -> 3, rest: 2
+            elif pattern.chars().issuperset(patternmap[1].chars()):
+                patternmap[pattern.string()] = 3
+                patternmap[3] = pattern
+            # 2
+            else:
+                patternmap[pattern.string()] = 2
+                patternmap[2] = pattern
+
+    def __str__(self):
+        return str(self._patternmap)
+
+    def lookuppatternstring(self, patternstring):
+        return self._patternmap[patternstring]
 
 
 class Panel:
     def __init__(self, line):
         parts = line.split(' ')
-        self._patterns = parts[0:10]
+        patternstrings = parts[0:10]
+        self._patternmap = PatternMap(patternstrings)
+        print(self._patternmap)
         self._outputs = parts[11:]
 
     def countdistinctdigits(self):
         count = 0
         for output in self._outputs:
-            if DigitMap.isdictinctnumberofchars(len(output)):
+            if DigitMap.isdictinctstring(output):
                 count += 1
         return count
 
@@ -50,8 +137,8 @@ class Panel:
         return totalcount
 
     def output(self):
-        # implementation needed
-        return 0
+        # digits = [self._patternmap.lookuppatternstring(output) for output in self._outputs]
+        return 0  # ''.join(digits)
 
     @staticmethod
     def sumoutputs(lines):
@@ -65,7 +152,7 @@ class Panel:
 if __name__ == '__main__':
     import util
 
-    # lines = util.readinputfile('inputfiles/day8_example.txt')
-    lines = util.readinputfile('inputfiles/day8_input.txt')
-    totalsum = Panel.sumoutputs(lines)
+    lines = util.readinputfile('inputfiles/day8_example.txt')
+    # lines = util.readinputfile('inputfiles/day8_input.txt')
+    totalsum = Panel.sumoutputs(lines[0:1])
     print(f'totalsum: {totalsum}')
