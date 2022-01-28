@@ -62,9 +62,10 @@ class PatternMap:
         for patternstring in patternstrings:
             digits = DigitMap.numberofcharstodigits(len(patternstring))
             pattern = Pattern(patternstring)
+            sortedpatternstring = ''.join(sorted(patternstring))
             if len(digits) == 1:
                 digit = digits[0]
-                patternmap[patternstring] = digit
+                patternmap[sortedpatternstring] = digit
                 patternmap[digit] = pattern
             elif len(patternstring) == 5:
                 g5c.append(pattern)
@@ -77,40 +78,54 @@ class PatternMap:
     @staticmethod
     def _evaluateg6c(patternmap, g6c):
         for pattern in g6c:
+            sortedpatternstring = ''.join(sorted(pattern.string()))
             # 6c contains 4 -> 9, rest: 6c2
             if pattern.chars().issuperset(patternmap[4].chars()):
-                patternmap[pattern.string()] = 9
+                patternmap[sortedpatternstring] = 9
                 patternmap[9] = pattern
             # 6c2 contains 1 -> 0, rest: 6
             elif pattern.chars().issuperset(patternmap[1].chars()):
-                patternmap[pattern.string()] = 0
+                patternmap[sortedpatternstring] = 0
                 patternmap[0] = pattern
             # 6
             else:
-                patternmap[pattern.string()] = 6
+                patternmap[sortedpatternstring] = 6
                 patternmap[6] = pattern
 
     @staticmethod
     def _evaluateg5c(patternmap, g5c):
         for pattern in g5c:
+            sortedpatternstring = ''.join(sorted(pattern.string()))
             # 5c contained in 6 -> 5, rest: 5c2
             if pattern.chars().issubset(patternmap[6].chars()):
-                patternmap[pattern.string()] = 5
+                patternmap[sortedpatternstring] = 5
                 patternmap[5] = pattern
             # 5c2 contains 1 -> 3, rest: 2
             elif pattern.chars().issuperset(patternmap[1].chars()):
-                patternmap[pattern.string()] = 3
+                patternmap[sortedpatternstring] = 3
                 patternmap[3] = pattern
             # 2
             else:
-                patternmap[pattern.string()] = 2
+                patternmap[sortedpatternstring] = 2
                 patternmap[2] = pattern
 
     def __str__(self):
         return str(self._patternmap)
 
     def lookuppatternstring(self, patternstring):
-        return self._patternmap[patternstring]
+        sortedpatternstring = ''.join(sorted(patternstring))
+        # print(sortedpatternstring)
+        for k, v in self._patternmap.items():
+            # print(k)
+            if k == sortedpatternstring:
+                # print(f'{k} does match')
+                # print(v)
+                # print()
+                return v
+            # else:
+                # print(f'{k} does not match')
+        # print()
+        return None
 
 
 class Panel:
@@ -118,7 +133,7 @@ class Panel:
         parts = line.split(' ')
         patternstrings = parts[0:10]
         self._patternmap = PatternMap(patternstrings)
-        print(self._patternmap)
+        # print(self._patternmap)
         self._outputs = parts[11:]
 
     def countdistinctdigits(self):
@@ -137,8 +152,13 @@ class Panel:
         return totalcount
 
     def output(self):
-        # digits = [self._patternmap.lookuppatternstring(output) for output in self._outputs]
-        return 0  # ''.join(digits)
+        # print(self._outputs)
+        digits = 0
+        for output in self._outputs:
+            digits *= 10
+            digits += self._patternmap.lookuppatternstring(output)
+        # print(digits)
+        return digits
 
     @staticmethod
     def sumoutputs(lines):
@@ -152,7 +172,7 @@ class Panel:
 if __name__ == '__main__':
     import util
 
-    lines = util.readinputfile('inputfiles/day8_example.txt')
-    # lines = util.readinputfile('inputfiles/day8_input.txt')
-    totalsum = Panel.sumoutputs(lines[0:1])
+    # lines = util.readinputfile('inputfiles/day8_example.txt')
+    lines = util.readinputfile('inputfiles/day8_input.txt')
+    totalsum = Panel.sumoutputs(lines)
     print(f'totalsum: {totalsum}')
