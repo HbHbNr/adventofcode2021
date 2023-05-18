@@ -13,7 +13,7 @@ def sweep(windowsize):
         else:
             currentwindow = lastwindow[1:]
             currentwindow.append(value)
-            if(sum(currentwindow) > sum(lastwindow)):
+            if sum(currentwindow) > sum(lastwindow):
                 increments += 1
             lastwindow = currentwindow
         # print(lastwindow)

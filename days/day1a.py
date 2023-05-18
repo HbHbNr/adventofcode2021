@@ -7,7 +7,7 @@ lastvalue = 0
 increments = 0
 for line in fileinput.input(inputfile):
     value = int(line)
-    if(firstline):
+    if firstline:
         firstline = False
     elif value > lastvalue:
         increments += 1
