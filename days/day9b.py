@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Any
 from re import sub
 
 
@@ -11,24 +11,25 @@ class Heightmap:
         self._rows.append(['9'] * (1 + self._maxx + 1))
         for line in lines:
             row = ['9']
-            row.extend(list(sub(r'[^9]', '?', line)))
+            row.extend(list(sub(r'[^9]', Heightmap.unknownmarker(), line)))
             row.append('9')
             self._rows.append(row)
         self._rows.append(['9'] * (1 + self._maxx + 1))
 
-    def findbasins(self) -> List[any]:
+    def findbasins(self) -> List[Any]:
         basins = []
         for y in range(1, self._maxy + 1):
             for x in range(1, self._maxx + 1):
                 if self.isunknown(x, y):
                     basin = Basin(self, x, y)
                     basins.append(basin)
-        return basins
+        sizes = [basin.size() for basin in basins]
+        return sorted(sizes, reverse=True)
 
     def get(self, x, y) -> str:
         return self._rows[y][x]
 
-    def set(self, x, y, marker) -> str:
+    def set(self, x, y, marker) -> None:
         self._rows[y][x] = marker
 
     def isunknown(self, x, y) -> bool:
@@ -40,7 +41,7 @@ class Heightmap:
 
     @classmethod
     def unknownmarker(cls):
-        return '?'
+        return ' '
 
 
 class Basin:
@@ -49,19 +50,21 @@ class Basin:
     def __init__(self, heightmap: Heightmap, startx, starty) -> None:
         self._heightmap = heightmap
         self._marker = Basin.popmarker()
-        print(self._marker)
         self._size = 0
         self.flowinto(startx, starty)
 
     def flowinto(self, x, y) -> None:
         if self._heightmap.isunknown(x, y):
             self._heightmap.set(x, y, self._marker)
-            ++self._size
+            self._size += 1
 
             self.flowinto(x-1, y)
             self.flowinto(x, y+1)
             self.flowinto(x+1, y)
             self.flowinto(x, y-1)
+
+    def size(self) -> int:
+        return self._size
 
     def print(self) -> None:
         print(self._size)
@@ -71,7 +74,7 @@ class Basin:
         markers = [chr(o) for o in range(ord('A'), ord('Z') + 1)]
         markers.extend([chr(o) for o in range(ord('a'), ord('z') + 1)])
         return markers
-    
+
     @classmethod
     def popmarker(cls) -> str:
         marker = cls._markers.pop(0)
@@ -82,12 +85,12 @@ class Basin:
 if __name__ == '__main__':
     from days import util
 
-    #lines = util.readinputfile('inputfiles/day9_example.txt')
+    # lines = util.readinputfile('inputfiles/day9_example.txt')
     lines = util.readinputfile('inputfiles/day9_input.txt')
     heightmap = Heightmap(lines)
-    heightmap.print()
+    # heightmap.print()
     basins = heightmap.findbasins()
-    heightmap.print()
-
-    #print("lowPoints: " + str(heightmap.findlowpoints()))
-    #print("riskLevel: " + str(heightmap.calcrisklevel()))
+    # heightmap.print()
+    # print(basins)
+    top3product = int(basins[0]) * int(basins[1]) * int(basins[2])
+    print('Product of the three largest basins: {}'.format(top3product))
