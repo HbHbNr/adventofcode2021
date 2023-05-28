@@ -14,4 +14,4 @@ Run
 # Testing
 Run
 
-    pytest days/*_test.py
+    ./test.sh
