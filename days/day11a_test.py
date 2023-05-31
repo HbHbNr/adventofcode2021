@@ -6,6 +6,8 @@ def test_example():
     cavern = day11a.Cavern(lines)
 
     assert cavern.totalFlashes() == 0
+    assert cavern.getEnergyLevel(0, 0) == 5  # top left
+    assert cavern.getEnergyLevel(-1, -1) == 6  # bottom right
 
     cavern.step()  # step 1
     assert cavern.totalFlashes() == 0
