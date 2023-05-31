@@ -4,6 +4,7 @@ from typing import List
 class Cavern:
 
     def __init__(self, lines: List[str]) -> None:
+        # TODO: add a frame of 0s
         self._maxx = len(lines[0])
         self._maxy = len(lines)
         self._rows = []
@@ -14,7 +15,13 @@ class Cavern:
 
     def step(self) -> None:
         self.incrementAll()
-        # etc.
+        # while at least one 9 exists:
+        # - search for first 9
+        # - increase it to 10
+        # - increase adjacent by 1, but not over 9
+        # - repeat
+        # reset all 10s to 0
+        # reset frame to 0s
 
     def incrementAll(self) -> None:
         for y in range(0, self._maxy):
