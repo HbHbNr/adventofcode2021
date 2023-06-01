@@ -5,13 +5,16 @@ Solutions of https://adventofcode.com/2021/
 * Python 3 (developed with Python 3.7)
 * Flake8 (optional, for linting)
 * pytest (optional, for testing)
+* mypy (optional, for static type checking)
 
 # Linting
-Run
 
     ./lint.sh
 
 # Testing
-Run
 
-    ./test.sh
+    ./pytest.sh
+
+# Static type checking
+
+    ./mypy.sh
