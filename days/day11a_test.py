@@ -33,6 +33,7 @@ def test_example():
     assert cavern.getEnergyLevel(1, 1) == 0  # top left
     assert cavern.getEnergyLevel(-2, -2) == 6  # bottom right
 
+
 def test_input():
     lines = util.readinputfile('inputfiles/day11_input.txt')
     cavern = day11a.Cavern(lines)
