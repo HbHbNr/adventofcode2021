@@ -4,7 +4,6 @@ from typing import List
 class Cavern:
 
     def __init__(self, lines: List[str]) -> None:
-        # TODO: add a frame of 0s
         self._maxx = len(lines[0])
         self._maxy = len(lines)
         self._rows = []
