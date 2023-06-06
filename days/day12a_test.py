@@ -4,7 +4,7 @@ from days import util, day12a
 def test_example1():
     lines = util.readinputfile('inputfiles/day12_example1.txt')
     graph = day12a.Graph(lines)
-    paths = sorted(graph.findDistinctPaths())
+    paths = graph.findDistinctPaths()
 
     assert len(paths) == 10
 
@@ -18,15 +18,15 @@ def test_example1():
     # start,b,A,c,A,end
     # start,b,A,end
     # start,b,end
-    assert paths[0] == ['start', 'A', 'b', 'A', 'c', 'A', 'end']
-    assert paths[2] == ['start', 'A', 'b', 'end']
-    assert paths[1] == ['start', 'b', 'end']
+    assert ['start', 'A', 'b', 'A', 'c', 'A', 'end'] in paths
+    assert ['start', 'A', 'b', 'end'] in paths
+    assert ['start', 'b', 'end'] in paths
 
 
 def test_example2():
     lines = util.readinputfile('inputfiles/day12_example2.txt')
     graph = day12a.Graph(lines)
-    paths = sorted(graph.findDistinctPaths())
+    paths = graph.findDistinctPaths()
 
     assert len(paths) == 19
 
@@ -34,7 +34,7 @@ def test_example2():
 def test_example3():
     lines = util.readinputfile('inputfiles/day12_example3.txt')
     graph = day12a.Graph(lines)
-    paths = sorted(graph.findDistinctPaths())
+    paths = graph.findDistinctPaths()
 
     assert len(paths) == 226
 
@@ -42,6 +42,6 @@ def test_example3():
 def test_input():
     lines = util.readinputfile('inputfiles/day12_input.txt')
     graph = day12a.Graph(lines)
-    paths = sorted(graph.findDistinctPaths())
+    paths = graph.findDistinctPaths()
 
-    # assert len(paths) == ???
+    assert len(paths) == 4378
