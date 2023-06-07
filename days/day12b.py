@@ -9,6 +9,9 @@ class Graph:
             vs = line.split('-')
             self.addPath(vs[0], vs[1])
             self.addPath(vs[1], vs[0])
+        caves = self._vertices.keys()
+        self._bigcaves = [cave for cave in caves if Graph.isBigCave(cave)]
+        self._smallcaves = [cave for cave in caves if not Graph.isBigCave(cave)]
 
     def addPath(self, fromvertex: str, tovertex: str) -> None:
         if fromvertex not in self._vertices:
@@ -30,37 +33,33 @@ class Graph:
         else:
             targets = self._vertices[currentpos]
             for target in targets:
-                if Graph.isValidTarget(newpath, target):
+                if self.isValidTarget(newpath, target):
                     self.traverse(distinctPaths, target, newpath)
                 # ignore invalid targets
 
-    @classmethod
-    def isValidTarget(cls, newpath: List[str], target: str) -> bool:
+    def isValidTarget(self, newpath: List[str], target: str) -> bool:
         # visit big caves any number of times
         # visit small caves at most twice
         valid = False
-        if Graph.isBigCave(target):
+        if target in self._bigcaves:
             valid = True
         elif target == 'start':
             valid = False
         elif target not in newpath:
             valid = True
         else:
-            valid = not Graph.anySmallCaveContainedTwice(newpath)
+            valid = not self.anySmallCaveContainedTwice(newpath)
         return valid
+
+    def anySmallCaveContainedTwice(self, currentpath: List[str]) -> bool:
+        for cave in self._smallcaves:
+            if currentpath.count(cave) > 1:
+                return True
+        return False
 
     @classmethod
     def isBigCave(cls, vertex: str) -> bool:
         return vertex == vertex.upper()
-
-    @classmethod
-    def anySmallCaveContainedTwice(cls, currentpath: List[str]) -> bool:
-        smallcaves = [cave for cave in currentpath if not Graph.isBigCave(cave)]
-        uniquesmallcaves = set(smallcaves)
-        for cave in uniquesmallcaves:
-            if smallcaves.count(cave) > 1:
-                return True
-        return False
 
     def __str__(self):
         return ','.join(self._vertices.keys())
