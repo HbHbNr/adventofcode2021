@@ -1,27 +1,27 @@
-from typing import List
+from typing import List, Dict, Set
 
 
 class Graph:
 
     def __init__(self, lines: List[str]) -> None:
-        self._vertices = {}
+        self._vertices: Dict[str, Set[str]] = {}
         for line in lines:
             vs = line.split('-')
             self.addPath(vs[0], vs[1])
             self.addPath(vs[1], vs[0])
 
-    def addPath(self, fromvertex, tovertex) -> None:
-        if not fromvertex in self._vertices:
-            self._vertices[fromvertex] = { tovertex }
+    def addPath(self, fromvertex: str, tovertex: str) -> None:
+        if fromvertex not in self._vertices:
+            self._vertices[fromvertex] = {tovertex}
         else:
             self._vertices[fromvertex].add(tovertex)
 
     def findDistinctPaths(self) -> List[List[str]]:
-        distinctPaths = []
-        self.traverse(distinctPaths, 'start', [])
+        distinctPaths: List[List[str]] = []
+        self.traverse(distinctPaths, 'start', [])  # start traversal
         return distinctPaths
 
-    def traverse(self, distinctPaths, currentpos, currentpath) -> None:
+    def traverse(self, distinctPaths: List[List[str]], currentpos: str, currentpath: List[str]) -> None:
         newpath = list(currentpath)
         newpath.append(currentpos)
         if currentpos == 'end':
@@ -32,13 +32,13 @@ class Graph:
             for target in targets:
                 if Graph.isBigCave(target):
                     self.traverse(distinctPaths, target, newpath)  # visit big caves any number of times
-                elif not target in currentpath:
+                elif target not in currentpath:
                     self.traverse(distinctPaths, target, newpath)  # visit small caves at most once
                 else:
                     pass  # would be more than one visit to a small cave
 
     @classmethod
-    def isBigCave(cls, vertex):
+    def isBigCave(cls, vertex: str) -> bool:
         return vertex == vertex.upper()
 
     def __str__(self):
