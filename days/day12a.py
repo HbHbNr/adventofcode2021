@@ -30,15 +30,15 @@ class Graph:
         else:
             targets = self._vertices[currentpos]
             for target in targets:
-                if Graph.isValidTarget(currentpath, target):
+                if Graph.isValidTarget(newpath, target):
                     self.traverse(distinctPaths, target, newpath)
                 # ignore invalid targets
 
     @classmethod
-    def isValidTarget(cls, currentpath: List[str], target: str) -> bool:
+    def isValidTarget(cls, newpath: List[str], target: str) -> bool:
         # visit big caves any number of times
         # visit small caves at most once
-        return Graph.isBigCave(target) or currentpath.count(target) == 0
+        return Graph.isBigCave(target) or newpath.count(target) == 0
 
     @classmethod
     def isBigCave(cls, vertex: str) -> bool:
