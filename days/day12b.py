@@ -25,17 +25,17 @@ class Graph:
         return distinctPaths
 
     def traverse(self, distinctPaths: List[List[str]], currentpos: str, currentpath: List[str]) -> None:
-        newpath = list(currentpath)
-        newpath.append(currentpos)
+        currentpath.append(currentpos)
         if currentpos == 'end':
-            # print(','.join(newpath))
-            distinctPaths.append(newpath)
+            # print(','.join(currentpath))
+            distinctPaths.append(list(currentpath))
         else:
             targets = self._vertices[currentpos]
             for target in targets:
-                if self.isValidTarget(newpath, target):
-                    self.traverse(distinctPaths, target, newpath)
+                if self.isValidTarget(currentpath, target):
+                    self.traverse(distinctPaths, target, currentpath)
                 # ignore invalid targets
+        currentpath.pop()
 
     def isValidTarget(self, newpath: List[str], target: str) -> bool:
         # visit big caves any number of times
