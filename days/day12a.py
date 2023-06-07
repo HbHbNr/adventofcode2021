@@ -25,7 +25,7 @@ class Graph:
         newpath = list(currentpath)
         newpath.append(currentpos)
         if currentpos == 'end':
-            print(newpath)
+            # print(newpath)
             distinctPaths.append(newpath)
         else:
             targets = self._vertices[currentpos]
@@ -38,7 +38,7 @@ class Graph:
     def isValidTarget(cls, currentpath: List[str], target: str) -> bool:
         # visit big caves any number of times
         # visit small caves at most once
-        return Graph.isBigCave(target) or target not in currentpath
+        return Graph.isBigCave(target) or currentpath.count(target) == 0
 
     @classmethod
     def isBigCave(cls, vertex: str) -> bool:
@@ -54,7 +54,7 @@ if __name__ == '__main__':
     # lines = util.readinputfile('inputfiles/day12_example1.txt')
     lines = util.readinputfile('inputfiles/day12_input.txt')
     graph = Graph(lines)
-    print(graph)
+    # print(graph)
     paths = graph.findDistinctPaths()
 
     print('DAY12A - Number of distinct paths: ' + str(len(paths)))
