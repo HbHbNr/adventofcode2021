@@ -25,7 +25,7 @@ class Graph:
         newpath = list(currentpath)
         newpath.append(currentpos)
         if currentpos == 'end':
-            # print(newpath)
+            # print(','.join(newpath))
             distinctPaths.append(newpath)
         else:
             targets = self._vertices[currentpos]
