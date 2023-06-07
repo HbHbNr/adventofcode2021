@@ -38,7 +38,7 @@ class Graph:
     def isValidTarget(cls, newpath: List[str], target: str) -> bool:
         # visit big caves any number of times
         # visit small caves at most once
-        return Graph.isBigCave(target) or newpath.count(target) == 0
+        return Graph.isBigCave(target) or target not in newpath
 
     @classmethod
     def isBigCave(cls, vertex: str) -> bool:
