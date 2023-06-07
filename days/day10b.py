@@ -11,7 +11,7 @@ class Checker:
         self._lines = list(lines)
         return
 
-    def findincompletelines(self) -> List[int]:
+    def findincompletelines(self) -> List[List[int]]:
         incompletelines = []
 
         for line in self._lines:
@@ -22,7 +22,7 @@ class Checker:
         return incompletelines
 
     @classmethod
-    def findsyntaxerrorinline(self, line) -> int:
+    def findsyntaxerrorinline(self, line) -> List[int]:
         openbrackets = []
         for bracket in list(line):
             if Checker.isopenbracket(bracket):
