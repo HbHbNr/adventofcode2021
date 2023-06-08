@@ -25,7 +25,7 @@ class School:
 
 
 if __name__ == '__main__':
-    import util
+    from days import util
 
     # lines = util.readinputfile('inputfiles/day6_example.txt')
     lines = util.readinputfile('inputfiles/day6_input.txt')

@@ -28,13 +28,13 @@ class School:
 
 
 if __name__ == '__main__':
-    import util
+    from days import util
 
     # lines = util.readinputfile('inputfiles/day6_example.txt')
     lines = util.readinputfile('inputfiles/day6_input.txt')
     school = School(lines[0])
-    print(school.size())
+    # print(school.size())
     # print(school)
-    school.nextdays(80, True)
+    school.nextdays(80, False)
     print(school.size())
     # print(school)

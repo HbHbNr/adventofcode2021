@@ -40,7 +40,7 @@ class Panel:
 
 
 if __name__ == '__main__':
-    import util
+    from days import util
 
     # lines = util.readinputfile('inputfiles/day8_example.txt')
     lines = util.readinputfile('inputfiles/day8_input.txt')

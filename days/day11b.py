@@ -87,5 +87,5 @@ if __name__ == '__main__':
         allFlashed = cavern.step()
         if allFlashed:
             break
-    print(cavern)
+    # print(cavern)
     print('DAY11B - the first step during which all octopuses flash: ' + str(step))

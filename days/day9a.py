@@ -43,5 +43,5 @@ if __name__ == '__main__':
     heightmap = Heightmap(lines)
     # heightmap.print()
 
-    print("lowPoints: " + str(heightmap.findlowpoints()))
+    # print("lowPoints: " + str(heightmap.findlowpoints()))
     print("riskLevel: " + str(heightmap.calcrisklevel()))

@@ -47,8 +47,8 @@ class BingoMatch:
                 bingoboard.playNumber(pickednumber)
                 # print(bingoboard.sum())
                 if bingoboard.isWinner():
-                    print(f'Winning board, numberindex {numberindex}, boardindex {boardindex}:')
-                    bingoboard.print('  ')
+                    # print(f'Winning board, numberindex {numberindex}, boardindex {boardindex}:')
+                    # bingoboard.print('  ')
                     boardsum = bingoboard.sum()
                     return {'numberindex': numberindex, 'pickednumber': pickednumber, 'boardindex': boardindex,
                             'boardsum': boardsum, 'solution': pickednumber * boardsum}
@@ -56,7 +56,7 @@ class BingoMatch:
 
 
 if __name__ == '__main__':
-    import util
+    from days import util
 
     lines = util.readinputfile('inputfiles/day4_input.txt')
     bingomatch = BingoMatch(lines)
