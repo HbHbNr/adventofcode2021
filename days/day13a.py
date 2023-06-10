@@ -2,6 +2,8 @@ from typing import List, Tuple
 
 
 class Matrix:
+    _dotmark = '#'
+    _nodotmark = '.'
 
     def __init__(self, lines: List[str]) -> None:
         self._dots = set()
@@ -11,9 +13,7 @@ class Matrix:
         emptyline = lines.index('')
         folddir, foldnum = Matrix.splitFoldCommand(lines[emptyline + 1])
 
-        lines2 = iter(lines)
-        line = next(lines2)
-        while line != '':
+        for line in lines[:emptyline]:
             xstr, ystr = line.split(',')
             x = int(xstr)
             y = int(ystr)
@@ -23,10 +23,6 @@ class Matrix:
             self._maxx = max(self._maxx, x)
             self._maxy = max(self._maxy, y)
             self._dots.add((x, y))
-            line = next(lines2)
-
-    def fold(self, steps) -> None:
-        pass
 
     def countDots(self) -> int:
         return len(self._dots)
@@ -49,16 +45,24 @@ class Matrix:
         return dir, num
 
     def __str__(self):
-        return str(self._maxx) + 'x' + str(self._maxy)
+        lines = []
+        for y in range(0, self._maxy + 1):
+            dots = []
+            for x in range(0, self._maxx + 1):
+                if (x, y) in self._dots:
+                    dots.append(Matrix._dotmark)
+                else:
+                    dots.append(Matrix._nodotmark)
+            lines.append(''.join(dots))
+        return '\n'.join(lines)
 
 
 if __name__ == '__main__':
     from days import util
 
-    # lines = util.readinputfile('inputfiles/day13_example.txt')
-    lines = util.readinputfile('inputfiles/day13_input.txt')
+    lines = util.readinputfile('inputfiles/day13_example.txt')
+    # lines = util.readinputfile('inputfiles/day13_input.txt')
     matrix = Matrix(lines)
     # print(matrix)
-    matrix.fold(1)
 
-    print('DAY13A: ' + str(matrix.countDots()))
+    util.printresultline('13a', matrix.countDots())
