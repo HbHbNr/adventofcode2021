@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Set
 
 
 class Matrix:
@@ -6,7 +6,7 @@ class Matrix:
     _nodotmark = '.'
 
     def __init__(self, lines: List[str]) -> None:
-        self._dots = set()
+        self._dots: Set[Tuple[int, int]] = set()
         self._maxx = 0
         self._maxy = 0
 
