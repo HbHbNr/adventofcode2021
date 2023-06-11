@@ -81,4 +81,4 @@ if __name__ == '__main__':
     matrix.fold()
     # print(matrix)
 
-    util.printresultline('13b', str(matrix.countDots()) + '\n' + str(matrix))
+    util.printresultline('13b', '\n' + str(matrix))
