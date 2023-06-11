@@ -1,7 +1,7 @@
 from days import util, day13a
 
 
-def test_example1():
+def test_example():
     lines = util.readinputfile('inputfiles/day13_example.txt')
     matrix = day13a.Matrix(lines)
 
