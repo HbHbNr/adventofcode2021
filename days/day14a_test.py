@@ -47,8 +47,13 @@ def test_example3():
     values.sort()
     assert values[-1] - values[0] == 1588
 
-# def test_input():
-#     lines = util.readinputfile('inputfiles/day14_input.txt')
-#     polymer = day14a.Polymer(lines)
-#
-#     assert str(polymer) == '???'
+
+def test_input():
+    lines = util.readinputfile('inputfiles/day14_input.txt')
+    polymer = day14a.Polymer(lines)
+    for step in range(1, 10 + 1):
+        polymer.step()
+    histogram = polymer.histogram()
+    values = list(histogram.values())
+    values.sort()
+    assert values[-1] - values[0] == 2874
