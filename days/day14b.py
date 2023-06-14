@@ -30,15 +30,15 @@ class Polymer:
         template: List[Tuple[str, int]] = [(element, number) for element in self._template]
         length = len(template)
         while length > 0:
-            if length > 1:  # examine first two elements
-                a = template[0]
-                b = template[1]
+            if length > 1:  # examine last two elements
+                a = template[-2]
+                b = template[-1]
                 a1 = a[1]
                 b1 = b[1]
                 # (at least) one element is at the lowest level
                 if a1 == 0 or b1 == 0:
                     # print(a[0], b[0], sep='', end='')
-                    template = template[2:]  # remove first two elements
+                    template = template[:-2]  # remove two last elements
                     length -= 2
                 # no element is at the lowest level
                 else:
@@ -46,9 +46,9 @@ class Polymer:
                     c: str = self._rules[key]
                     self._histogram[c] += 1
                     if a1 < b1:
-                        template.insert(1, (c, a1 - 1))
+                        template.insert(length - 1, (c, a1 - 1))
                     else:
-                        template.insert(1, (c, b1 - 1))
+                        template.insert(length - 1, (c, b1 - 1))
                     length += 1
             elif length == 1:  # last element of template
                 # print(template[0][0])
