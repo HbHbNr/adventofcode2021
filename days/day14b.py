@@ -64,12 +64,13 @@ class Polymer:
 
 if __name__ == '__main__':
     from days import util
+    import sys
 
     lines = util.readinputfile('inputfiles/day14_example.txt')
     # lines = util.readinputfile('inputfiles/day14_input.txt')
     polymer = Polymer(lines)
     number = 21
-    profile = False
+    profile = len(sys.argv) > 1  # add any parameter to activate profiling
     if profile:
         import cProfile
         cProfile.run('polymer.steps(number)')
