@@ -27,20 +27,33 @@ class Polymer:
         self._histogram = histogram
 
     def steps(self, number: int) -> None:
-        if number > 0:
-            for i in range(0, len(self._template) - 1):
-                a = self._template[i]
-                b = self._template[i + 1]
-                self.step(number, a, b)
-
-    def step(self, number: int, a: str, b: str) -> None:
-        key = (a, b)
-        c = self._rules.get(key)
-        if c is not None:
-            self._histogram[c] += 1
-            if number > 1:
-                self.step(number - 1, a, c)
-                self.step(number - 1, c, b)
+        template: List[Tuple[str, int]] = [(element, number) for element in self._template]
+        length = len(template)
+        while length > 0:
+            if length > 1:  # examine first two elements
+                a = template[0]
+                b = template[1]
+                a1 = a[1]
+                b1 = b[1]
+                # (at least) one element is at the lowest level
+                if a1 == 0 or b1 == 0:
+                    # print(a[0], b[0], sep='', end='')
+                    template = template[2:]  # remove first two elements
+                    length -= 2
+                # no element is at the lowest level
+                else:
+                    key = (a[0], b[0])
+                    c: str = self._rules[key]
+                    self._histogram[c] += 1
+                    if a1 < b1:
+                        template.insert(1, (c, a1 - 1))
+                    else:
+                        template.insert(1, (c, b1 - 1))
+                    length += 1
+            elif length == 1:  # last element of template
+                # print(template[0][0])
+                break
+        # print()
 
     def histogram(self) -> Dict[str, int]:
         return self._histogram
@@ -55,10 +68,15 @@ if __name__ == '__main__':
     lines = util.readinputfile('inputfiles/day14_example.txt')
     # lines = util.readinputfile('inputfiles/day14_input.txt')
     polymer = Polymer(lines)
-    number = 23
-    polymer.steps(number)
+    number = 21
+    profile = False
+    if profile:
+        import cProfile
+        cProfile.run('polymer.steps(number)')
+    else:
+        polymer.steps(number)
     histogram = polymer.histogram()
-    print(histogram)
+    # print(histogram)
     values = list(histogram.values())
     values.sort()
     diff = values[-1] - values[0]
