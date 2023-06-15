@@ -37,10 +37,8 @@ class Polymer:
         return self._numberMap[number]
 
     @classmethod
-    def preheatHistogram(cls, symbolCount, template) -> Dict[int, int]:
-        histogram: Dict[int, int] = dict()
-        for number in range(symbolCount):
-            histogram[number] = 0
+    def preheatHistogram(cls, symbolCount, template) -> List[int]:
+        histogram: List[int] = [0] * symbolCount
         for number in template:
             histogram[number] += 1
         # print(f'found {len(histogram)} symbols: {",".join(histogram.keys())}')
@@ -63,6 +61,9 @@ class Polymer:
         return symbolMap, numberMap
 
     def steps(self, level: int) -> None:
+        # idea 1: switch back to recursive, but keep track of already solved pairs
+        # idea 2: multiple rules lead to the same new element
+        #         - solved pairs are also valid for other pairs with the same new element
         template: List[Tuple[int, int]] = [(number, level) for number in self._template]
         length = len(template)
         template.extend([(0, 0)] * level)  # reserve space for additional elements
@@ -93,8 +94,9 @@ class Polymer:
                 break
         print(self._histogram)
 
-    def histogram(self) -> Dict[int, int]:
-        return self._histogram
+    def histogram(self) -> Dict[str, int]:
+        histogram: Dict[str, int] = dict([(self.lookupNumber(i), self._histogram[i]) for i in range(len(self._histogram))])
+        return histogram
 
     def __str__(self):
         return self._template
@@ -107,7 +109,7 @@ if __name__ == '__main__':
     lines = util.readinputfile('inputfiles/day14_example.txt')
     # lines = util.readinputfile('inputfiles/day14_input.txt')
     polymer = Polymer(lines)
-    number = 20
+    number = 22
     profile = len(sys.argv) > 1  # add any parameter to activate profiling
     if profile:
         import cProfile
@@ -115,7 +117,7 @@ if __name__ == '__main__':
     else:
         polymer.steps(number)
     histogram = polymer.histogram()
-    # print(histogram)
+    print(histogram)
     values = list(histogram.values())
     values.sort()
     diff = values[-1] - values[0]

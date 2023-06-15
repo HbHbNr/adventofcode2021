@@ -5,11 +5,11 @@ def test_example1():
     lines = util.readinputfile('inputfiles/day14_example.txt')
     polymer = day14b.Polymer(lines)
     polymer.steps(0)
-    # histogram = polymer.histogram()
-    # assert histogram.get('B') == 1
-    # assert histogram.get('C') == 1
-    # assert histogram.get('H') == 0
-    # assert histogram.get('N') == 2
+    histogram = polymer.histogram()
+    assert histogram.get('B') == 1
+    assert histogram.get('C') == 1
+    assert histogram.get('H') == 0
+    assert histogram.get('N') == 2
 
 
 def test_example2():
@@ -18,10 +18,10 @@ def test_example2():
     polymer = day14b.Polymer(lines)
     polymer.steps(4)
     histogram = polymer.histogram()
-    # assert histogram.get('B') == 23
-    # assert histogram.get('C') == 10
-    # assert histogram.get('H') == 5
-    # assert histogram.get('N') == 11
+    assert histogram.get('B') == 23
+    assert histogram.get('C') == 10
+    assert histogram.get('H') == 5
+    assert histogram.get('N') == 11
 
     values = list(histogram.values())
     values.sort()
@@ -33,10 +33,10 @@ def test_example3():
     polymer = day14b.Polymer(lines)
     polymer.steps(10)
     histogram = polymer.histogram()
-    # assert histogram.get('B') == 1749
-    # assert histogram.get('C') == 298
-    # assert histogram.get('H') == 161
-    # assert histogram.get('N') == 865
+    assert histogram.get('B') == 1749
+    assert histogram.get('C') == 298
+    assert histogram.get('H') == 161
+    assert histogram.get('N') == 865
 
     values = list(histogram.values())
     values.sort()
