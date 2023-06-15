@@ -8,7 +8,7 @@ class Polymer:
         self._symbolMap, self._numberMap = Polymer.createSymbolMaps(lines)
         print(self._symbolMap)
         print(self._numberMap)
-        self._template = [self.lookupSymbol(char) for char in lines[0]]
+        self._template: List[int] = [self.lookupSymbol(char) for char in lines[0]]
         print(self._template)
         self._shiftKey = int.bit_length(len(self._symbolMap) - 1)
         print(self._shiftKey)
@@ -94,6 +94,23 @@ class Polymer:
                 break
         print(self._histogram)
 
+    def steps_recursive(self, level: int) -> None:
+        if level > 0:
+            for i in range(0, len(self._template) - 1):
+                a = self._template[i]
+                b = self._template[i + 1]
+                self.step_recursive(level, a, b)
+
+    def step_recursive(self, level: int, a: int, b: int) -> None:
+        # look into cache here, only if not found do step_recursive()
+        key = a << self._shiftKey | b
+        c: int = self._rules[key]
+        self._histogram[c] += 1
+        if level > 1:
+            self.step_recursive(level - 1, a, c)
+            self.step_recursive(level - 1, c, b)
+        # make step_recursive return the histogram and save it to the cache
+
     def histogram(self) -> Dict[str, int]:
         histogram: Dict[str, int] = dict([(self.lookupNumber(i), self._histogram[i]) for i in range(len(self._histogram))])
         return histogram
@@ -113,9 +130,9 @@ if __name__ == '__main__':
     profile = len(sys.argv) > 1  # add any parameter to activate profiling
     if profile:
         import cProfile
-        cProfile.run('polymer.steps(number)')
+        cProfile.run('polymer.steps_recursive(number)')
     else:
-        polymer.steps(number)
+        polymer.steps_recursive(number)
     histogram = polymer.histogram()
     print(histogram)
     values = list(histogram.values())
