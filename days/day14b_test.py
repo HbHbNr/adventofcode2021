@@ -57,12 +57,11 @@ def test_example4():
     assert values[-1] - values[0] == 2188189693529
 
 
-# def test_input():
-#     lines = util.readinputfile('inputfiles/day14_input.txt')
-#     polymer = day14b.Polymer(lines)
-#     for step in range(1, 10 + 1):
-#         polymer.steps_recursive()
-#     histogram = polymer.histogram()
-#     values = list(histogram.values())
-#     values.sort()
-#     assert values[-1] - values[0] == 2874
+def test_input():
+    lines = util.readinputfile('inputfiles/day14_input.txt')
+    polymer = day14b.Polymer(lines)
+    polymer.steps_recursive(40)
+    histogram = polymer.histogram()
+    values = list(histogram.values())
+    values.sort()
+    assert values[-1] - values[0] == 5208377027195
