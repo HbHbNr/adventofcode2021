@@ -44,7 +44,7 @@ def test_example3():
 
 
 # TOO SLOW!
-def ttest_example4():
+def test_example4():
     lines = util.readinputfile('inputfiles/day14_example.txt')
     polymer = day14b.Polymer(lines)
     polymer.steps_recursive(40)

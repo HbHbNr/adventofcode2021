@@ -28,7 +28,10 @@ class Polymer:
 
         # prepare histogram with all possible symbols
         self._histogram = Polymer.preheatHistogram(len(self._symbolMap), self._template)
+        self._histogramLen = len(self._histogram)
         print(self._histogram)
+
+        self._cache: Dict[Tuple[int, int], List[int]] = dict()
 
     def lookupSymbol(self, symbol: str) -> int:
         return self._symbolMap[symbol]
@@ -99,16 +102,30 @@ class Polymer:
             for i in range(0, len(self._template) - 1):
                 a = self._template[i]
                 b = self._template[i + 1]
-                self.step_recursive(level, a, b)
+                histogram = self.step_recursive(level, a, b)
+                for i in range(self._histogramLen):
+                    self._histogram[i] += histogram[i]
+        print(f'cachesize: {len(self._cache)}')
 
-    def step_recursive(self, level: int, a: int, b: int) -> None:
+    def step_recursive(self, level: int, a: int, b: int) -> List[int]:
         # look into cache here, only if not found do step_recursive()
+        # unclear: when is the content of the cache added to the histogram?
+        # the content of the cache should be used *instead* of doing the recursion
         key = a << self._shiftKey | b
-        c: int = self._rules[key]
-        self._histogram[c] += 1
-        if level > 1:
-            self.step_recursive(level - 1, a, c)
-            self.step_recursive(level - 1, c, b)
+        cachekey = (key, level)
+        if cachekey in self._cache:
+            histogram = self._cache[cachekey]
+        else:
+            c: int = self._rules[key]
+            histogram = [0] * self._histogramLen
+            histogram[c] = 1
+            if level > 1:
+                ah = self.step_recursive(level - 1, a, c)
+                bh = self.step_recursive(level - 1, c, b)
+                for i in range(self._histogramLen):
+                    histogram[i] += ah[i] + bh[i]
+            self._cache[cachekey] = histogram
+        return histogram
         # make step_recursive return the histogram and save it to the cache
 
     def histogram(self) -> Dict[str, int]:
@@ -123,10 +140,10 @@ if __name__ == '__main__':
     from days import util
     import sys
 
-    lines = util.readinputfile('inputfiles/day14_example.txt')
-    # lines = util.readinputfile('inputfiles/day14_input.txt')
+    # lines = util.readinputfile('inputfiles/day14_example.txt')
+    lines = util.readinputfile('inputfiles/day14_input.txt')
     polymer = Polymer(lines)
-    number = 22
+    number = 40
     profile = len(sys.argv) > 1  # add any parameter to activate profiling
     if profile:
         import cProfile
