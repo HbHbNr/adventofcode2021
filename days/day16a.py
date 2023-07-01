@@ -8,11 +8,15 @@ class ByteStream:
 
     @classmethod
     def fromHexString(cls, hexString: str) -> 'ByteStream':
-        bs = bytes.fromhex(hexString)
-        byteStream = ByteStream(bs)
-        return byteStream
+        bs: bytes = bytes.fromhex(hexString)
+        return ByteStream(bs)
 
-    def getBytes(self) -> Generator:
+    @classmethod
+    def fromHexFile(cls, hexInputfile: str) -> 'ByteStream':
+        bs: bytes = util.readhexinputfile(hexInputfile)
+        return ByteStream(bs)
+
+    def stream(self) -> Generator:
         for b in self._bs:
             yield b
 
@@ -20,14 +24,16 @@ class ByteStream:
 if __name__ == '__main__':
     from days import util
 
-    bs: bytes = util.readhexinputfile('inputfiles/day16_example1.txt')
-    # util.readhexinputfile('inputfiles/day16_input.txt')
-    for i in range(len(bs)):
-        print(bs[i], bin(bs[i]))
-
-    byteStream = ByteStream.fromHexString('D2FE28')
-    getBytes = byteStream.getBytes()
-    b = next(getBytes, -1)
+    byteStream = ByteStream.fromHexFile('inputfiles/day16_example1.txt')
+    stream = byteStream.stream()
+    b = next(stream, -1)
     while b >= 0:
         print(b)
-        b = next(getBytes, -1)
+        b = next(stream, -1)
+
+    byteStream = ByteStream.fromHexString('D2FE28')
+    stream = byteStream.stream()
+    b = next(stream, -1)
+    while b >= 0:
+        print(b)
+        b = next(stream, -1)

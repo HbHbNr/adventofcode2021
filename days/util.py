@@ -2,6 +2,7 @@ import fileinput
 
 
 def readinputfile(inputfile):
+    """ Read all lines from inputfile and store them in a tuple of strings, with removed newlines. """
     lines = []
     for line in fileinput.input(inputfile):
         lines.append(line.rstrip())
@@ -9,8 +10,9 @@ def readinputfile(inputfile):
 
 
 def readhexinputfile(inputfile) -> bytes:
-    line: str = fileinput.input(inputfile).readline().rstrip()
-    print(line)
+    """ Read all lines from inputfile and create 'bytes' object from the data. """
+    lines = readinputfile(inputfile)
+    line = ''.join(lines)
     return bytes.fromhex(line)
 
 
