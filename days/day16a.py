@@ -1,4 +1,4 @@
-from typing import Generator
+from typing import Generator, Tuple, List
 
 
 class ByteStream:
@@ -82,48 +82,55 @@ class BuoyancyInterchangeTransmissionSystem:
 
     def __init__(self, bitStream: BitStream) -> None:
         self._bitstream = bitStream
-        self._versions = []
+        self._versions: List[int] = []
 
-    def parsePacket(self):
-        while True:
-            version = self._bitstream.getBits(3)
-            typeID = self._bitstream.getBits(3)
-            print(version, typeID)
-            self._versions.append(version)
-            if typeID == 4:
-                literal = self.parseLiteral()
-                print(literal)
+    def parsePacket(self) -> int:
+        totalBits = 6
+        version = self._bitstream.getBits(3)
+        typeID = self._bitstream.getBits(3)
+        print(version, typeID)
+        self._versions.append(version)
+        if typeID == 4:
+            bits, literal = self.parseLiteral()
+            totalBits += bits
+            print(literal)
+        else:
+            lengthTypeID = self._bitstream.getBits(1)
+            totalBits += 1
+            if lengthTypeID == 0:
+                totalBits += self.parseRawData()
             else:
-                lengthTypeID = self._bitstream.getBits(1)
-                if lengthTypeID == 0:
-                    self.parseRawData()
-                else:
-                    self.parseSubPackets()
-            break
+                totalBits += self.parseSubPackets()
+        return totalBits
 
-    def parseLiteral(self) -> int:
+    def parseLiteral(self) -> Tuple[int, int]:
         print('parseLiteral')
+        totalBits = 0
         result = 0
         readMore = True
         while readMore:
             part = self._bitstream.getBits(5)
             result = result << 4
             result |= (part & 0b1111)
+            totalBits += 5
             readMore = bool(part & 0b10000)
-        return result
+        return totalBits, result
 
-    def parseRawData(self) -> None:
+    def parseRawData(self) -> int:
         print('parseRawData')
         rawLength = self._bitstream.getBits(15)
-        rawData = self._bitstream.getBits(rawLength)
-        _ = rawData
-        # ignore data for now
+        availableBits = rawLength
+        while availableBits > 0:
+            availableBits -= self.parsePacket()
+        return rawLength
 
-    def parseSubPackets(self) -> None:
+    def parseSubPackets(self) -> int:
         print('parseSubPackets')
+        totalBits = 0
         subPacketsNumber = self._bitstream.getBits(11)
         for i in range(subPacketsNumber):
-            self.parsePacket()
+            totalBits += self.parsePacket()
+        return totalBits
 
 
 if __name__ == '__main__':
@@ -171,12 +178,12 @@ if __name__ == '__main__':
     bitStream = BitStream(byteStream)
     bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
     bITS.parsePacket()
-    print(sum(bITS._versions))  # wrong
+    print(sum(bITS._versions))
     print()
 
     byteStream = ByteStream.fromHexString('A0016C880162017C3686B18A3D4780')
     bitStream = BitStream(byteStream)
     bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
     bITS.parsePacket()
-    print(sum(bITS._versions))  # wrong
+    print(sum(bITS._versions))  # wrong!
     print()
