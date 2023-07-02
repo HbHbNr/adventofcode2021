@@ -1,4 +1,5 @@
 from typing import Generator, Tuple, List
+from days import util
 
 
 class ByteStream:
@@ -88,7 +89,7 @@ class BuoyancyInterchangeTransmissionSystem:
         totalBits = 6
         version = self._bitstream.getBits(3)
         typeID = self._bitstream.getBits(3)
-        print(version, typeID)
+        print('v=', version, ' t=', typeID, sep='')
         self._versions.append(version)
         if typeID == 4:
             bits, literal = self.parseLiteral()
@@ -98,9 +99,9 @@ class BuoyancyInterchangeTransmissionSystem:
             lengthTypeID = self._bitstream.getBits(1)
             totalBits += 1
             if lengthTypeID == 0:
-                totalBits += self.parseRawData()
+                totalBits += self.parseOperator0()
             else:
-                totalBits += self.parseSubPackets()
+                totalBits += self.parseOperator1()
         return totalBits
 
     def parseLiteral(self) -> Tuple[int, int]:
@@ -116,15 +117,16 @@ class BuoyancyInterchangeTransmissionSystem:
             readMore = bool(part & 0b10000)
         return totalBits, result
 
-    def parseRawData(self) -> int:
+    def parseOperator0(self) -> int:
         print('parseRawData')
         rawLength = self._bitstream.getBits(15)
         availableBits = rawLength
         while availableBits > 0:
+            print('  availableBits=', availableBits, sep='')
             availableBits -= self.parsePacket()
         return rawLength
 
-    def parseSubPackets(self) -> int:
+    def parseOperator1(self) -> int:
         print('parseSubPackets')
         totalBits = 0
         subPacketsNumber = self._bitstream.getBits(11)
@@ -132,58 +134,21 @@ class BuoyancyInterchangeTransmissionSystem:
             totalBits += self.parsePacket()
         return totalBits
 
+    def getVersions(self) -> Tuple[int, ...]:
+        return tuple(self._versions)
+
 
 if __name__ == '__main__':
-    from days import util
-
-    # byteStream = ByteStream.fromHexFile('inputfiles/day16_example1.txt')
-    # stream = byteStream.stream()
-    # b = next(stream, -1)
-    # while b >= 0:
-    #     print(b)
-    #     b = next(stream, -1)
-
-    # byteStream = ByteStream.fromHexString('D2FE28')
-    # bitStream = BitStream(byteStream)
-    # # b = next(stream, -1)
-    # # while b >= 0:
-    # #     print(b)
-    # #     b = next(stream, -1)
-    # for number in [3, 3, 5, 5, 5]:
-    #     i = bitStream.getBits(number)
-    #     print('->', i, "({0:b})".format(i))
-
-    byteStream = ByteStream.fromHexString('D2FE28')
-    bitStream = BitStream(byteStream)
-    bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
-    bITS.parsePacket()
-    print(sum(bITS._versions))
-    print()
-
     byteStream = ByteStream.fromHexString('38006F45291200')
     bitStream = BitStream(byteStream)
     bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
     bITS.parsePacket()
-    print(sum(bITS._versions))
+    print('sum:', sum(bITS._versions))
     print()
 
     byteStream = ByteStream.fromHexString('EE00D40C823060')
     bitStream = BitStream(byteStream)
     bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
     bITS.parsePacket()
-    print(sum(bITS._versions))
-    print()
-
-    byteStream = ByteStream.fromHexString('8A004A801A8002F478')
-    bitStream = BitStream(byteStream)
-    bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
-    bITS.parsePacket()
-    print(sum(bITS._versions))
-    print()
-
-    byteStream = ByteStream.fromHexString('A0016C880162017C3686B18A3D4780')
-    bitStream = BitStream(byteStream)
-    bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
-    bITS.parsePacket()
-    print(sum(bITS._versions))  # wrong!
+    print('sum:', sum(bITS._versions))
     print()
