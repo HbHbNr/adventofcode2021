@@ -1,7 +1,7 @@
 from days import day16a
 
 
-def test_bitstream():
+def test_bitstream1():
     byteStream = day16a.ByteStream.fromHexString('D2FE28')
     bitStream = day16a.BitStream(byteStream)
 
@@ -10,6 +10,19 @@ def test_bitstream():
     assert bitStream.getBits(5) == 0b10111  # literal part 1
     assert bitStream.getBits(5) == 0b11110  # literal part 2
     assert bitStream.getBits(5) == 0b00101  # literal part 3
+
+
+def test_bitstream2():
+    byteStream = day16a.ByteStream.fromHexString('38006F45291200')
+    bitStream = day16a.BitStream(byteStream)
+
+    assert bitStream.getBits(3) == 1  # version
+    assert bitStream.getBits(3) == 6  # type ID
+    assert bitStream.getBits(1) == 0  # type length ID
+    assert bitStream.getBits(15) == 27  # length of sub packages
+    assert bitStream.getBits(11) == 0b11010001010  # literal A
+    assert bitStream.getBits(16) == 0b0101001000100100  # literal B
+    assert bitStream.getBits(7) == 0  # padding
 
 
 def test_examplehexfile():
