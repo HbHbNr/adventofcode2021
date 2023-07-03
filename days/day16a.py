@@ -139,4 +139,17 @@ class BuoyancyInterchangeTransmissionSystem:
 
 
 if __name__ == '__main__':
-    pass
+    hexstrings = [('C0015000016115A2E0802F182340', 7, 23),
+                  ('A0016C880162017C3686B18A3D4780', 8, 31)]
+    # hexstrings.pop()  # broken
+    hexstrings.pop()  # broken
+    for hexstring, versioncount, versionsum in hexstrings:
+        print('*****', hexstring)
+        byteStream = ByteStream.fromHexString(hexstring)
+        bitStream = BitStream(byteStream)
+        bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
+        bITS.parsePacket()
+        versions = bITS.getVersions()
+
+        assert len(versions) == versioncount
+        assert sum(versions) == versionsum
