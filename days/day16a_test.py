@@ -25,6 +25,13 @@ def test_bitstream2():
     assert bitStream.getBits(7) == 0  # padding
 
 
+def test_bitstream3():
+    byteStream = day16a.ByteStream.fromHexString('EE00D40C823060')
+    bitStream = day16a.BitStream(byteStream)
+
+    assert bitStream.getBits(3) == 7  # version
+
+
 def test_examplehexfile():
     byteStream = day16a.ByteStream.fromHexFile('inputfiles/day16_example.txt')
     bitStream = day16a.BitStream(byteStream)
@@ -43,7 +50,7 @@ def test_examplehexstrings():
     hexstrings.pop()  # broken
     hexstrings.pop()  # broken
     for hexstring, versioncount, versionsum in hexstrings:
-        print(hexstring)
+        print('*****', hexstring)
         byteStream = day16a.ByteStream.fromHexString(hexstring)
         bitStream = day16a.BitStream(byteStream)
         bITS = day16a.BuoyancyInterchangeTransmissionSystem(bitStream)

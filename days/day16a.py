@@ -118,7 +118,7 @@ class BuoyancyInterchangeTransmissionSystem:
         return totalBits, result
 
     def parseOperator0(self) -> int:
-        print('parseRawData')
+        print('parseOperator0')
         rawLength = self._bitstream.getBits(15)
         availableBits = rawLength
         while availableBits > 0:
@@ -127,7 +127,7 @@ class BuoyancyInterchangeTransmissionSystem:
         return rawLength
 
     def parseOperator1(self) -> int:
-        print('parseSubPackets')
+        print('parseOperator1')
         totalBits = 0
         subPacketsNumber = self._bitstream.getBits(11)
         for i in range(subPacketsNumber):
@@ -139,16 +139,4 @@ class BuoyancyInterchangeTransmissionSystem:
 
 
 if __name__ == '__main__':
-    byteStream = ByteStream.fromHexString('38006F45291200')
-    bitStream = BitStream(byteStream)
-    bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
-    bITS.parsePacket()
-    print('sum:', sum(bITS._versions))
-    print()
-
-    byteStream = ByteStream.fromHexString('EE00D40C823060')
-    bitStream = BitStream(byteStream)
-    bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
-    bITS.parsePacket()
-    print('sum:', sum(bITS._versions))
-    print()
+    pass
