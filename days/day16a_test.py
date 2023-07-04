@@ -67,3 +67,14 @@ def test_examplehexstrings():
 
         assert len(versions) == versioncount
         assert sum(versions) == versionsum
+
+
+def test_input():
+    byteStream = day16a.ByteStream.fromHexFile('inputfiles/day16_input.txt')
+    bitStream = day16a.BitStream(byteStream)
+    bITS = day16a.BuoyancyInterchangeTransmissionSystem(bitStream)
+    bITS.parsePacket()
+    versions = bITS.getVersions()
+
+    assert len(versions) == 268
+    assert sum(versions) == 897
