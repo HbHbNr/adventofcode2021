@@ -125,7 +125,7 @@ class BuoyancyInterchangeTransmissionSystem:
         while availableBits > 0:
             print('  availableBits=', availableBits, sep='')
             availableBits -= self.parsePacket()
-        return rawLength
+        return 15 + rawLength
 
     def parseOperator1(self) -> int:
         print('parseOperator1')
@@ -133,7 +133,7 @@ class BuoyancyInterchangeTransmissionSystem:
         subPacketsNumber = self._bitstream.getBits(11)
         for i in range(subPacketsNumber):
             totalBits += self.parsePacket()
-        return totalBits
+        return 11 + totalBits
 
     def getVersions(self) -> Tuple[int, ...]:
         return tuple(self._versions)
@@ -142,8 +142,6 @@ class BuoyancyInterchangeTransmissionSystem:
 if __name__ == '__main__':
     hexstrings = [('C0015000016115A2E0802F182340', 7, 23),
                   ('A0016C880162017C3686B18A3D4780', 8, 31)]
-    # hexstrings.pop()  # broken
-    hexstrings.pop()  # broken
     for hexstring, versioncount, versionsum in hexstrings:
         print('*****', hexstring)
         byteStream = ByteStream.fromHexString(hexstring)

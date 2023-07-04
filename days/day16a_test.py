@@ -50,12 +50,13 @@ def test_examplehexfile():
 
 
 def test_examplehexstrings():
-    hexstrings = [('8A004A801A8002F478', 4, 16),
+    hexstrings = [('D2FE28', 1, 6),
+                  ('38006F45291200', 3, 9),
+                  ('EE00D40C823060', 4, 14),
+                  ('8A004A801A8002F478', 4, 16),
                   ('620080001611562C8802118E34', 7, 12),
                   ('C0015000016115A2E0802F182340', 7, 23),
                   ('A0016C880162017C3686B18A3D4780', 8, 31)]
-    hexstrings.pop()  # broken
-    hexstrings.pop()  # broken
     for hexstring, versioncount, versionsum in hexstrings:
         print('*****', hexstring)
         byteStream = day16a.ByteStream.fromHexString(hexstring)
