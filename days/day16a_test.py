@@ -30,6 +30,13 @@ def test_bitstream3():
     bitStream = day16a.BitStream(byteStream)
 
     assert bitStream.getBits(3) == 7  # version
+    assert bitStream.getBits(3) == 3  # type ID
+    assert bitStream.getBits(1) == 1  # type length ID
+    assert bitStream.getBits(11) == 3  # number of sub packages
+    assert bitStream.getBits(11) == 0b01010000001  # literal A
+    assert bitStream.getBits(11) == 0b10010000010  # literal A
+    assert bitStream.getBits(11) == 0b00110000011  # literal A
+    assert bitStream.getBits(5) == 0  # padding
 
 
 def test_examplehexfile():

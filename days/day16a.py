@@ -76,6 +76,7 @@ class BitStream:
                 self._availableBits = 0
                 # print('c')
                 pass
+        # print((' ' * 20 + 'getBits({0:2})={1:2}  {1:0' + str(number) + 'b}').format(number, result))
         return result
 
 
