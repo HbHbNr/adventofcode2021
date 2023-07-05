@@ -1,47 +1,9 @@
-from days import day16a
-
-
-def test_bitstream1():
-    byteStream = day16a.ByteStream.fromHexString('D2FE28')
-    bitStream = day16a.BitStream(byteStream)
-
-    assert bitStream.getBits(3) == 6  # version
-    assert bitStream.getBits(3) == 4  # type ID
-    assert bitStream.getBits(5) == 0b10111  # literal part 1
-    assert bitStream.getBits(5) == 0b11110  # literal part 2
-    assert bitStream.getBits(5) == 0b00101  # literal part 3
-
-
-def test_bitstream2():
-    byteStream = day16a.ByteStream.fromHexString('38006F45291200')
-    bitStream = day16a.BitStream(byteStream)
-
-    assert bitStream.getBits(3) == 1  # version
-    assert bitStream.getBits(3) == 6  # type ID
-    assert bitStream.getBits(1) == 0  # type length ID
-    assert bitStream.getBits(15) == 27  # length of sub packages
-    assert bitStream.getBits(11) == 0b11010001010  # literal A
-    assert bitStream.getBits(16) == 0b0101001000100100  # literal B
-    assert bitStream.getBits(7) == 0  # padding
-
-
-def test_bitstream3():
-    byteStream = day16a.ByteStream.fromHexString('EE00D40C823060')
-    bitStream = day16a.BitStream(byteStream)
-
-    assert bitStream.getBits(3) == 7  # version
-    assert bitStream.getBits(3) == 3  # type ID
-    assert bitStream.getBits(1) == 1  # type length ID
-    assert bitStream.getBits(11) == 3  # number of sub packages
-    assert bitStream.getBits(11) == 0b01010000001  # literal A
-    assert bitStream.getBits(11) == 0b10010000010  # literal A
-    assert bitStream.getBits(11) == 0b00110000011  # literal A
-    assert bitStream.getBits(5) == 0  # padding
+from days import day16a, bytestream, bitstream
 
 
 def test_examplehexfile():
-    byteStream = day16a.ByteStream.fromHexFile('inputfiles/day16_example.txt')
-    bitStream = day16a.BitStream(byteStream)
+    byteStream = bytestream.ByteStream.fromHexFile('inputfiles/day16_example.txt')
+    bitStream = bitstream.BitStream(byteStream)
     bITS = day16a.BuoyancyInterchangeTransmissionSystem(bitStream)
     bITS.parsePacket()
     versions = bITS.getVersions()
@@ -59,8 +21,8 @@ def test_examplehexstrings():
                   ('A0016C880162017C3686B18A3D4780', 8, 31)]
     for hexstring, versioncount, versionsum in hexstrings:
         print('*****', hexstring)
-        byteStream = day16a.ByteStream.fromHexString(hexstring)
-        bitStream = day16a.BitStream(byteStream)
+        byteStream = bytestream.ByteStream.fromHexString(hexstring)
+        bitStream = bitstream.BitStream(byteStream)
         bITS = day16a.BuoyancyInterchangeTransmissionSystem(bitStream)
         bITS.parsePacket()
         versions = bITS.getVersions()
@@ -70,8 +32,8 @@ def test_examplehexstrings():
 
 
 def test_input():
-    byteStream = day16a.ByteStream.fromHexFile('inputfiles/day16_input.txt')
-    bitStream = day16a.BitStream(byteStream)
+    byteStream = bytestream.ByteStream.fromHexFile('inputfiles/day16_input.txt')
+    bitStream = bitstream.BitStream(byteStream)
     bITS = day16a.BuoyancyInterchangeTransmissionSystem(bitStream)
     bITS.parsePacket()
     versions = bITS.getVersions()
