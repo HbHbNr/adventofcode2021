@@ -8,7 +8,7 @@ def test_bytestreamstring():
     assert next(stream) == 0xfe
     assert next(stream) == 0x28
     try:
-        # buffer is empty now and thows StopIteration exception
+        # buffer is empty now and raises StopIteration exception
         next(stream)
         assert False
     except StopIteration:
@@ -29,7 +29,7 @@ def test_bytestreamfile():
     assert next(stream) == 0xf4
     assert next(stream) == 0x78
     try:
-        # buffer is empty now and thows StopIteration exception
+        # buffer is empty now and raises StopIteration exception
         next(stream)
         assert False
     except StopIteration:
