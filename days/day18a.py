@@ -1,5 +1,5 @@
 from typing import NamedTuple, Optional
-# from days import tokenstream
+from util import tokenstream
 
 
 class TreeNode(NamedTuple):
@@ -22,6 +22,7 @@ class TreeNode(NamedTuple):
 
 if __name__ == '__main__':
     from days import util
+    token = tokenstream.Token.createInteger(3)
 
     # solved with https://github.com/HbHbNr/a-star
     util.printresultline('18a', 0)

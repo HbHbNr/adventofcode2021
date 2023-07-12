@@ -1,4 +1,4 @@
-from days import bytestream
+from util import bytestream
 
 
 def test_bytestreamstring():

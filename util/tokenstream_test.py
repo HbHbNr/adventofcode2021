@@ -1,4 +1,4 @@
-from days import tokenstream
+from util import tokenstream
 
 
 def test_tokenstreamstring1():

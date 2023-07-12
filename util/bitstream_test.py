@@ -1,4 +1,4 @@
-from days import bytestream, bitstream
+from util import bytestream, bitstream
 
 
 def test_bitstream1():

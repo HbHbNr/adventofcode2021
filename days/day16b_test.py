@@ -1,4 +1,5 @@
-from days import day16b, bytestream, bitstream
+from days import day16b
+from util import bytestream, bitstream
 
 
 def test_examplehexstrings():
