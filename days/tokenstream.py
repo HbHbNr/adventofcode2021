@@ -15,7 +15,7 @@ class Token(NamedTuple):
     intvalue: int
 
     @classmethod
-    def createBasic(cls, s: str):
+    def createBasic(cls, s: str) -> 'Token':
         if s == '[':
             type = TokenType.SQUARE_BRACKET_OPEN
         elif s == ']':
@@ -28,7 +28,7 @@ class Token(NamedTuple):
         return Token(type, 0)
 
     @classmethod
-    def createInteger(cls, value: int):
+    def createInteger(cls, value: int) -> 'Token':
         return Token(TokenType.INTEGER, value)
 
 
