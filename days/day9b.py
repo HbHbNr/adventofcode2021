@@ -83,7 +83,7 @@ class Basin:
 
 
 if __name__ == '__main__':
-    from days import util
+    from util import util
 
     # lines = util.readinputfile('inputfiles/day9_example.txt')
     lines = util.readinputfile('inputfiles/day9_input.txt')

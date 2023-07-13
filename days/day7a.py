@@ -22,7 +22,7 @@ class Aligner:
 
 
 if __name__ == '__main__':
-    from days import util
+    from util import util
 
     # lines = util.readinputfile('inputfiles/day7_example.txt')
     lines = util.readinputfile('inputfiles/day7_input.txt')

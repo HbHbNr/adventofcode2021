@@ -1,4 +1,5 @@
-from days import util, day8b
+from util import util
+from days import day8b
 
 
 def test_example_distinct():

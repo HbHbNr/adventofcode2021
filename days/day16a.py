@@ -1,5 +1,5 @@
 from typing import Tuple, List
-from days import util
+from util import util
 from util import bytestream, bitstream
 
 

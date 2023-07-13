@@ -1,4 +1,5 @@
-from days import util, day10a
+from util import util
+from days import day10a
 
 
 def test_brackets():

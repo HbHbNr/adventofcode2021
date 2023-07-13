@@ -43,7 +43,7 @@ class Map:
 
 
 if __name__ == '__main__':
-    from days import util
+    from util import util
 
     # lines = util.readinputfile('inputfiles/day5_example.txt')
     lines = util.readinputfile('inputfiles/day5_input.txt')

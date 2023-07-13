@@ -1,5 +1,5 @@
 from typing import Generator
-from days import util
+from util import util
 
 
 class ByteStream:

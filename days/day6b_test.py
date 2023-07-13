@@ -1,4 +1,5 @@
-from days import util, day6b
+from util import util
+from days import day6b
 
 
 def test_example():

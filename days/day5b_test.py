@@ -1,4 +1,5 @@
-from days import util, day5b
+from util import util
+from days import day5b
 
 
 def test_map_example():

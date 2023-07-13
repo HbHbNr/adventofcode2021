@@ -1,4 +1,5 @@
-from days import util, day4a
+from util import util
+from days import day4a
 
 
 def test_bingoboard_simple():

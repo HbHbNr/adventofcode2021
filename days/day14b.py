@@ -100,7 +100,7 @@ class Polymer:
 
 
 if __name__ == '__main__':
-    from days import util
+    from util import util
     import sys
 
     # lines = util.readinputfile('inputfiles/day14_example.txt')
