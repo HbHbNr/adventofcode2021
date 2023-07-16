@@ -23,11 +23,11 @@ def test_example2():
 
     assert len(str(polymer)) == 4
 
-    for step in range(1, 5 + 1):
+    for _ in range(1, 5 + 1):
         polymer.step()
     assert len(str(polymer)) == 97
 
-    for step in range(6, 10 + 1):
+    for _ in range(6, 10 + 1):
         polymer.step()
     assert len(str(polymer)) == 3073
 
@@ -36,7 +36,7 @@ def test_example3():
     lines = util.readinputfile('inputfiles/day14_example.txt')
     polymer = day14a.Polymer(lines)
 
-    for step in range(1, 10 + 1):
+    for _ in range(1, 10 + 1):
         polymer.step()
     histogram = polymer.histogram()
     assert histogram.get('B') == 1749
@@ -52,7 +52,7 @@ def test_example3():
 def test_input():
     lines = util.readinputfile('inputfiles/day14_input.txt')
     polymer = day14a.Polymer(lines)
-    for step in range(1, 10 + 1):
+    for _ in range(1, 10 + 1):
         polymer.step()
     histogram = polymer.histogram()
     values = list(histogram.values())

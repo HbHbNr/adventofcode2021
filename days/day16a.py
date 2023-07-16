@@ -16,7 +16,7 @@ class BuoyancyInterchangeTransmissionSystem:
         # print('v=', version, ' t=', typeID, sep='')
         self._versions.append(version)
         if typeID == 4:
-            bits, literal = self.parseLiteral()
+            bits, _ = self.parseLiteral()
             totalBits += bits
             # print(literal)
         else:
@@ -54,7 +54,7 @@ class BuoyancyInterchangeTransmissionSystem:
         # print('parseOperator1')
         totalBits = 0
         subPacketsNumber = self._bitstream.getBits(11)
-        for i in range(subPacketsNumber):
+        for _ in range(subPacketsNumber):
             totalBits += self.parsePacket()
         return 11 + totalBits
 

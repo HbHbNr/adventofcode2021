@@ -40,8 +40,8 @@ class Checker:
         return character in Checker._openbrackets
 
     @classmethod
-    def matchingbrackets(cls, open, close):
-        return Checker._openbrackets.index(open) == Checker._closebrackets.index(close)
+    def matchingbrackets(cls, openBracket, closeBracket):
+        return Checker._openbrackets.index(openBracket) == Checker._closebrackets.index(closeBracket)
 
     @classmethod
     def errorscore(cls, close):

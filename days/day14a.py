@@ -46,7 +46,7 @@ def main():
     # lines = util.readinputfile('inputfiles/day14_example.txt')
     lines = util.readinputfile('inputfiles/day14_input.txt')
     polymer = Polymer(lines)
-    for step in range(1, 10 + 1):
+    for _ in range(1, 10 + 1):
         polymer.step()
         # print(f'{step} - {len(str(polymer))}')
     histogram = polymer.histogram()

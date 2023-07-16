@@ -17,15 +17,15 @@ class Token(NamedTuple):
     @classmethod
     def createBasic(cls, s: str) -> 'Token':
         if s == '[':
-            type = TokenType.SQUARE_BRACKET_OPEN
+            tokenType = TokenType.SQUARE_BRACKET_OPEN
         elif s == ']':
-            type = TokenType.SQUARE_BRACKET_CLOSE
+            tokenType = TokenType.SQUARE_BRACKET_CLOSE
         elif s == ',':
-            type = TokenType.COMMA
+            tokenType = TokenType.COMMA
         else:
             raise ValueError(f'{s} has unknown TokenType')
 
-        return Token(type, 0)
+        return Token(tokenType, 0)
 
     @classmethod
     def createInteger(cls, value: int) -> 'Token':

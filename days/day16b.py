@@ -61,7 +61,7 @@ class BuoyancyInterchangeTransmissionSystem:
         totalBits = 0
         results: List[int] = []
         subPacketsNumber = self._bitstream.getBits(11)
-        for i in range(subPacketsNumber):
+        for _ in range(subPacketsNumber):
             bits, result = self.parsePacket()
             totalBits += bits
             results.append(result)

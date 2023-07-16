@@ -40,9 +40,9 @@ class Matrix:
     @classmethod
     def splitFoldCommand(cls, line: str) -> Tuple[str, int]:
         _, _, line = line.split(' ')
-        dir, numstr = line.split('=')
-        num = int(numstr)
-        return dir, num
+        folddir, foldnumstr = line.split('=')
+        foldnum = int(foldnumstr)
+        return folddir, foldnum
 
     def __str__(self):
         lines = []
