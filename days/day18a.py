@@ -20,9 +20,14 @@ class TreeNode(NamedTuple):
         return self.left is not None
 
 
-if __name__ == '__main__':
+def main():
     from util import util
     token = tokenstream.Token.createInteger(3)
+    print(token)
 
     # solved with https://github.com/HbHbNr/a-star
     util.printresultline('18a', 0)
+
+
+if __name__ == '__main__':
+    main()

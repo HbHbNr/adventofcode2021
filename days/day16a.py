@@ -62,10 +62,14 @@ class BuoyancyInterchangeTransmissionSystem:
         return tuple(self._versions)
 
 
-if __name__ == '__main__':
+def main():
     byteStream = bytestream.ByteStream.fromHexFile('inputfiles/day16_input.txt')
     bitStream = bitstream.BitStream(byteStream)
     bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
     bITS.parsePacket()
     versions = bITS.getVersions()
     util.printresultline('16a', sum(versions))
+
+
+if __name__ == '__main__':
+    main()

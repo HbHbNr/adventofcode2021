@@ -48,7 +48,7 @@ class Checker:
         return Checker._closebracketsscores[Checker._closebrackets.index(close)]
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day10_example.txt')
@@ -58,3 +58,7 @@ if __name__ == '__main__':
 
     # print("syntaxerrors: " + str(syntaxerrors))
     print("syntaxerrorscore: " + str(sum(syntaxerrors)))
+
+
+if __name__ == '__main__':
+    main()

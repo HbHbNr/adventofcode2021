@@ -39,10 +39,14 @@ class Panel:
         return totalcount
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day8_example.txt')
     lines = util.readinputfile('inputfiles/day8_input.txt')
     totalcount = Panel.countalldistinctdigits(lines)
     print(f'totalcount: {totalcount}')
+
+
+if __name__ == '__main__':
+    main()

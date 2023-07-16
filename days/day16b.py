@@ -84,9 +84,13 @@ class BuoyancyInterchangeTransmissionSystem:
             return 1 if results[0] == results[1] else 0
 
 
-if __name__ == '__main__':
+def main():
     byteStream = bytestream.ByteStream.fromHexFile('inputfiles/day16_input.txt')
     bitStream = bitstream.BitStream(byteStream)
     bITS = BuoyancyInterchangeTransmissionSystem(bitStream)
     _, result = bITS.parsePacket()
     util.printresultline('16b', result)
+
+
+if __name__ == '__main__':
+    main()

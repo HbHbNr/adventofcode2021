@@ -64,7 +64,7 @@ class Checker:
         return Checker._openbracketsscores[Checker._openbrackets.index(bracket)]
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day10_example.txt')
@@ -76,3 +76,7 @@ if __name__ == '__main__':
     #     print(str(line))
 
     print("Middle score: " + str(Checker.calccompletescore(incompletelines)))
+
+
+if __name__ == '__main__':
+    main()

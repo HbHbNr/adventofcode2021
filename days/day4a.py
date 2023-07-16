@@ -55,7 +55,7 @@ class BingoMatch:
         return None
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     lines = util.readinputfile('inputfiles/day4_input.txt')
@@ -64,3 +64,7 @@ if __name__ == '__main__':
     print(result)
     if result is not None:
         print(result['pickednumber'] * result['boardsum'])
+
+
+if __name__ == '__main__':
+    main()

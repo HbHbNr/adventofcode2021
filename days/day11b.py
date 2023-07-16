@@ -75,7 +75,7 @@ class Cavern:
         return '\n'.join(lines)
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day11_example.txt')
@@ -89,3 +89,7 @@ if __name__ == '__main__':
             break
     # print(cavern)
     print('DAY11B - the first step during which all octopuses flash: ' + str(step))
+
+
+if __name__ == '__main__':
+    main()

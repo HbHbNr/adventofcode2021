@@ -71,7 +71,7 @@ class Matrix:
         # return str(self._foldcommands)
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day13_example.txt')
@@ -82,3 +82,7 @@ if __name__ == '__main__':
     # print(matrix)
 
     util.printresultline('13b', '\n' + str(matrix))
+
+
+if __name__ == '__main__':
+    main()

@@ -35,7 +35,7 @@ class Heightmap:
             print(row)
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day9_example.txt')
@@ -45,3 +45,7 @@ if __name__ == '__main__':
 
     # print("lowPoints: " + str(heightmap.findlowpoints()))
     print("riskLevel: " + str(heightmap.calcrisklevel()))
+
+
+if __name__ == '__main__':
+    main()

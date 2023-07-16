@@ -57,7 +57,7 @@ class Matrix:
         return '\n'.join(lines)
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day13_example.txt')
@@ -66,3 +66,7 @@ if __name__ == '__main__':
     # print(matrix)
 
     util.printresultline('13a', matrix.countDots())
+
+
+if __name__ == '__main__':
+    main()

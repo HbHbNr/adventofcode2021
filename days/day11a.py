@@ -71,7 +71,7 @@ class Cavern:
         return '\n'.join(lines)
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day11_example.txt')
@@ -83,3 +83,7 @@ if __name__ == '__main__':
         cavern.step()
     # print(cavern)
     print('DAY11A - Number of total flashes after 100 steps: ' + str(cavern.getTotalFlashes()))
+
+
+if __name__ == '__main__':
+    main()

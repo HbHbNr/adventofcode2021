@@ -65,7 +65,7 @@ class Graph:
         return ','.join(self._vertices.keys())
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day12_example1.txt')
@@ -75,3 +75,7 @@ if __name__ == '__main__':
     paths = graph.findDistinctPaths()
 
     print('DAY12B - Number of distinct paths: ' + str(len(paths)))
+
+
+if __name__ == '__main__':
+    main()

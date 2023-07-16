@@ -21,7 +21,7 @@ class Aligner:
         return alignment
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day7_example.txt')
@@ -30,3 +30,7 @@ if __name__ == '__main__':
     print('crabs: {}'.format(aligner.size()))
     alignment = aligner.calcbestx()
     print('bestx: {}  bestfuel: {}'.format(alignment['bestx'], alignment['totalfuels'][alignment['bestx']]))
+
+
+if __name__ == '__main__':
+    main()

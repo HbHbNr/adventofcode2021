@@ -42,7 +42,7 @@ class Map:
         return {'width': self._width, 'height': self._height}
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day5_example.txt')
@@ -51,3 +51,7 @@ if __name__ == '__main__':
     print(map.size())
     # map.print()
     print(map.countdangerouscoords())
+
+
+if __name__ == '__main__':
+    main()

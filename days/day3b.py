@@ -51,8 +51,12 @@ def determineratings(inputfile):
     return (oxygen, co2)
 
 
-if __name__ == '__main__':
+def main():
     oxygen, co2 = determineratings('inputfiles/day3_input.txt')
     print('oxygen: {} -> {}'.format(oxygen, int(oxygen, 2)))
     print('co2: {} -> {}'.format(co2, int(co2, 2)))
     print('oxygen * co2: {}'.format(int(oxygen, 2) * int(co2, 2)))
+
+
+if __name__ == '__main__':
+    main()

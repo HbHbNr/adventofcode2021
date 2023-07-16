@@ -99,7 +99,7 @@ class Polymer:
         return self._template
 
 
-if __name__ == '__main__':
+def main():
     from util import util
     import sys
 
@@ -120,3 +120,7 @@ if __name__ == '__main__':
     diff = values[-1] - values[0]
 
     util.printresultline('14b', diff)
+
+
+if __name__ == '__main__':
+    main()

@@ -63,7 +63,7 @@ class BingoMatch:
         return winningbingoboards
 
 
-if __name__ == '__main__':
+def main():
     from util import util
 
     lines = util.readinputfile('inputfiles/day4_input.txt')
@@ -71,3 +71,7 @@ if __name__ == '__main__':
     winningbingoboards = bingomatch.play()
     print('First board: ' + str(winningbingoboards[0]))
     print(' Last board: ' + str(winningbingoboards[len(winningbingoboards)-1]))
+
+
+if __name__ == '__main__':
+    main()
