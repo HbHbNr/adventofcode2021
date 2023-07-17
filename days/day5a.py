@@ -41,16 +41,20 @@ class Map:
     def size(self):
         return {'width': self._width, 'height': self._height}
 
+    # for unit testing
+    def testCoord(self, x, y, value) -> bool:
+        return self._coords[x][y] == value
+
 
 def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day5_example.txt')
     lines = util.readinputfile('inputfiles/day5_input.txt')
-    map = Map(lines)
-    print(map.size())
+    theMap = Map(lines)
+    print(theMap.size())
     # map.print()
-    print(map.countdangerouscoords())
+    print(theMap.countdangerouscoords())
 
 
 if __name__ == '__main__':

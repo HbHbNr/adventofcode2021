@@ -29,6 +29,7 @@ class Map:
 
     def drawlined(self, x1, y1, x2, y2):
         if x2 < x1:
+            # pylint: disable=arguments-out-of-order
             # always draw from left to right
             self.drawlined(x2, y2, x1, y1)
         else:
@@ -59,16 +60,20 @@ class Map:
     def size(self):
         return {'width': self._width, 'height': self._height}
 
+    # for unit testing
+    def testCoord(self, x, y, value) -> bool:
+        return self._coords[x][y] == value
+
 
 def main():
     from util import util
 
     # lines = util.readinputfile('inputfiles/day5_example.txt')
     lines = util.readinputfile('inputfiles/day5_input.txt')
-    map = Map(lines)
-    print(map.size())
+    theMap = Map(lines)
+    print(theMap.size())
     # print(map)
-    print(map.countdangerouscoords())
+    print(theMap.countdangerouscoords())
 
 
 if __name__ == '__main__':
