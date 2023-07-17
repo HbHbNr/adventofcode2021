@@ -1,3 +1,6 @@
+from typing import Tuple
+
+
 class BingoBoard:
     def __init__(self, rows):
         self._rows = [[int(x) for x in row.split(None)] for row in rows]
@@ -26,6 +29,14 @@ class BingoBoard:
     def isWinner(self):
         result = self._rows.count([-1, -1, -1, -1, -1]) > 0 or self._columns.count([-1, -1, -1, -1, -1]) > 0
         return result
+
+    # for unit testing
+    def getRow(self, rowIndex) -> Tuple[int]:
+        return tuple(self._rows[rowIndex])
+
+    # for unit testing
+    def getColumn(self, columnIndex) -> Tuple[int]:
+        return tuple(self._columns[columnIndex])
 
 
 class BingoMatch:
