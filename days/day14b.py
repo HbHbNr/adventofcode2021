@@ -34,7 +34,7 @@ class Polymer:
         self._histogramLen = len(self._histogram)
         # print(self._histogram)
 
-        self._cache: Dict[Tuple[int, int], List[int]] = dict()
+        self._cache: Dict[Tuple[int, int], List[int]] = {}
 
     def lookupSymbol(self, symbol: str) -> int:
         return self._symbolMap[symbol]
@@ -55,8 +55,8 @@ class Polymer:
         for line in lines[2:]:
             symbols.add(line[6])
         # print(f'found {len(symbols)} symbols: {",".join(symbols)}')
-        symbolMap: Dict[str, int] = dict()
-        numberMap: Dict[int, str] = dict()
+        symbolMap: Dict[str, int] = {}
+        numberMap: Dict[int, str] = {}
         number = 0
         for symbol in symbols:
             symbolMap[symbol] = number

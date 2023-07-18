@@ -1,4 +1,5 @@
 import fileinput
+import sys
 
 
 class Position:
@@ -29,7 +30,7 @@ def pilot():
             position.up(value)
         else:
             print('Unknown command "{}" in line {}'.format(line.rstrip(),  fileinput.filelineno()))
-            exit(1)
+            sys.exit(1)
     return position
 
 

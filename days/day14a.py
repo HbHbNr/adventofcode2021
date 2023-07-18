@@ -5,7 +5,7 @@ class Polymer:
 
     def __init__(self, lines: List[str]) -> None:
         self._template = lines[0]
-        self._rules: Dict[Tuple[str, str], str] = dict()
+        self._rules: Dict[Tuple[str, str], str] = {}
 
         for line in lines[2:]:
             key = line[0], line[1]
@@ -28,7 +28,7 @@ class Polymer:
         # print(self._template)
 
     def histogram(self) -> Dict[str, int]:
-        histogram: Dict[str, int] = dict()
+        histogram: Dict[str, int] = {}
         for c in self._template:
             if c in histogram:
                 histogram[c] += 1
