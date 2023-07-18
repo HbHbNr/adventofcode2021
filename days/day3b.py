@@ -37,7 +37,7 @@ def filterlines(lines, mostcommon):
     for index in range(maxindex):
         histogram = createhistogram(lines, index)
         value = histogram.comparevalues(mostcommon)
-        lines2 = list(filter(lambda line: line[index] == value, lines))
+        lines2 = list(filter(lambda line: line[index] == value, lines))  # pylint: disable=cell-var-from-loop
         lines = lines2
         if len(lines) == 1:
             break
@@ -52,10 +52,14 @@ def determineratings(inputfile):
 
 
 def main():
+    from util import util
+
     oxygen, co2 = determineratings('inputfiles/day3_input.txt')
-    print('oxygen: {} -> {}'.format(oxygen, int(oxygen, 2)))
-    print('co2: {} -> {}'.format(co2, int(co2, 2)))
-    print('oxygen * co2: {}'.format(int(oxygen, 2) * int(co2, 2)))
+    # print('oxygen: {} -> {}'.format(oxygen, int(oxygen, 2)))
+    # print('co2: {} -> {}'.format(co2, int(co2, 2)))
+    # print('oxygen * co2: {}'.format(int(oxygen, 2) * int(co2, 2)))
+
+    util.printresultline('3b', int(oxygen, 2) * int(co2, 2))
 
 
 if __name__ == '__main__':

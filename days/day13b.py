@@ -43,10 +43,8 @@ class Matrix:
     def folddot(cls, folddir, foldnum, x, y) -> Tuple[int, int]:
         if folddir == 'x' and x > foldnum:
             x = foldnum - (x - foldnum)
-            pass
         elif folddir == 'y' and y > foldnum:
             y = foldnum - (y - foldnum)
-            pass
         return (x, y)
 
     @classmethod

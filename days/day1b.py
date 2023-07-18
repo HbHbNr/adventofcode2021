@@ -1,9 +1,8 @@
 import fileinput
 
-inputfile = "inputfiles/day1_input.txt"
-
 
 def sweep(windowsize):
+    inputfile = "inputfiles/day1_input.txt"
     lastwindow = []
     increments = 0
     for line in fileinput.input(inputfile):
@@ -20,5 +19,13 @@ def sweep(windowsize):
     return increments
 
 
-for windowsize in [1, 3]:
-    print('windowsize {}: {} increments'.format(windowsize, sweep(windowsize)))
+def main():
+    from util import util
+
+    increments = sweep(3)
+
+    util.printresultline('1b', increments)
+
+
+if __name__ == '__main__':
+    main()

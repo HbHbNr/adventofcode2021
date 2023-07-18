@@ -1,7 +1,5 @@
 import fileinput
 
-inputfile = "inputfiles/day2_input.txt"
-
 
 class Position:
     def __init__(self, x=0, y=0, aim=0):
@@ -21,9 +19,10 @@ class Position:
 
 
 def pilot():
+    inputfile = "inputfiles/day2_input.txt"
     position = Position()
     for line in fileinput.input(inputfile):
-        command, sep, value = line.rstrip().partition(' ')
+        command, _, value = line.rstrip().partition(' ')
         if command == 'forward':
             position.forward(value)
         elif command == 'down':
@@ -36,5 +35,13 @@ def pilot():
     return position
 
 
-position = pilot()
-print('position: {}/{}  product: {}'.format(position.x, position.y, position.x * position.y))
+def main():
+    from util import util
+
+    position = pilot()
+
+    util.printresultline('2b', position.x * position.y)
+
+
+if __name__ == '__main__':
+    main()

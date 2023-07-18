@@ -1,8 +1,5 @@
 import fileinput
 
-# inputfile = "inputfiles/day3_example.txt"
-inputfile = "inputfiles/day3_input.txt"
-
 
 class Histogram:
     def __init__(self, maxindex):
@@ -13,7 +10,7 @@ class Histogram:
 
     def buildparameter(self, mostcommon):
         parameter = []
-        for index, values in enumerate(self.frequencies):
+        for _, values in enumerate(self.frequencies):
             # print(values)
             diff = values['0'] - values['1']
             diff = diff if mostcommon else -diff
@@ -32,10 +29,22 @@ def createhistogram(inputfile):
     return histogram
 
 
-histogram = createhistogram(inputfile)
-print(histogram.frequencies)
-gamma = histogram.buildparameter(True)
-epsilon = histogram.buildparameter(False)
-print('gamma: {} -> {}'.format(gamma, int(gamma, 2)))
-print('epsilon: {} -> {}'.format(epsilon, int(epsilon, 2)))
-print('gamma * epsilon: {}'.format(int(gamma, 2) * int(epsilon, 2)))
+def main():
+    from util import util
+
+    # inputfile = "inputfiles/day3_example.txt"
+    inputfile = "inputfiles/day3_input.txt"
+
+    histogram = createhistogram(inputfile)
+    # print(histogram.frequencies)
+    gamma = histogram.buildparameter(True)
+    epsilon = histogram.buildparameter(False)
+    # print('gamma: {} -> {}'.format(gamma, int(gamma, 2)))
+    # print('epsilon: {} -> {}'.format(epsilon, int(epsilon, 2)))
+    # print('gamma * epsilon: {}'.format(int(gamma, 2) * int(epsilon, 2)))
+
+    util.printresultline('3a', int(gamma, 2) * int(epsilon, 2))
+
+
+if __name__ == '__main__':
+    main()

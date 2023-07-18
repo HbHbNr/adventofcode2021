@@ -26,6 +26,9 @@ class School:
                 print(f'Day {day}')
             self.nextday()
 
+    def getFishes(self):
+        return tuple(self._fishes)
+
 
 def main():
     from util import util
