@@ -37,7 +37,7 @@ def filterlines(lines, mostcommon):
     for index in range(maxindex):
         histogram = createhistogram(lines, index)
         value = histogram.comparevalues(mostcommon)
-        lines2 = list(filter(lambda line: line[index] == value, lines))
+        lines2 = list(filter(lambda line: line[index] == value, lines))  # pylint: disable=cell-var-from-loop
         lines = lines2
         if len(lines) == 1:
             break
