@@ -2,7 +2,7 @@ from util import util
 from days import day11b
 
 
-def test_example():
+def testExample():
     lines = util.readinputfile('inputfiles/day11_example.txt')
     cavern = day11b.Cavern(lines)
 
@@ -22,7 +22,7 @@ def test_example():
             assert step != FIRST_FLASH  # in all other steps never all flash
 
 
-def test_input():
+def testInput():
     lines = util.readinputfile('inputfiles/day11_input.txt')
     cavern = day11b.Cavern(lines)
 

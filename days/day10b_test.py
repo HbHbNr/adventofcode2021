@@ -10,7 +10,7 @@ def test_brackets():
     assert day10b.Checker.scoreofbracket('<') == 4
 
 
-def test_example():
+def testExample():
     lines = util.readinputfile('inputfiles/day10_example.txt')
     checker = day10b.Checker(lines)
     incompletelines = checker.findincompletelines()

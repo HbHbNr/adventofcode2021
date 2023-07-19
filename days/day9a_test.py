@@ -2,7 +2,7 @@ from util import util
 from days import day9a
 
 
-def test_example():
+def testExample():
     lines = util.readinputfile('inputfiles/day9_example.txt')
     heightmap = day9a.Heightmap(lines)
 

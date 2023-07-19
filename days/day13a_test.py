@@ -2,14 +2,14 @@ from util import util
 from days import day13a
 
 
-def test_example():
+def testExample():
     lines = util.readinputfile('inputfiles/day13_example.txt')
     matrix = day13a.Matrix(lines)
 
     assert matrix.countDots() == 17
 
 
-def test_input():
+def testInput():
     lines = util.readinputfile('inputfiles/day13_input.txt')
     matrix = day13a.Matrix(lines)
 

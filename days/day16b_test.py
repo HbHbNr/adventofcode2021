@@ -2,7 +2,7 @@ from days import day16b
 from util import bytestream, bitstream
 
 
-def test_examplehexstrings():
+def testExampleHexStrings():
     hexstrings = [('C200B40A82', 3),
                   ('04005AC33890', 54),
                   ('880086C3E88112', 7),
@@ -21,7 +21,7 @@ def test_examplehexstrings():
         assert expectedresult == result
 
 
-def test_input():
+def testInput():
     byteStream = bytestream.ByteStream.fromHexFile('inputfiles/day16_input.txt')
     bitStream = bitstream.BitStream(byteStream)
     bITS = day16b.BuoyancyInterchangeTransmissionSystem(bitStream)

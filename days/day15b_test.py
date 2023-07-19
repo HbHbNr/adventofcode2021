@@ -1,6 +1,6 @@
-def test_example():
+def testExample():
     assert True
 
 
-def test_input():
+def testInput():
     assert True

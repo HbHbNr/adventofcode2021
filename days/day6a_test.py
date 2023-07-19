@@ -2,7 +2,7 @@ from util import util
 from days import day6a
 
 
-def test_example():
+def testExample():
     lines = util.readinputfile('inputfiles/day6_example.txt')
     school = day6a.School(lines[0])
     assert school.size() == 5
@@ -15,7 +15,7 @@ def test_example():
     assert school.getFishes() == (1, 2, 1, 6, 0, 8)
 
 
-def test_example18():
+def testExample18():
     lines = util.readinputfile('inputfiles/day6_example.txt')
     school = day6a.School(lines[0])
     school.nextdays(18)
@@ -26,7 +26,7 @@ def test_example18():
     assert fishes[22] == 8
 
 
-def test_example80():
+def testExample80():
     lines = util.readinputfile('inputfiles/day6_example.txt')
     school = day6a.School(lines[0])
     school.nextdays(80)

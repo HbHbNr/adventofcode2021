@@ -10,7 +10,7 @@ def test_brackets():
     assert day10a.Checker.errorscore('>') == 25137
 
 
-def test_example():
+def testExample():
     lines = util.readinputfile('inputfiles/day10_example.txt')
     checker = day10a.Checker(lines)
     syntaxerrors = checker.findsyntaxerrors()
