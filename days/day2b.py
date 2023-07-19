@@ -31,7 +31,7 @@ def pilot():
         elif command == 'up':
             position.up(value)
         else:
-            print('Unknown command "{}" in line {}'.format(line.rstrip(),  fileinput.filelineno()))
+            print(f'Unknown command "{line.rstrip()}" in line {fileinput.filelineno()}')
             sys.exit(1)
     return position
 

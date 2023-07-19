@@ -1,6 +1,3 @@
-from typing import Tuple
-
-
 class BingoBoard:
     def __init__(self, rows):
         self._rows = [[int(x) for x in row.split(None)] for row in rows]
@@ -11,7 +8,7 @@ class BingoBoard:
 
     def print(self, indent=''):
         for row in self._rows:
-            print('{}{:2} {:2} {:2} {:2} {:2}'.format(indent, *row))
+            print('{}{:2} {:2} {:2} {:2} {:2}'.format(indent, *row))  # pylint: disable=consider-using-f-string
 
     def playNumber(self, pickednumber):
         for row_or_column in [*self._rows, *self._columns]:
@@ -31,15 +28,17 @@ class BingoBoard:
         return result
 
     # for unit testing
-    def getRow(self, rowIndex) -> Tuple[int]:
+    def getRow(self, rowIndex):
         return tuple(self._rows[rowIndex])
 
     # for unit testing
-    def getColumn(self, columnIndex) -> Tuple[int]:
+    def getColumn(self, columnIndex):
         return tuple(self._columns[columnIndex])
 
 
 class BingoMatch:
+    # pylint: disable=too-few-public-methods
+
     def __init__(self, lines):
         self._pickednumbers = [int(x) for x in lines[0].split(',')]
         self._bingoboards = []

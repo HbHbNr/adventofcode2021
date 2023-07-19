@@ -18,11 +18,11 @@ class Heightmap:
         for y in range(1, self._maxy + 1):
             for x in range(1, self._maxx + 1):
                 height = int(self._rows[y][x])
-                if height < int(self._rows[y-1][x]):
-                    if height < int(self._rows[y+1][x]):
-                        if height < int(self._rows[y][x-1]):
-                            if height < int(self._rows[y][x+1]):
-                                lowpoints.append(height)
+                if height < int(self._rows[y-1][x]) \
+                        and height < int(self._rows[y+1][x]) \
+                        and height < int(self._rows[y][x-1]) \
+                        and height < int(self._rows[y][x+1]):
+                    lowpoints.append(height)
         return lowpoints
 
     def calcrisklevel(self) -> int:

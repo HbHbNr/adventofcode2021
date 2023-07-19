@@ -3,6 +3,7 @@ import math
 
 
 class Polymer:
+    # pylint: disable=too-many-instance-attributes
 
     def __init__(self, lines: List[str]) -> None:
         # create mapping between symbols and numbers
@@ -92,7 +93,7 @@ class Polymer:
         return histogram
 
     def histogram(self) -> Dict[str, int]:
-        histogram: Dict[str, int] = dict([(self.lookupNumber(i), self._histogram[i]) for i in range(len(self._histogram))])
+        histogram: Dict[str, int] = dict((self.lookupNumber(i), self._histogram[i]) for i in range(len(self._histogram)))
         return histogram
 
     def __str__(self):

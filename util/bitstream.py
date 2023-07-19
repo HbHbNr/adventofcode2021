@@ -2,10 +2,12 @@ from util import bytestream
 
 
 class BitStream:
+    # pylint: disable=too-few-public-methods
+
+    BITMASK = (0, 0b1, 0b11, 0b111, 0b1111, 0b11111, 0b111111, 0b1111111)
 
     def __init__(self, byteStream: bytestream.ByteStream):
         self._byteStream = byteStream.stream()
-        self._bitmask = (0, 0b1, 0b11, 0b111, 0b1111, 0b11111, 0b111111, 0b1111111)
         self._buffer: int = 0
         self._availableBits: int = 0
 
@@ -25,7 +27,7 @@ class BitStream:
                 # print("{0:b}".format(buffer2))
                 buffer2 = buffer2 >> (self._availableBits - missingBits)
                 # print("{0:b}".format(buffer2))
-                buffer2 &= self._bitmask[missingBits]
+                buffer2 &= BitStream.BITMASK[missingBits]
                 # print("{0:b}".format(buffer2))
                 result = result << missingBits
                 # print("{0:b}".format(result))
@@ -45,7 +47,7 @@ class BitStream:
             else:  # availableBits < 8
                 buffer2 = self._buffer
                 # print("{0:b}".format(buffer2))
-                buffer2 &= self._bitmask[self._availableBits]
+                buffer2 &= BitStream.BITMASK[self._availableBits]
                 # print("{0:b}".format(buffer2))
                 result = result << self._availableBits
                 # print("{0:b}".format(result))

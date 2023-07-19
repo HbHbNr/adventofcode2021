@@ -93,7 +93,7 @@ def main():
     # heightmap.print()
     # print(basins)
     top3product = int(basins[0]) * int(basins[1]) * int(basins[2])
-    print('Product of the three largest basins: {}'.format(top3product))
+    print(f'Product of the three largest basins: {top3product}')
 
 
 if __name__ == '__main__':

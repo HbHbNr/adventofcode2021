@@ -9,7 +9,6 @@ class Checker:
 
     def __init__(self, lines: List[str]) -> None:
         self._lines = list(lines)
-        return
 
     def findsyntaxerrors(self) -> List[int]:
         syntaxerrors = []

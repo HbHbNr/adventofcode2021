@@ -33,6 +33,7 @@ class Token(NamedTuple):
 
 
 class TokenStream:
+    # pylint: disable=too-few-public-methods
 
     def __init__(self, s: str) -> None:
         self._tokens: List[Token] = []

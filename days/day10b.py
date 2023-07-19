@@ -9,20 +9,19 @@ class Checker:
 
     def __init__(self, lines: List[str]) -> None:
         self._lines = list(lines)
-        return
 
     def findincompletelines(self) -> List[List[int]]:
         incompletelines = []
 
         for line in self._lines:
             incompleteline = self.findsyntaxerrorinline(line)
-            if incompleteline != []:
+            if incompleteline:
                 incompletelines.append(incompleteline)
 
         return incompletelines
 
     @classmethod
-    def findsyntaxerrorinline(self, line) -> List[int]:
+    def findsyntaxerrorinline(cls, line) -> List[int]:
         openbrackets = []
         for bracket in list(line):
             if Checker.isopenbracket(bracket):
