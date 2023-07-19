@@ -2,7 +2,7 @@ from util import util
 from days import day5a
 
 
-def test_map_example():
+def testMapExample():
     lines = util.readinputfile('inputfiles/day5_example.txt')
     theMap = day5a.Map(lines)
     # assert len(theMap._coords) == 10

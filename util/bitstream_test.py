@@ -1,7 +1,7 @@
 from util import bytestream, bitstream
 
 
-def test_bitstream1():
+def testBitstream1():
     byteStream = bytestream.ByteStream.fromHexString('D2FE28')
     bitStream = bitstream.BitStream(byteStream)
 
@@ -12,7 +12,7 @@ def test_bitstream1():
     assert bitStream.getBits(5) == 0b00101  # literal part 3
 
 
-def test_bitstream2():
+def testBitstream2():
     byteStream = bytestream.ByteStream.fromHexString('38006F45291200')
     bitStream = bitstream.BitStream(byteStream)
 
@@ -25,7 +25,7 @@ def test_bitstream2():
     assert bitStream.getBits(7) == 0  # padding
 
 
-def test_bitstream3():
+def testBitstream3():
     byteStream = bytestream.ByteStream.fromHexString('EE00D40C823060')
     bitStream = bitstream.BitStream(byteStream)
 

@@ -1,7 +1,7 @@
 from util import bytestream
 
 
-def test_bytestreamstring():
+def testBytestreamstring():
     stream = bytestream.ByteStream.fromHexString('D2FE28').stream()
 
     assert next(stream) == 0xd2
@@ -15,7 +15,7 @@ def test_bytestreamstring():
         assert True
 
 
-def test_bytestreamfile():
+def testBytestreamfile():
     # 8A004A801A8002F478
     stream = bytestream.ByteStream.fromHexFile('inputfiles/day16_example.txt').stream()
 

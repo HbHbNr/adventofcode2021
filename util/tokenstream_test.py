@@ -1,7 +1,7 @@
 from util import tokenstream
 
 
-def test_tokenstreamstring1():
+def testTokenStreamString1():
     stream = tokenstream.TokenStream('[[1,9],[18,105]]').stream()
 
     assert next(stream) == tokenstream.Token(tokenstream.TokenType.SQUARE_BRACKET_OPEN, 0)
@@ -25,7 +25,7 @@ def test_tokenstreamstring1():
         assert True
 
 
-def test_tokenstreamstring2():
+def testTokenStreamString2():
     # test edge case where integer is end of string
     stream = tokenstream.TokenStream('[[119').stream()
 

@@ -2,7 +2,7 @@ from util import util
 from days import day10b
 
 
-def test_brackets():
+def testBrackets():
     assert day10b.Checker.isopenbracket('(') is True
     assert day10b.Checker.isopenbracket(')') is False
     assert day10b.Checker.matchingbrackets('[', ']') is True
