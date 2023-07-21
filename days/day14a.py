@@ -16,24 +16,24 @@ class Polymer:
     def step(self) -> None:
         newtemplate: List[str] = []
         for i in range(0, len(self._template) - 1):
-            a = self._template[i]
-            b = self._template[i + 1]
-            key = (a, b)
-            c = self._rules.get(key)
-            newtemplate.append(a)
-            if c is not None:
-                newtemplate.append(c)
+            left = self._template[i]
+            right = self._template[i + 1]
+            key = (left, right)
+            middle = self._rules.get(key)
+            newtemplate.append(left)
+            if middle is not None:
+                newtemplate.append(middle)
         newtemplate.append(self._template[-1])
         self._template = ''.join(newtemplate)
         # print(self._template)
 
     def histogram(self) -> Dict[str, int]:
         histogram: Dict[str, int] = {}
-        for c in self._template:
-            if c in histogram:
-                histogram[c] += 1
+        for char in self._template:
+            if char in histogram:
+                histogram[char] += 1
             else:
-                histogram[c] = 1
+                histogram[char] = 1
         return histogram
 
     def __str__(self):

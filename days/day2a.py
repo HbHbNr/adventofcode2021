@@ -13,7 +13,7 @@ class Position:
     def down(self, value):
         self.y += int(value)
 
-    def up(self, value):
+    def up(self, value):  # pylint: disable=invalid-name
         self.y -= int(value)
 
 

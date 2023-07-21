@@ -15,15 +15,15 @@ class Token(NamedTuple):
     intvalue: int
 
     @classmethod
-    def createBasic(cls, s: str) -> 'Token':
-        if s == '[':
+    def createBasic(cls, tokenString: str) -> 'Token':
+        if tokenString == '[':
             tokenType = TokenType.SQUARE_BRACKET_OPEN
-        elif s == ']':
+        elif tokenString == ']':
             tokenType = TokenType.SQUARE_BRACKET_CLOSE
-        elif s == ',':
+        elif tokenString == ',':
             tokenType = TokenType.COMMA
         else:
-            raise ValueError(f'{s} has unknown TokenType')
+            raise ValueError(f'{tokenString} has unknown TokenType')
 
         return Token(tokenType, 0)
 
@@ -35,18 +35,18 @@ class Token(NamedTuple):
 class TokenStream:
     # pylint: disable=too-few-public-methods
 
-    def __init__(self, s: str) -> None:
+    def __init__(self, tokenString: str) -> None:
         self._tokens: List[Token] = []
         i = 0
-        while i < len(s):
-            if not str.isdecimal(s[i]):
-                self._tokens.append(Token.createBasic(s[i]))
+        while i < len(tokenString):
+            if not str.isdecimal(tokenString[i]):
+                self._tokens.append(Token.createBasic(tokenString[i]))
                 i += 1
             else:
                 value = 0
-                while i < len(s) and str.isdecimal(s[i]):
+                while i < len(tokenString) and str.isdecimal(tokenString[i]):
                     value *= 10
-                    value += int(s[i])
+                    value += int(tokenString[i])
                     i += 1
                 self._tokens.append(Token.createInteger(value))
 

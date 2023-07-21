@@ -6,9 +6,9 @@ class Graph:
     def __init__(self, lines: List[str]) -> None:
         self._vertices: Dict[str, Set[str]] = {}
         for line in lines:
-            vs = line.split('-')
-            self.addPath(vs[0], vs[1])
-            self.addPath(vs[1], vs[0])
+            vertices = line.split('-')
+            self.addPath(vertices[0], vertices[1])
+            self.addPath(vertices[1], vertices[0])
 
     def addPath(self, fromvertex: str, tovertex: str) -> None:
         if fromvertex not in self._vertices:

@@ -15,7 +15,7 @@ class Position:
     def down(self, value):
         self.aim += int(value)
 
-    def up(self, value):
+    def up(self, value):  # pylint: disable=invalid-name
         self.aim -= int(value)
 
 

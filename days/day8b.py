@@ -115,13 +115,13 @@ class PatternMap:
     def lookuppatternstring(self, patternstring):
         sortedpatternstring = ''.join(sorted(patternstring))
         # print(sortedpatternstring)
-        for k, v in self._patternmap.items():
+        for key, value in self._patternmap.items():
             # print(k)
-            if k == sortedpatternstring:
+            if key == sortedpatternstring:
                 # print(f'{k} does match')
                 # print(v)
                 # print()
-                return v
+                return value
             # else:
                 # print(f'{k} does not match')
         # print()

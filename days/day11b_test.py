@@ -12,25 +12,25 @@ def testExample():
     assert cavern.getEnergyLevel(1, 1) == 5  # top left
     assert cavern.getEnergyLevel(-2, -2) == 6  # bottom right
 
-    FIRST_FLASH = 195
+    firstFlashAt = 195
 
-    for step in range(1, FIRST_FLASH + 1):
-        allFlashed = cavern.step()  # steps 1 to <firstflash>
+    for step in range(1, firstFlashAt + 1):
+        allFlashed = cavern.step()  # steps 1 to <firstFlashAt>
         if allFlashed:
-            assert step == FIRST_FLASH  # only in step <firstflash> they all flash
+            assert step == firstFlashAt  # only in step <firstFlashAt> they all flash
         else:
-            assert step != FIRST_FLASH  # in all other steps never all flash
+            assert step != firstFlashAt  # in all other steps never all flash
 
 
 def testInput():
     lines = util.readinputfile('inputfiles/day11_input.txt')
     cavern = day11b.Cavern(lines)
 
-    FIRST_FLASH = 346
+    firstFlashAt = 346
 
-    for step in range(1, FIRST_FLASH + 1):
-        allFlashed = cavern.step()  # steps 1 to <firstflash>
+    for step in range(1, firstFlashAt + 1):
+        allFlashed = cavern.step()  # steps 1 to <firstFlashAt>
         if allFlashed:
-            assert step == FIRST_FLASH  # only in step <firstflash> they all flash
+            assert step == firstFlashAt  # only in step <firstFlashAt> they all flash
         else:
-            assert step != FIRST_FLASH  # in all other steps never all flash
+            assert step != firstFlashAt  # in all other steps never all flash

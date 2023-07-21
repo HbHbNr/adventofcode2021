@@ -11,10 +11,10 @@ class BingoBoard:
             print('{}{:2} {:2} {:2} {:2} {:2}'.format(indent, *row))  # pylint: disable=consider-using-f-string
 
     def playNumber(self, pickednumber):
-        for row_or_column in [*self._rows, *self._columns]:
-            if pickednumber in row_or_column:
+        for rowOrColumn in [*self._rows, *self._columns]:
+            if pickednumber in rowOrColumn:
                 # print(f'{pickednumber} found in {row_or_column}')
-                row_or_column[row_or_column.index(pickednumber)] = -1
+                rowOrColumn[rowOrColumn.index(pickednumber)] = -1
 
     def sum(self):
         result = 0

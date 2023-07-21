@@ -4,19 +4,19 @@ from util import util
 
 class ByteStream:
 
-    def __init__(self, bs: bytes) -> None:
-        self._bs = bs
+    def __init__(self, _bytes: bytes) -> None:
+        self._bytes = _bytes
 
     @classmethod
     def fromHexString(cls, hexString: str) -> 'ByteStream':
-        bs: bytes = bytes.fromhex(hexString)
-        return ByteStream(bs)
+        _bytes: bytes = bytes.fromhex(hexString)
+        return ByteStream(_bytes)
 
     @classmethod
     def fromHexFile(cls, hexInputfile: str) -> 'ByteStream':
-        bs: bytes = util.readhexinputfile(hexInputfile)
-        return ByteStream(bs)
+        _bytes: bytes = util.readhexinputfile(hexInputfile)
+        return ByteStream(_bytes)
 
     def stream(self) -> Generator:
-        for b in self._bs:
-            yield b
+        for byte in self._bytes:
+            yield byte
