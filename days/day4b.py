@@ -80,8 +80,10 @@ def main():
     lines = util.readinputfile('inputfiles/day4_input.txt')
     bingomatch = BingoMatch(lines)
     winningbingoboards = bingomatch.play()
-    print('First board: ' + str(winningbingoboards[0]))
-    print(' Last board: ' + str(winningbingoboards[len(winningbingoboards)-1]))
+    # print('First board: ' + str(winningbingoboards[0]))
+    # print(' Last board: ' + str(winningbingoboards[len(winningbingoboards)-1]))
+    lastBoard = winningbingoboards[len(winningbingoboards)-1]
+    util.printresultline('4b', lastBoard['solution'])
 
 
 if __name__ == '__main__':

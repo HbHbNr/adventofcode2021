@@ -72,9 +72,8 @@ def main():
     lines = util.readinputfile('inputfiles/day4_input.txt')
     bingomatch = BingoMatch(lines)
     result = bingomatch.play()
-    print(result)
-    if result is not None:
-        print(result['pickednumber'] * result['boardsum'])
+    # print(result)
+    util.printresultline('4a', result['pickednumber'] * result['boardsum'])
 
 
 if __name__ == '__main__':

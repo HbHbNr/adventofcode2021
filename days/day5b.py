@@ -70,9 +70,9 @@ def main():
     # lines = util.readinputfile('inputfiles/day5_example.txt')
     lines = util.readinputfile('inputfiles/day5_input.txt')
     theMap = Map(lines)
-    print(theMap.size())
+    # print(theMap.size())
     # print(map)
-    print(theMap.countdangerouscoords())
+    util.printresultline('5b', theMap.countdangerouscoords())
 
 
 if __name__ == '__main__':

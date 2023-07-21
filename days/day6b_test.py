@@ -24,3 +24,11 @@ def testExample80():
     school = day6b.School(lines[0])
     school.nextdays(80)
     assert school.size() == 5934
+
+
+def testInput():
+    lines = util.readinputfile('inputfiles/day6_input.txt')
+    school = day6b.School(lines[0])
+    school.nextdays(256, False)
+
+    assert school.size() == 1695929023803

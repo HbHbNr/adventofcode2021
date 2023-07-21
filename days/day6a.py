@@ -40,8 +40,9 @@ def main():
     # print(school.size())
     # print(school)
     school.nextdays(80, False)
-    print(school.size())
+    # print(school.size())
     # print(school)
+    util.printresultline('6a', school.size())
 
 
 if __name__ == '__main__':
