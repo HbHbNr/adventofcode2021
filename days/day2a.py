@@ -1,5 +1,6 @@
 import fileinput
 import sys
+from util import util
 
 
 class Position:
@@ -35,8 +36,6 @@ def pilot():
 
 
 def main():
-    from util import util
-
     position = pilot()
 
     util.printresultline('2a', position.x * position.y)

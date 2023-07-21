@@ -14,7 +14,7 @@ max-line-length=127
 [MESSAGES CONTROL]
 # do not report missing docstring
 #disable=C0114,C0115,C0116,invalid-name,duplicate-code,import-outside-toplevel
-disable=C0114,C0115,C0116,duplicate-code,import-outside-toplevel
+disable=C0114,C0115,C0116,duplicate-code
 
 [REPORTS]
 score=no

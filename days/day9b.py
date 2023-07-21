@@ -1,5 +1,6 @@
 from typing import List, Any
 from re import sub
+from util import util
 
 
 class Heightmap:
@@ -83,8 +84,6 @@ class Basin:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day9_example.txt')
     lines = util.readinputfile('inputfiles/day9_input.txt')
     heightmap = Heightmap(lines)

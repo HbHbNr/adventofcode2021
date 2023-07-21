@@ -1,4 +1,5 @@
 from typing import List
+from util import util
 
 
 class Checker:
@@ -64,8 +65,6 @@ class Checker:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day10_example.txt')
     lines = util.readinputfile('inputfiles/day10_input.txt')
     checker = Checker(lines)

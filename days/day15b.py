@@ -1,6 +1,7 @@
-def main():
-    from util import util
+from util import util
 
+
+def main():
     # solved with https://github.com/HbHbNr/a-star
     util.printresultline('15b', 2800)
 

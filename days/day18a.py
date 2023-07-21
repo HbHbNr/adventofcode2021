@@ -1,4 +1,5 @@
 from typing import NamedTuple, Optional
+from util import util
 from util import tokenstream
 
 
@@ -21,7 +22,6 @@ class TreeNode(NamedTuple):
 
 
 def main():
-    from util import util
     token = tokenstream.Token.createInteger(3)
     print(token)
 

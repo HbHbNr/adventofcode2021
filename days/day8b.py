@@ -1,3 +1,6 @@
+from util import util
+
+
 # steps to determine all numbers
 # distinct string lengths: 1, 7, 8, 8
 # (7 - 1 -> a)
@@ -170,8 +173,6 @@ class Panel:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day8_example.txt')
     lines = util.readinputfile('inputfiles/day8_input.txt')
     totalsum = Panel.sumoutputs(lines)

@@ -1,4 +1,5 @@
 from typing import List, Tuple, Dict
+from util import util
 
 
 class Polymer:
@@ -41,8 +42,6 @@ class Polymer:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day14_example.txt')
     lines = util.readinputfile('inputfiles/day14_input.txt')
     polymer = Polymer(lines)

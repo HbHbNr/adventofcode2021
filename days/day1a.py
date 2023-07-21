@@ -1,4 +1,5 @@
 import fileinput
+from util import util
 
 
 def sweep():
@@ -17,8 +18,6 @@ def sweep():
 
 
 def main():
-    from util import util
-
     increments = sweep()
 
     util.printresultline('1a', increments)

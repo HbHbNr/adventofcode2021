@@ -1,3 +1,6 @@
+from util import util
+
+
 class BingoBoard:
     def __init__(self, rows):
         self._rows = [[int(x) for x in row.split(None)] for row in rows]
@@ -74,8 +77,6 @@ class BingoMatch:
 
 
 def main():
-    from util import util
-
     lines = util.readinputfile('inputfiles/day4_input.txt')
     bingomatch = BingoMatch(lines)
     winningbingoboards = bingomatch.play()

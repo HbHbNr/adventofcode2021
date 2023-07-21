@@ -1,4 +1,5 @@
 import fileinput
+from util import util
 
 
 def sweep(windowsize):
@@ -20,8 +21,6 @@ def sweep(windowsize):
 
 
 def main():
-    from util import util
-
     increments = sweep(3)
 
     util.printresultline('1b', increments)

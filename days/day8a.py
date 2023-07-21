@@ -1,3 +1,6 @@
+from util import util
+
+
 class DigitMap:
     # map number of chars to possible digit(s)
     # 2c -> 1
@@ -40,8 +43,6 @@ class Panel:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day8_example.txt')
     lines = util.readinputfile('inputfiles/day8_input.txt')
     totalcount = Panel.countalldistinctdigits(lines)

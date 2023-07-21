@@ -1,3 +1,6 @@
+from util import util
+
+
 class Aligner:
     def __init__(self, line):
         self._crabs = tuple(int(crab) for crab in line.split(','))
@@ -24,8 +27,6 @@ class Aligner:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day7_example.txt')
     lines = util.readinputfile('inputfiles/day7_input.txt')
     aligner = Aligner(lines[0])

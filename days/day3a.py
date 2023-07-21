@@ -1,4 +1,5 @@
 import fileinput
+from util import util
 
 
 class Histogram:
@@ -30,8 +31,6 @@ def createhistogram(inputfile):
 
 
 def main():
-    from util import util
-
     # inputfile = "inputfiles/day3_example.txt"
     inputfile = "inputfiles/day3_input.txt"
 

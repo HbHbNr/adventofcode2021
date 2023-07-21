@@ -1,5 +1,6 @@
 from typing import List, Tuple, Dict, Set
 import math
+from util import util
 
 
 class Polymer:
@@ -101,19 +102,17 @@ class Polymer:
 
 
 def main():
-    from util import util
-    import sys
-
     # lines = util.readinputfile('inputfiles/day14_example.txt')
     lines = util.readinputfile('inputfiles/day14_input.txt')
     polymer = Polymer(lines)
     number = 40
-    profile = len(sys.argv) > 1  # add any parameter to activate profiling
-    if profile:
-        import cProfile
-        cProfile.run('polymer.stepsRecursive(number)')
-    else:
-        polymer.stepsRecursive(number)
+    # profile = len(sys.argv) > 1  # add any parameter to activate profiling
+    # if profile:
+    #     import cProfile
+    #     cProfile.run('polymer.stepsRecursive(number)')
+    # else:
+    #     polymer.stepsRecursive(number)
+    polymer.stepsRecursive(number)
     histogram = polymer.histogram()
     # print(histogram)
     values = list(histogram.values())

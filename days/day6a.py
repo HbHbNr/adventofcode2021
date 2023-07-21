@@ -1,3 +1,6 @@
+from util import util
+
+
 class School:
     def __init__(self, line):
         self._fishes = [int(x) for x in line.split(',')]
@@ -31,8 +34,6 @@ class School:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day6_example.txt')
     lines = util.readinputfile('inputfiles/day6_input.txt')
     school = School(lines[0])

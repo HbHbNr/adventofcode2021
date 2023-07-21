@@ -1,3 +1,6 @@
+from util import util
+
+
 class School:
     def __init__(self, line):
         self._fishstats = [0 for x in range(9)]
@@ -25,8 +28,6 @@ class School:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day6_example.txt')
     lines = util.readinputfile('inputfiles/day6_input.txt')
     school = School(lines[0])

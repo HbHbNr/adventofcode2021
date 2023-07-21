@@ -1,4 +1,5 @@
 from typing import List, Dict, Set
+from util import util
 
 
 class Graph:
@@ -66,8 +67,6 @@ class Graph:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day12_example1.txt')
     lines = util.readinputfile('inputfiles/day12_input.txt')
     graph = Graph(lines)

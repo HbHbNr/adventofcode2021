@@ -1,4 +1,5 @@
 from typing import List
+from util import util
 
 
 class Cavern:
@@ -72,8 +73,6 @@ class Cavern:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day11_example.txt')
     lines = util.readinputfile('inputfiles/day11_input.txt')
     cavern = Cavern(lines)

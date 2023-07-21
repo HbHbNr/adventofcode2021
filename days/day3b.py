@@ -1,4 +1,5 @@
 import fileinput
+from util import util
 
 
 class Histogram:
@@ -52,8 +53,6 @@ def determineratings(inputfile):
 
 
 def main():
-    from util import util
-
     oxygen, co2 = determineratings('inputfiles/day3_input.txt')
     # print('oxygen: {} -> {}'.format(oxygen, int(oxygen, 2)))
     # print('co2: {} -> {}'.format(co2, int(co2, 2)))
