@@ -1,3 +1,4 @@
+"""A class for bit streams"""
 from util import bytestream
 
 

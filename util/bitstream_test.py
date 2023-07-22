@@ -1,3 +1,4 @@
+"""Unit tests for the BitStream class"""
 from util import bytestream, bitstream
 
 

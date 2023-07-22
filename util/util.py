@@ -1,3 +1,4 @@
+"""Collection of utility functions"""
 import fileinput
 
 

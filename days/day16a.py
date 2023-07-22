@@ -1,3 +1,4 @@
+"""Solution for https://adventofcode.com/2021/day/16 part a"""
 from typing import Tuple, List
 from util import util
 from util import bytestream, bitstream

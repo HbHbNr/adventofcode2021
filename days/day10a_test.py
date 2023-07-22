@@ -1,3 +1,4 @@
+"""Unit tests for https://adventofcode.com/2021/day/10 part a"""
 from util import util
 from days import day10a
 

@@ -1,3 +1,4 @@
+"""A class for byte streams"""
 from typing import Generator
 from util import util
 

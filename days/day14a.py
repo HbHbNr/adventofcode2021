@@ -1,3 +1,4 @@
+"""Solution for https://adventofcode.com/2021/day/14 part a"""
 from typing import List, Tuple, Dict
 from util import util
 
