@@ -17,3 +17,10 @@ def testExampleOutput():
     assert day8b.Panel(lines[-1]).output() == 4315
 
     assert day8b.Panel.sumoutputs(lines) == 61229
+
+
+def testInput():
+    lines = util.readinputfile('inputfiles/day8_input.txt')
+    totalsum = day8b.Panel.sumoutputs(lines)
+
+    assert totalsum == 1074888

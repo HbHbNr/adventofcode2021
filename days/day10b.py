@@ -72,8 +72,9 @@ def main():
 
     # for line in incompletelines:
     #     print(str(line))
+    # print("Middle score: " + str(Checker.calccompletescore(incompletelines)))
 
-    print("Middle score: " + str(Checker.calccompletescore(incompletelines)))
+    util.printresultline('10b', Checker.calccompletescore(incompletelines))
 
 
 if __name__ == '__main__':

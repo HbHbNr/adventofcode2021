@@ -18,3 +18,11 @@ def testExample():
     assert len(incompletelines) == 5
     assert incompletelines[4] == list("<{([")
     assert day10b.Checker.calccompletescore(incompletelines) == 288957
+
+
+def testInput():
+    lines = util.readinputfile('inputfiles/day10_input.txt')
+    checker = day10b.Checker(lines)
+    incompletelines = checker.findincompletelines()
+
+    assert day10b.Checker.calccompletescore(incompletelines) == 3249889609

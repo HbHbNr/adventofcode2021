@@ -55,7 +55,9 @@ def main():
     syntaxerrors = checker.findsyntaxerrors()
 
     # print("syntaxerrors: " + str(syntaxerrors))
-    print("syntaxerrorscore: " + str(sum(syntaxerrors)))
+    # print("syntaxerrorscore: " + str(sum(syntaxerrors)))
+
+    util.printresultline('10a', sum(syntaxerrors))
 
 
 if __name__ == '__main__':

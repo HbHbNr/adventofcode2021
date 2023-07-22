@@ -16,3 +16,11 @@ def testExample():
     syntaxerrors = checker.findsyntaxerrors()
 
     assert sum(syntaxerrors) == 26397
+
+
+def testInput():
+    lines = util.readinputfile('inputfiles/day10_input.txt')
+    checker = day10a.Checker(lines)
+    syntaxerrors = checker.findsyntaxerrors()
+
+    assert sum(syntaxerrors) == 370407

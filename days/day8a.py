@@ -46,7 +46,8 @@ def main():
     # lines = util.readinputfile('inputfiles/day8_example.txt')
     lines = util.readinputfile('inputfiles/day8_input.txt')
     totalcount = Panel.countalldistinctdigits(lines)
-    print(f'totalcount: {totalcount}')
+
+    util.printresultline('8a', totalcount)
 
 
 if __name__ == '__main__':

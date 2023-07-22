@@ -8,3 +8,10 @@ def testExample():
     assert day8a.Panel(lines[0]).countdistinctdigits() == 2
     assert day8a.Panel(lines[-1]).countdistinctdigits() == 2
     assert day8a.Panel.countalldistinctdigits(lines) == 26
+
+
+def testInput():
+    lines = util.readinputfile('inputfiles/day8_input.txt')
+    totalcount = day8a.Panel.countalldistinctdigits(lines)
+
+    assert totalcount == 548

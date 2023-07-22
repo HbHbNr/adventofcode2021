@@ -73,7 +73,7 @@ def main():
     # print(graph)
     paths = graph.findDistinctPaths()
 
-    print('DAY12B - Number of distinct paths: ' + str(len(paths)))
+    util.printresultline('12b', len(paths))
 
 
 if __name__ == '__main__':

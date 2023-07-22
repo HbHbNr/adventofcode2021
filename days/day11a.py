@@ -81,7 +81,8 @@ def main():
     for _ in range(1, 101):
         cavern.step()
     # print(cavern)
-    print('DAY11A - Number of total flashes after 100 steps: ' + str(cavern.getTotalFlashes()))
+
+    util.printresultline('11a', cavern.getTotalFlashes())
 
 
 if __name__ == '__main__':
