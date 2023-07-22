@@ -1,3 +1,4 @@
+"""Solution for https://adventofcode.com/2021/day/9 part b"""
 from typing import List, Any
 from re import sub
 from util import util

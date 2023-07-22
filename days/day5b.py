@@ -1,3 +1,4 @@
+"""Solution for https://adventofcode.com/2021/day/5 part b"""
 from math import copysign
 import re
 from util import util

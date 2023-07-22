@@ -1,3 +1,4 @@
+"""Solution for https://adventofcode.com/2021/day/15 part a"""
 from util import util
 
 

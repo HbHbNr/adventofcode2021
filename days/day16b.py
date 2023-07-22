@@ -1,3 +1,4 @@
+"""Solution for https://adventofcode.com/2021/day/16 part b"""
 from typing import Tuple, List
 from functools import reduce
 from util import util

@@ -1,3 +1,4 @@
+"""Classes for tokens and token streams"""
 from typing import Generator, NamedTuple, List
 from enum import Enum
 

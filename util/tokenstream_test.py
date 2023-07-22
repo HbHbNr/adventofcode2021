@@ -1,3 +1,4 @@
+"""Unit tests for the Token and TokenStream classes"""
 from util import tokenstream
 
 

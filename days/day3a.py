@@ -1,3 +1,4 @@
+"""Solution for https://adventofcode.com/2021/day/3 part a"""
 import fileinput
 from util import util
 

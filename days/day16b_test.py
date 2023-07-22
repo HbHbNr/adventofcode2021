@@ -1,3 +1,4 @@
+"""Unit tests for https://adventofcode.com/2021/day/16 part b"""
 from days import day16b
 from util import bytestream, bitstream
 
