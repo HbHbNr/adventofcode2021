@@ -4,7 +4,7 @@ from util import util
 
 
 def sweep(windowsize):
-    inputfile = "inputfiles/day1_input.txt"
+    inputfile = "inputfiles/day01_input.txt"
     lastwindow = []
     increments = 0
     for line in fileinput.input(inputfile):

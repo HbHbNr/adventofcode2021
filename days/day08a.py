@@ -44,8 +44,8 @@ class Panel:
 
 
 def main():
-    # lines = util.readinputfile('inputfiles/day8_example.txt')
-    lines = util.readinputfile('inputfiles/day8_input.txt')
+    # lines = util.readinputfile('inputfiles/day08_example.txt')
+    lines = util.readinputfile('inputfiles/day08_input.txt')
     totalcount = Panel.countalldistinctdigits(lines)
 
     util.printresultline('8a', totalcount)

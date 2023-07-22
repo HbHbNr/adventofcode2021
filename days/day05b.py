@@ -68,8 +68,8 @@ class Map:
 
 
 def main():
-    # lines = util.readinputfile('inputfiles/day5_example.txt')
-    lines = util.readinputfile('inputfiles/day5_input.txt')
+    # lines = util.readinputfile('inputfiles/day05_example.txt')
+    lines = util.readinputfile('inputfiles/day05_input.txt')
     theMap = Map(lines)
     # print(theMap.size())
     # print(map)

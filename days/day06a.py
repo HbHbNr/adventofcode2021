@@ -35,8 +35,8 @@ class School:
 
 
 def main():
-    # lines = util.readinputfile('inputfiles/day6_example.txt')
-    lines = util.readinputfile('inputfiles/day6_input.txt')
+    # lines = util.readinputfile('inputfiles/day06_example.txt')
+    lines = util.readinputfile('inputfiles/day06_input.txt')
     school = School(lines[0])
     # print(school.size())
     # print(school)

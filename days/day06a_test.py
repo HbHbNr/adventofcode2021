@@ -4,7 +4,7 @@ from days import day06a
 
 
 def testExample():
-    lines = util.readinputfile('inputfiles/day6_example.txt')
+    lines = util.readinputfile('inputfiles/day06_example.txt')
     school = day06a.School(lines[0])
 
     assert school.size() == 5
@@ -22,7 +22,7 @@ def testExample():
 
 
 def testExample18():
-    lines = util.readinputfile('inputfiles/day6_example.txt')
+    lines = util.readinputfile('inputfiles/day06_example.txt')
     school = day06a.School(lines[0])
     school.nextdays(18)
 
@@ -36,7 +36,7 @@ def testExample18():
 
 
 def testExample80():
-    lines = util.readinputfile('inputfiles/day6_example.txt')
+    lines = util.readinputfile('inputfiles/day06_example.txt')
     school = day06a.School(lines[0])
     school.nextdays(80)
 
@@ -44,7 +44,7 @@ def testExample80():
 
 
 def testInput():
-    lines = util.readinputfile('inputfiles/day6_input.txt')
+    lines = util.readinputfile('inputfiles/day06_input.txt')
     school = day06a.School(lines[0])
     school.nextdays(80, False)
 

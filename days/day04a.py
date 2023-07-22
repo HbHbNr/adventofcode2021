@@ -70,7 +70,7 @@ class BingoMatch:
 
 
 def main():
-    lines = util.readinputfile('inputfiles/day4_input.txt')
+    lines = util.readinputfile('inputfiles/day04_input.txt')
     bingomatch = BingoMatch(lines)
     result = bingomatch.play()
     # print(result)

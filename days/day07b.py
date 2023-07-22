@@ -28,8 +28,8 @@ class Aligner:
 
 
 def main():
-    # lines = util.readinputfile('inputfiles/day7_example.txt')
-    lines = util.readinputfile('inputfiles/day7_input.txt')
+    # lines = util.readinputfile('inputfiles/day07_example.txt')
+    lines = util.readinputfile('inputfiles/day07_input.txt')
     aligner = Aligner(lines[0])
     # print(f'crabs: {aligner.size()}')
     alignment = aligner.calcbestx()

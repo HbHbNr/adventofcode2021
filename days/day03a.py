@@ -32,8 +32,8 @@ def createhistogram(inputfile):
 
 
 def main():
-    # inputfile = "inputfiles/day3_example.txt"
-    inputfile = "inputfiles/day3_input.txt"
+    # inputfile = "inputfiles/day03_example.txt"
+    inputfile = "inputfiles/day03_input.txt"
 
     histogram = createhistogram(inputfile)
     # print(histogram.frequencies)

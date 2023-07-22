@@ -4,7 +4,7 @@ from days import day08a
 
 
 def testExample():
-    lines = util.readinputfile('inputfiles/day8_example.txt')
+    lines = util.readinputfile('inputfiles/day08_example.txt')
 
     assert day08a.Panel(lines[0]).countdistinctdigits() == 2
     assert day08a.Panel(lines[-1]).countdistinctdigits() == 2
@@ -12,7 +12,7 @@ def testExample():
 
 
 def testInput():
-    lines = util.readinputfile('inputfiles/day8_input.txt')
+    lines = util.readinputfile('inputfiles/day08_input.txt')
     totalcount = day08a.Panel.countalldistinctdigits(lines)
 
     assert totalcount == 548

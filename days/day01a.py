@@ -4,7 +4,7 @@ from util import util
 
 
 def sweep():
-    inputfile = "inputfiles/day1_input.txt"
+    inputfile = "inputfiles/day01_input.txt"
     firstline = True
     lastvalue = 0
     increments = 0

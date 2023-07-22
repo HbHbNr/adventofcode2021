@@ -85,8 +85,8 @@ class Basin:
 
 
 def main():
-    # lines = util.readinputfile('inputfiles/day9_example.txt')
-    lines = util.readinputfile('inputfiles/day9_input.txt')
+    # lines = util.readinputfile('inputfiles/day09_example.txt')
+    lines = util.readinputfile('inputfiles/day09_input.txt')
     heightmap = Heightmap(lines)
     # heightmap.print()
     basins = heightmap.findbasins()

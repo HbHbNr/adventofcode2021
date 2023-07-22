@@ -4,7 +4,7 @@ from days import day09b
 
 
 def testExample():
-    lines = util.readinputfile('inputfiles/day9_example.txt')
+    lines = util.readinputfile('inputfiles/day09_example.txt')
     heightmap = day09b.Heightmap(lines)
     basins = heightmap.findbasins()
     top3product = int(basins[0]) * int(basins[1]) * int(basins[2])
@@ -14,7 +14,7 @@ def testExample():
 
 
 def testInput():
-    lines = util.readinputfile('inputfiles/day9_input.txt')
+    lines = util.readinputfile('inputfiles/day09_input.txt')
     heightmap = day09b.Heightmap(lines)
     basins = heightmap.findbasins()
     top3product = int(basins[0]) * int(basins[1]) * int(basins[2])

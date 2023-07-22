@@ -4,7 +4,7 @@ from days import day07a
 
 
 def testExample():
-    lines = util.readinputfile('inputfiles/day7_example.txt')
+    lines = util.readinputfile('inputfiles/day07_example.txt')
     aligner = day07a.Aligner(lines[0])
     assert aligner.size() == 10
     alignment = aligner.calcbestx()
@@ -16,7 +16,7 @@ def testExample():
 
 
 def testInput():
-    lines = util.readinputfile('inputfiles/day7_input.txt')
+    lines = util.readinputfile('inputfiles/day07_input.txt')
     aligner = day07a.Aligner(lines[0])
     alignment = aligner.calcbestx()
 

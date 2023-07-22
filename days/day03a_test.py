@@ -3,8 +3,8 @@ from days import day03a
 
 
 def testInput():
-    # inputfile = "inputfiles/day3_example.txt"
-    inputfile = "inputfiles/day3_input.txt"
+    # inputfile = "inputfiles/day03_example.txt"
+    inputfile = "inputfiles/day03_input.txt"
 
     histogram = day03a.createhistogram(inputfile)
     gamma = histogram.buildparameter(True)

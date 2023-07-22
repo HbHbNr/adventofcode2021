@@ -54,7 +54,7 @@ def determineratings(inputfile):
 
 
 def main():
-    oxygen, co2 = determineratings('inputfiles/day3_input.txt')
+    oxygen, co2 = determineratings('inputfiles/day03_input.txt')
     # print('oxygen: {} -> {}'.format(oxygen, int(oxygen, 2)))
     # print('co2: {} -> {}'.format(co2, int(co2, 2)))
     # print('oxygen * co2: {}'.format(int(oxygen, 2) * int(co2, 2)))

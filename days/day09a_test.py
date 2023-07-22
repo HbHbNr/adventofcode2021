@@ -4,7 +4,7 @@ from days import day09a
 
 
 def testExample():
-    lines = util.readinputfile('inputfiles/day9_example.txt')
+    lines = util.readinputfile('inputfiles/day09_example.txt')
     heightmap = day09a.Heightmap(lines)
 
     assert heightmap.findlowpoints() == [1, 0, 5, 5]
@@ -12,7 +12,7 @@ def testExample():
 
 
 def testInput():
-    lines = util.readinputfile('inputfiles/day9_input.txt')
+    lines = util.readinputfile('inputfiles/day09_input.txt')
     heightmap = day09a.Heightmap(lines)
 
     assert heightmap.calcrisklevel() == 562

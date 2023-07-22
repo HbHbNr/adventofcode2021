@@ -78,7 +78,7 @@ class BingoMatch:
 
 
 def main():
-    lines = util.readinputfile('inputfiles/day4_input.txt')
+    lines = util.readinputfile('inputfiles/day04_input.txt')
     bingomatch = BingoMatch(lines)
     winningbingoboards = bingomatch.play()
     # print('First board: ' + str(winningbingoboards[0]))

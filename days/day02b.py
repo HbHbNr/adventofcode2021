@@ -22,7 +22,7 @@ class Position:
 
 
 def pilot():
-    inputfile = "inputfiles/day2_input.txt"
+    inputfile = "inputfiles/day02_input.txt"
     position = Position()
     for line in fileinput.input(inputfile):
         command, _, value = line.rstrip().partition(' ')

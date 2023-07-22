@@ -174,8 +174,8 @@ class Panel:
 
 
 def main():
-    # lines = util.readinputfile('inputfiles/day8_example.txt')
-    lines = util.readinputfile('inputfiles/day8_input.txt')
+    # lines = util.readinputfile('inputfiles/day08_example.txt')
+    lines = util.readinputfile('inputfiles/day08_input.txt')
     totalsum = Panel.sumoutputs(lines)
 
     util.printresultline('8b', totalsum)

@@ -13,7 +13,7 @@ def testBingoBoardSimple():
 
 
 def testBingoMatchExample():
-    lines = util.readinputfile('inputfiles/day4_example.txt')
+    lines = util.readinputfile('inputfiles/day04_example.txt')
     bingomatch = day04b.BingoMatch(lines)
     winningbingoboards = bingomatch.play()
     result = winningbingoboards[0]
@@ -26,7 +26,7 @@ def testBingoMatchExample():
 
 
 def maitestBingoMatchInput():
-    lines = util.readinputfile('inputfiles/day4_input.txt')
+    lines = util.readinputfile('inputfiles/day04_input.txt')
     bingomatch = day04b.BingoMatch(lines)
     winningbingoboards = bingomatch.play()
     lastBoard = winningbingoboards[len(winningbingoboards)-1]
