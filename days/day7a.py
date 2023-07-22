@@ -1,6 +1,9 @@
+from util import util
+
+
 class Aligner:
     def __init__(self, line):
-        self._crabs = tuple([int(crab) for crab in line.split(',')])
+        self._crabs = tuple(int(crab) for crab in line.split(','))
 
     def __str__(self):
         return str(self._crabs)
@@ -22,14 +25,15 @@ class Aligner:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day7_example.txt')
     lines = util.readinputfile('inputfiles/day7_input.txt')
     aligner = Aligner(lines[0])
-    print('crabs: {}'.format(aligner.size()))
+    # print(f'crabs: {aligner.size()}')
     alignment = aligner.calcbestx()
-    print('bestx: {}  bestfuel: {}'.format(alignment['bestx'], alignment['totalfuels'][alignment['bestx']]))
+    # # pylint: disable=consider-using-f-string
+    # print('bestx: {}  bestfuel: {}'.format(alignment['bestx'], alignment['totalfuels'][alignment['bestx']]))
+
+    util.printresultline('7a', alignment['totalfuels'][alignment['bestx']])
 
 
 if __name__ == '__main__':

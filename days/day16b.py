@@ -1,7 +1,7 @@
 from typing import Tuple, List
+from functools import reduce
 from util import util
 from util import bytestream, bitstream
-from functools import reduce
 
 
 class BuoyancyInterchangeTransmissionSystem:
@@ -68,20 +68,22 @@ class BuoyancyInterchangeTransmissionSystem:
         return 11 + totalBits, results
 
     def operator(self, typeID: int, results: List[int]) -> int:
+        result = -1
         if typeID == 0:
-            return sum(results)
+            result = sum(results)
         elif typeID == 1:
-            return reduce((lambda x, y: x * y), results)
+            result = reduce((lambda x, y: x * y), results)
         elif typeID == 2:
-            return min(results)
+            result = min(results)
         elif typeID == 3:
-            return max(results)
+            result = max(results)
         elif typeID == 5:
-            return 1 if results[0] > results[1] else 0
+            result = 1 if results[0] > results[1] else 0
         elif typeID == 6:
-            return 1 if results[0] < results[1] else 0
+            result = 1 if results[0] < results[1] else 0
         else:  # typeID == 7
-            return 1 if results[0] == results[1] else 0
+            result = 1 if results[0] == results[1] else 0
+        return result
 
 
 def main():

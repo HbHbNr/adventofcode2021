@@ -2,7 +2,7 @@ from util import util
 from days import day8b
 
 
-def test_example_distinct():
+def testExampleDistinct():
     lines = util.readinputfile('inputfiles/day8_example.txt')
 
     assert day8b.Panel(lines[0]).countdistinctdigits() == 2
@@ -10,10 +10,17 @@ def test_example_distinct():
     assert day8b.Panel.countalldistinctdigits(lines) == 26
 
 
-def test_example_output():
+def testExampleOutput():
     lines = util.readinputfile('inputfiles/day8_example.txt')
 
     assert day8b.Panel(lines[0]).output() == 8394
     assert day8b.Panel(lines[-1]).output() == 4315
 
     assert day8b.Panel.sumoutputs(lines) == 61229
+
+
+def testInput():
+    lines = util.readinputfile('inputfiles/day8_input.txt')
+    totalsum = day8b.Panel.sumoutputs(lines)
+
+    assert totalsum == 1074888

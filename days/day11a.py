@@ -1,4 +1,5 @@
 from typing import List
+from util import util
 
 
 class Cavern:
@@ -72,8 +73,6 @@ class Cavern:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day11_example.txt')
     lines = util.readinputfile('inputfiles/day11_input.txt')
     cavern = Cavern(lines)
@@ -82,7 +81,8 @@ def main():
     for _ in range(1, 101):
         cavern.step()
     # print(cavern)
-    print('DAY11A - Number of total flashes after 100 steps: ' + str(cavern.getTotalFlashes()))
+
+    util.printresultline('11a', cavern.getTotalFlashes())
 
 
 if __name__ == '__main__':

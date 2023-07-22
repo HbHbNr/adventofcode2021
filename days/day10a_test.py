@@ -2,7 +2,7 @@ from util import util
 from days import day10a
 
 
-def test_brackets():
+def testBrackets():
     assert day10a.Checker.isopenbracket('(') is True
     assert day10a.Checker.isopenbracket(')') is False
     assert day10a.Checker.matchingbrackets('[', ']') is True
@@ -10,9 +10,17 @@ def test_brackets():
     assert day10a.Checker.errorscore('>') == 25137
 
 
-def test_example():
+def testExample():
     lines = util.readinputfile('inputfiles/day10_example.txt')
     checker = day10a.Checker(lines)
     syntaxerrors = checker.findsyntaxerrors()
 
     assert sum(syntaxerrors) == 26397
+
+
+def testInput():
+    lines = util.readinputfile('inputfiles/day10_input.txt')
+    checker = day10a.Checker(lines)
+    syntaxerrors = checker.findsyntaxerrors()
+
+    assert sum(syntaxerrors) == 370407

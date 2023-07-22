@@ -2,9 +2,10 @@ from util import util
 from days import day5b
 
 
-def test_map_example():
+def testMapExample():
     lines = util.readinputfile('inputfiles/day5_example.txt')
     theMap = day5b.Map(lines)
+
     # assert len(theMap._coords) == 10
     # assert len(theMap._coords[0]) == 10
     assert theMap.testCoord(2, 1, 1)
@@ -13,3 +14,10 @@ def test_map_example():
     assert theMap.testCoord(8, 0, 1)
     assert theMap.testCoord(6, 4, 3)
     assert theMap.countdangerouscoords() == 12
+
+
+def testMapInput():
+    lines = util.readinputfile('inputfiles/day5_input.txt')
+    theMap = day5b.Map(lines)
+
+    assert theMap.countdangerouscoords() == 15463

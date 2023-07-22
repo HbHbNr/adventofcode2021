@@ -1,4 +1,5 @@
 from typing import List
+from util import util
 
 
 class Checker:
@@ -9,20 +10,19 @@ class Checker:
 
     def __init__(self, lines: List[str]) -> None:
         self._lines = list(lines)
-        return
 
     def findincompletelines(self) -> List[List[int]]:
         incompletelines = []
 
         for line in self._lines:
             incompleteline = self.findsyntaxerrorinline(line)
-            if incompleteline != []:
+            if incompleteline:
                 incompletelines.append(incompleteline)
 
         return incompletelines
 
     @classmethod
-    def findsyntaxerrorinline(self, line) -> List[int]:
+    def findsyntaxerrorinline(cls, line) -> List[int]:
         openbrackets = []
         for bracket in list(line):
             if Checker.isopenbracket(bracket):
@@ -65,8 +65,6 @@ class Checker:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day10_example.txt')
     lines = util.readinputfile('inputfiles/day10_input.txt')
     checker = Checker(lines)
@@ -74,8 +72,9 @@ def main():
 
     # for line in incompletelines:
     #     print(str(line))
+    # print("Middle score: " + str(Checker.calccompletescore(incompletelines)))
 
-    print("Middle score: " + str(Checker.calccompletescore(incompletelines)))
+    util.printresultline('10b', Checker.calccompletescore(incompletelines))
 
 
 if __name__ == '__main__':

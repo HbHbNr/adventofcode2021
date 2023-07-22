@@ -1,4 +1,5 @@
 from typing import List
+from util import util
 
 
 class Checker:
@@ -9,7 +10,6 @@ class Checker:
 
     def __init__(self, lines: List[str]) -> None:
         self._lines = list(lines)
-        return
 
     def findsyntaxerrors(self) -> List[int]:
         syntaxerrors = []
@@ -49,15 +49,15 @@ class Checker:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day10_example.txt')
     lines = util.readinputfile('inputfiles/day10_input.txt')
     checker = Checker(lines)
     syntaxerrors = checker.findsyntaxerrors()
 
     # print("syntaxerrors: " + str(syntaxerrors))
-    print("syntaxerrorscore: " + str(sum(syntaxerrors)))
+    # print("syntaxerrorscore: " + str(sum(syntaxerrors)))
+
+    util.printresultline('10a', sum(syntaxerrors))
 
 
 if __name__ == '__main__':

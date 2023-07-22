@@ -17,4 +17,4 @@ def readhexinputfile(inputfile) -> bytes:
 
 
 def printresultline(day, result):
-    print('Day {:>3}: {}'.format(day, result))
+    print(f'Day {day:>3}: {result}')

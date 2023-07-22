@@ -1,5 +1,6 @@
 from typing import List, Any
 from re import sub
+from util import util
 
 
 class Heightmap:
@@ -83,8 +84,6 @@ class Basin:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day9_example.txt')
     lines = util.readinputfile('inputfiles/day9_input.txt')
     heightmap = Heightmap(lines)
@@ -93,7 +92,8 @@ def main():
     # heightmap.print()
     # print(basins)
     top3product = int(basins[0]) * int(basins[1]) * int(basins[2])
-    print('Product of the three largest basins: {}'.format(top3product))
+
+    util.printresultline('9b', top3product)
 
 
 if __name__ == '__main__':

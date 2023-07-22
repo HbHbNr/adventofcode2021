@@ -1,4 +1,5 @@
 from typing import List
+from util import util
 
 
 class Heightmap:
@@ -18,11 +19,11 @@ class Heightmap:
         for y in range(1, self._maxy + 1):
             for x in range(1, self._maxx + 1):
                 height = int(self._rows[y][x])
-                if height < int(self._rows[y-1][x]):
-                    if height < int(self._rows[y+1][x]):
-                        if height < int(self._rows[y][x-1]):
-                            if height < int(self._rows[y][x+1]):
-                                lowpoints.append(height)
+                if height < int(self._rows[y-1][x]) \
+                        and height < int(self._rows[y+1][x]) \
+                        and height < int(self._rows[y][x-1]) \
+                        and height < int(self._rows[y][x+1]):
+                    lowpoints.append(height)
         return lowpoints
 
     def calcrisklevel(self) -> int:
@@ -36,15 +37,15 @@ class Heightmap:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day9_example.txt')
     lines = util.readinputfile('inputfiles/day9_input.txt')
     heightmap = Heightmap(lines)
     # heightmap.print()
 
     # print("lowPoints: " + str(heightmap.findlowpoints()))
-    print("riskLevel: " + str(heightmap.calcrisklevel()))
+    # print("riskLevel: " + str(heightmap.calcrisklevel()))
+
+    util.printresultline('9a', heightmap.calcrisklevel())
 
 
 if __name__ == '__main__':

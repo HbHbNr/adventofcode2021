@@ -1,4 +1,6 @@
 import fileinput
+import sys
+from util import util
 
 
 class Position:
@@ -12,7 +14,7 @@ class Position:
     def down(self, value):
         self.y += int(value)
 
-    def up(self, value):
+    def up(self, value):  # pylint: disable=invalid-name
         self.y -= int(value)
 
 
@@ -28,14 +30,12 @@ def pilot():
         elif command == 'up':
             position.up(value)
         else:
-            print('Unknown command "{}" in line {}'.format(line.rstrip(),  fileinput.filelineno()))
-            exit(1)
+            print(f'Unknown command "{line.rstrip()}" in line {fileinput.filelineno()}')
+            sys.exit(1)
     return position
 
 
 def main():
-    from util import util
-
     position = pilot()
 
     util.printresultline('2a', position.x * position.y)

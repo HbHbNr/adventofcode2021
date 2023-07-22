@@ -2,7 +2,7 @@ from util import util
 from days import day11a
 
 
-def test_example():
+def testExample():
     lines = util.readinputfile('inputfiles/day11_example.txt')
     cavern = day11a.Cavern(lines)
 
@@ -35,7 +35,7 @@ def test_example():
     assert cavern.getEnergyLevel(-2, -2) == 6  # bottom right
 
 
-def test_input():
+def testInput():
     lines = util.readinputfile('inputfiles/day11_input.txt')
     cavern = day11a.Cavern(lines)
 

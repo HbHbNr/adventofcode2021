@@ -2,10 +2,10 @@ from util import util
 from days import day14b
 
 
-def test_example1():
+def testExample1():
     lines = util.readinputfile('inputfiles/day14_example.txt')
     polymer = day14b.Polymer(lines)
-    polymer.steps_recursive(0)
+    polymer.stepsRecursive(0)
     histogram = polymer.histogram()
     assert histogram.get('B') == 1
     assert histogram.get('C') == 1
@@ -13,11 +13,11 @@ def test_example1():
     assert histogram.get('N') == 2
 
 
-def test_example2():
+def testExample2():
     lines = util.readinputfile('inputfiles/day14_example.txt')
     polymer = day14b.Polymer(lines)
     polymer = day14b.Polymer(lines)
-    polymer.steps_recursive(4)
+    polymer.stepsRecursive(4)
     histogram = polymer.histogram()
     assert histogram.get('B') == 23
     assert histogram.get('C') == 10
@@ -29,10 +29,10 @@ def test_example2():
     assert values[-1] - values[0] == 18
 
 
-def test_example3():
+def testExample3():
     lines = util.readinputfile('inputfiles/day14_example.txt')
     polymer = day14b.Polymer(lines)
-    polymer.steps_recursive(10)
+    polymer.stepsRecursive(10)
     histogram = polymer.histogram()
     assert histogram.get('B') == 1749
     assert histogram.get('C') == 298
@@ -45,10 +45,10 @@ def test_example3():
 
 
 # TOO SLOW!
-def test_example4():
+def testExample4():
     lines = util.readinputfile('inputfiles/day14_example.txt')
     polymer = day14b.Polymer(lines)
-    polymer.steps_recursive(40)
+    polymer.stepsRecursive(40)
     histogram = polymer.histogram()
     assert histogram.get('B') == 2192039569602
     assert histogram.get('H') == 3849876073
@@ -58,10 +58,10 @@ def test_example4():
     assert values[-1] - values[0] == 2188189693529
 
 
-def test_input():
+def testInput():
     lines = util.readinputfile('inputfiles/day14_input.txt')
     polymer = day14b.Polymer(lines)
-    polymer.steps_recursive(40)
+    polymer.stepsRecursive(40)
     histogram = polymer.histogram()
     values = list(histogram.values())
     values.sort()

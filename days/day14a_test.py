@@ -2,7 +2,7 @@ from util import util
 from days import day14a
 
 
-def test_example1():
+def testExample1():
     lines = util.readinputfile('inputfiles/day14_example.txt')
     polymer = day14a.Polymer(lines)
 
@@ -17,7 +17,7 @@ def test_example1():
         assert str(polymer) == result
 
 
-def test_example2():
+def testExample2():
     lines = util.readinputfile('inputfiles/day14_example.txt')
     polymer = day14a.Polymer(lines)
 
@@ -32,7 +32,7 @@ def test_example2():
     assert len(str(polymer)) == 3073
 
 
-def test_example3():
+def testExample3():
     lines = util.readinputfile('inputfiles/day14_example.txt')
     polymer = day14a.Polymer(lines)
 
@@ -49,7 +49,7 @@ def test_example3():
     assert values[-1] - values[0] == 1588
 
 
-def test_input():
+def testInput():
     lines = util.readinputfile('inputfiles/day14_input.txt')
     polymer = day14a.Polymer(lines)
     for _ in range(1, 10 + 1):

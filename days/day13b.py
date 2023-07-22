@@ -1,4 +1,5 @@
 from typing import List, Tuple, Set
+from util import util
 
 
 class Matrix:
@@ -70,8 +71,6 @@ class Matrix:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day13_example.txt')
     lines = util.readinputfile('inputfiles/day13_input.txt')
     matrix = Matrix(lines)

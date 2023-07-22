@@ -1,4 +1,5 @@
 from typing import List
+from util import util
 
 
 class Cavern:
@@ -76,8 +77,6 @@ class Cavern:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day11_example.txt')
     lines = util.readinputfile('inputfiles/day11_input.txt')
     cavern = Cavern(lines)
@@ -88,7 +87,8 @@ def main():
         if allFlashed:
             break
     # print(cavern)
-    print('DAY11B - the first step during which all octopuses flash: ' + str(step))
+
+    util.printresultline('11b', step)
 
 
 if __name__ == '__main__':

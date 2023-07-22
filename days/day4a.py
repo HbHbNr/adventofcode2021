@@ -1,4 +1,4 @@
-from typing import Tuple
+from util import util
 
 
 class BingoBoard:
@@ -11,13 +11,13 @@ class BingoBoard:
 
     def print(self, indent=''):
         for row in self._rows:
-            print('{}{:2} {:2} {:2} {:2} {:2}'.format(indent, *row))
+            print('{}{:2} {:2} {:2} {:2} {:2}'.format(indent, *row))  # pylint: disable=consider-using-f-string
 
     def playNumber(self, pickednumber):
-        for row_or_column in [*self._rows, *self._columns]:
-            if pickednumber in row_or_column:
+        for rowOrColumn in [*self._rows, *self._columns]:
+            if pickednumber in rowOrColumn:
                 # print(f'{pickednumber} found in {row_or_column}')
-                row_or_column[row_or_column.index(pickednumber)] = -1
+                rowOrColumn[rowOrColumn.index(pickednumber)] = -1
 
     def sum(self):
         result = 0
@@ -31,15 +31,17 @@ class BingoBoard:
         return result
 
     # for unit testing
-    def getRow(self, rowIndex) -> Tuple[int]:
+    def getRow(self, rowIndex):
         return tuple(self._rows[rowIndex])
 
     # for unit testing
-    def getColumn(self, columnIndex) -> Tuple[int]:
+    def getColumn(self, columnIndex):
         return tuple(self._columns[columnIndex])
 
 
 class BingoMatch:
+    # pylint: disable=too-few-public-methods
+
     def __init__(self, lines):
         self._pickednumbers = [int(x) for x in lines[0].split(',')]
         self._bingoboards = []
@@ -67,14 +69,11 @@ class BingoMatch:
 
 
 def main():
-    from util import util
-
     lines = util.readinputfile('inputfiles/day4_input.txt')
     bingomatch = BingoMatch(lines)
     result = bingomatch.play()
-    print(result)
-    if result is not None:
-        print(result['pickednumber'] * result['boardsum'])
+    # print(result)
+    util.printresultline('4a', result['pickednumber'] * result['boardsum'])
 
 
 if __name__ == '__main__':

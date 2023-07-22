@@ -1,3 +1,6 @@
+from util import util
+
+
 # steps to determine all numbers
 # distinct string lengths: 1, 7, 8, 8
 # (7 - 1 -> a)
@@ -115,13 +118,13 @@ class PatternMap:
     def lookuppatternstring(self, patternstring):
         sortedpatternstring = ''.join(sorted(patternstring))
         # print(sortedpatternstring)
-        for k, v in self._patternmap.items():
+        for key, value in self._patternmap.items():
             # print(k)
-            if k == sortedpatternstring:
+            if key == sortedpatternstring:
                 # print(f'{k} does match')
                 # print(v)
                 # print()
-                return v
+                return value
             # else:
                 # print(f'{k} does not match')
         # print()
@@ -170,12 +173,11 @@ class Panel:
 
 
 def main():
-    from util import util
-
     # lines = util.readinputfile('inputfiles/day8_example.txt')
     lines = util.readinputfile('inputfiles/day8_input.txt')
     totalsum = Panel.sumoutputs(lines)
-    print(f'totalsum: {totalsum}')
+
+    util.printresultline('8b', totalsum)
 
 
 if __name__ == '__main__':

@@ -2,7 +2,7 @@ from days import day16a
 from util import bytestream, bitstream
 
 
-def test_examplehexfile():
+def testExampleHexFile():
     byteStream = bytestream.ByteStream.fromHexFile('inputfiles/day16_example.txt')
     bitStream = bitstream.BitStream(byteStream)
     bITS = day16a.BuoyancyInterchangeTransmissionSystem(bitStream)
@@ -12,7 +12,7 @@ def test_examplehexfile():
     assert sum(versions) == 16
 
 
-def test_examplehexstrings():
+def testExampleHexStrings():
     hexstrings = [('D2FE28', 1, 6),
                   ('38006F45291200', 3, 9),
                   ('EE00D40C823060', 4, 14),
@@ -32,7 +32,7 @@ def test_examplehexstrings():
         assert sum(versions) == versionsum
 
 
-def test_input():
+def testInput():
     byteStream = bytestream.ByteStream.fromHexFile('inputfiles/day16_input.txt')
     bitStream = bitstream.BitStream(byteStream)
     bITS = day16a.BuoyancyInterchangeTransmissionSystem(bitStream)
