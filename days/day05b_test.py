@@ -1,11 +1,11 @@
 """Unit tests for https://adventofcode.com/2021/day/5 part b"""
 from util import util
-from days import day5b
+from days import day05b
 
 
 def testMapExample():
     lines = util.readinputfile('inputfiles/day5_example.txt')
-    theMap = day5b.Map(lines)
+    theMap = day05b.Map(lines)
 
     # assert len(theMap._coords) == 10
     # assert len(theMap._coords[0]) == 10
@@ -19,6 +19,6 @@ def testMapExample():
 
 def testMapInput():
     lines = util.readinputfile('inputfiles/day5_input.txt')
-    theMap = day5b.Map(lines)
+    theMap = day05b.Map(lines)
 
     assert theMap.countdangerouscoords() == 15463

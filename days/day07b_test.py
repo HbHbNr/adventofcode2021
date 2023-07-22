@@ -1,11 +1,11 @@
 """Unit tests for https://adventofcode.com/2021/day/7 part b"""
 from util import util
-from days import day7b
+from days import day07b
 
 
 def testExample():
     lines = util.readinputfile('inputfiles/day7_example.txt')
-    aligner = day7b.Aligner(lines[0])
+    aligner = day07b.Aligner(lines[0])
 
     assert aligner.size() == 10
 
@@ -18,7 +18,7 @@ def testExample():
 
 def testInput():
     lines = util.readinputfile('inputfiles/day7_input.txt')
-    aligner = day7b.Aligner(lines[0])
+    aligner = day07b.Aligner(lines[0])
     alignment = aligner.calcbestx()
 
     assert alignment['totalfuels'][alignment['bestx']] == 96987874

@@ -1,11 +1,11 @@
 """Unit tests for https://adventofcode.com/2021/day/9 part b"""
 from util import util
-from days import day9b
+from days import day09b
 
 
 def testExample():
     lines = util.readinputfile('inputfiles/day9_example.txt')
-    heightmap = day9b.Heightmap(lines)
+    heightmap = day09b.Heightmap(lines)
     basins = heightmap.findbasins()
     top3product = int(basins[0]) * int(basins[1]) * int(basins[2])
 
@@ -15,7 +15,7 @@ def testExample():
 
 def testInput():
     lines = util.readinputfile('inputfiles/day9_input.txt')
-    heightmap = day9b.Heightmap(lines)
+    heightmap = day09b.Heightmap(lines)
     basins = heightmap.findbasins()
     top3product = int(basins[0]) * int(basins[1]) * int(basins[2])
 

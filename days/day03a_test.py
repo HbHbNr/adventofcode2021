@@ -1,12 +1,12 @@
 """Unit tests for https://adventofcode.com/2021/day/3 part a"""
-from days import day3a
+from days import day03a
 
 
 def testInput():
     # inputfile = "inputfiles/day3_example.txt"
     inputfile = "inputfiles/day3_input.txt"
 
-    histogram = day3a.createhistogram(inputfile)
+    histogram = day03a.createhistogram(inputfile)
     gamma = histogram.buildparameter(True)
     epsilon = histogram.buildparameter(False)
 

@@ -1,11 +1,11 @@
-"""Unit tests for https://adventofcode.com/2021/day/4 part b"""
+"""Unit tests for https://adventofcode.com/2021/day/4 part a"""
 from util import util
-from days import day4b
+from days import day04a
 
 
 def testBingoBoardSimple():
     simplerows = ['1 2 3 4 5', '6 7 8 9 10', '11 12 13 14 15', '16 17 18 19 20', '21 22 23 24 25']
-    bingoboard = day4b.BingoBoard(simplerows)
+    bingoboard = day04a.BingoBoard(simplerows)
 
     assert bingoboard.sum() == sum(range(26))
     assert bingoboard.getRow(1) == (6, 7, 8, 9, 10)
@@ -14,10 +14,10 @@ def testBingoBoardSimple():
 
 def testBingoMatchExample():
     lines = util.readinputfile('inputfiles/day4_example.txt')
-    bingomatch = day4b.BingoMatch(lines)
-    winningbingoboards = bingomatch.play()
-    result = winningbingoboards[0]
+    bingomatch = day04a.BingoMatch(lines)
+    result = bingomatch.play()
 
+    assert result is not None
     assert result['numberindex'] == 11
     assert result['pickednumber'] == 24
     assert result['boardindex'] == 2
@@ -25,10 +25,9 @@ def testBingoMatchExample():
     assert result['solution'] == 4512
 
 
-def maitestBingoMatchInput():
+def testBingoMatchInput():
     lines = util.readinputfile('inputfiles/day4_input.txt')
-    bingomatch = day4b.BingoMatch(lines)
-    winningbingoboards = bingomatch.play()
-    lastBoard = winningbingoboards[len(winningbingoboards)-1]
+    bingomatch = day04a.BingoMatch(lines)
+    result = bingomatch.play()
 
-    assert lastBoard['solution'] == 6256
+    assert result['pickednumber'] * result['boardsum'] == 58838

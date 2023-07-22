@@ -1,11 +1,11 @@
 """Unit tests for https://adventofcode.com/2021/day/6 part a"""
 from util import util
-from days import day6a
+from days import day06a
 
 
 def testExample():
     lines = util.readinputfile('inputfiles/day6_example.txt')
-    school = day6a.School(lines[0])
+    school = day06a.School(lines[0])
 
     assert school.size() == 5
     assert school.getFishes() == (3, 4, 3, 1, 2)
@@ -23,7 +23,7 @@ def testExample():
 
 def testExample18():
     lines = util.readinputfile('inputfiles/day6_example.txt')
-    school = day6a.School(lines[0])
+    school = day06a.School(lines[0])
     school.nextdays(18)
 
     assert school.size() == 26
@@ -37,7 +37,7 @@ def testExample18():
 
 def testExample80():
     lines = util.readinputfile('inputfiles/day6_example.txt')
-    school = day6a.School(lines[0])
+    school = day06a.School(lines[0])
     school.nextdays(80)
 
     assert school.size() == 5934
@@ -45,7 +45,7 @@ def testExample80():
 
 def testInput():
     lines = util.readinputfile('inputfiles/day6_input.txt')
-    school = day6a.School(lines[0])
+    school = day06a.School(lines[0])
     school.nextdays(80, False)
 
     assert school.size() == 377263
