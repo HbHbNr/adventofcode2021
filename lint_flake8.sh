@@ -6,4 +6,4 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Check syntax with flake8..."
-flake8 . --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+flake8 . --max-complexity=10 --max-line-length=127 --statistics
