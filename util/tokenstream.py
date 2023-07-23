@@ -32,6 +32,14 @@ class Token(NamedTuple):
     def createInteger(cls, value: int) -> 'Token':
         return Token(TokenType.INTEGER, value)
 
+    def __str__(self):
+        string = ''
+        if self.type == TokenType.INTEGER:
+            string = f'{self.type}({self.intvalue})'
+        else:
+            string = str(self.type)
+        return string
+
 
 class TokenStream:
     # pylint: disable=too-few-public-methods

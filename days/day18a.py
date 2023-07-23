@@ -23,8 +23,10 @@ class TreeNode(NamedTuple):
 
 
 def main():
-    token = tokenstream.Token.createInteger(3)
-    print(token)
+    Token = tokenstream.Token.createInteger(3)
+    print(Token)
+    Token = tokenstream.Token.createBasic(',')
+    print(Token)
 
     util.printresultline('18a', '???')
 
