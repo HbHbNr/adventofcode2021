@@ -24,6 +24,7 @@ jobs:
         ./lint_flake8.sh
 
   pylint:
+    needs: flake8
     runs-on: ubuntu-latest
     strategy:
       matrix:
