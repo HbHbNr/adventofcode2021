@@ -1,2 +1,2 @@
 #!/bin/bash
-pytest .
+pytest --cov=days --cov=util
