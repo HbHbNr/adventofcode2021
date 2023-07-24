@@ -44,7 +44,7 @@ jobs:
         ./lint_pylint.sh
 
   mypy:
-    needs: pylint
+    needs: flake8
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -64,7 +64,7 @@ jobs:
         ./mypy.sh
 
   pytest:
-    needs: mypy
+    needs: flake8
     runs-on: ubuntu-latest
     strategy:
       matrix:
