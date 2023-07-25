@@ -2,6 +2,9 @@ name: Code quality
 
 on: [push]
 
+env:
+  codecov-python-version: "3.10"
+
 jobs:
 
   flake8:
@@ -80,7 +83,25 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
         pip install pytest-cov
-    - name: Unit testing with mypy
+    - name: Unit testing with pytest
+      run: |
+        ./pytest.sh
+
+  codecov:
+    needs: pytest
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ env.codecov-python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ env.codecov-python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+        pip install pytest-cov
+    - name: Unit testing with pytest
       run: |
         ./pytest.sh
     - name: Upload coverage reports to Codecov
