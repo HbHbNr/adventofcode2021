@@ -1,8 +1,9 @@
 """Unit tests for the Token and TokenStream classes"""
+import pytest
 from util import tokenstream
 
 
-def testTokenStreamString1():
+def testTokenStreamNormal():
     stream = tokenstream.TokenStream('[[1,9],[18,105]]').stream()
 
     assert next(stream) == tokenstream.Token(tokenstream.TokenType.SQUARE_BRACKET_OPEN, 0)
@@ -18,24 +19,28 @@ def testTokenStreamString1():
     assert next(stream) == tokenstream.Token(tokenstream.TokenType.INTEGER, 105)
     assert next(stream) == tokenstream.Token(tokenstream.TokenType.SQUARE_BRACKET_CLOSE, 0)
     assert next(stream) == tokenstream.Token(tokenstream.TokenType.SQUARE_BRACKET_CLOSE, 0)
-    try:
+    with pytest.raises(StopIteration):
         # buffer is empty now and raises StopIteration exception
         next(stream)
-        assert False
-    except StopIteration:
-        assert True
 
 
-def testTokenStreamString2():
-    # test edge case where integer is end of string
+def testTokenStreamIntegerAtEnd():
     stream = tokenstream.TokenStream('[[119').stream()
 
     assert next(stream) == tokenstream.Token(tokenstream.TokenType.SQUARE_BRACKET_OPEN, 0)
     assert next(stream) == tokenstream.Token(tokenstream.TokenType.SQUARE_BRACKET_OPEN, 0)
     assert next(stream) == tokenstream.Token(tokenstream.TokenType.INTEGER, 119)
-    try:
+    with pytest.raises(StopIteration):
         # buffer is empty now and raises StopIteration exception
         next(stream)
-        assert False
-    except StopIteration:
-        assert True
+
+
+def testTokenStreamUnknownToken():
+    # test unknown token within the string
+    with pytest.raises(ValueError):
+        tokenstream.TokenStream('[[1,9]#[18,105]]').stream()
+
+
+def testTokenStr():
+    assert str(tokenstream.Token(tokenstream.TokenType.SQUARE_BRACKET_OPEN, 0)) == 'TokenType.SQUARE_BRACKET_OPEN'
+    assert str(tokenstream.Token(tokenstream.TokenType.INTEGER, 1)) == 'TokenType.INTEGER(1)'

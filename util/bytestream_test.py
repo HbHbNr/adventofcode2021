@@ -1,4 +1,5 @@
 """Unit tests for the ByteStream class"""
+import pytest
 from util import bytestream
 
 
@@ -8,12 +9,9 @@ def testBytestreamstring():
     assert next(stream) == 0xd2
     assert next(stream) == 0xfe
     assert next(stream) == 0x28
-    try:
+    with pytest.raises(StopIteration):
         # buffer is empty now and raises StopIteration exception
         next(stream)
-        assert False
-    except StopIteration:
-        assert True
 
 
 def testBytestreamfile():
@@ -29,9 +27,6 @@ def testBytestreamfile():
     assert next(stream) == 0x02
     assert next(stream) == 0xf4
     assert next(stream) == 0x78
-    try:
+    with pytest.raises(StopIteration):
         # buffer is empty now and raises StopIteration exception
         next(stream)
-        assert False
-    except StopIteration:
-        assert True
