@@ -1,0 +1,7 @@
+[report]
+omit =
+    days/__init__.py
+    util/__init__.py
+
+[html]
+directory = coverage_html_report

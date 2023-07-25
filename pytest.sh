@@ -1,2 +1,2 @@
 #!/bin/bash
-pytest --cov=days --cov=util
+pytest --cov=days --cov=util && coverage html
