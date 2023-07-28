@@ -1,9 +1,9 @@
-![Static Badge](https://img.shields.io/badge/Python-3.7-blue)
-![Static Badge](https://img.shields.io/badge/Python-3.8-blue)
-![Static Badge](https://img.shields.io/badge/Python-3.9-blue)
-![Static Badge](https://img.shields.io/badge/Python-3.10-blue)
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/HbHbNr/adventofcode2021/codequality.yml?logo=github&logoColor=white)
-![Codecov](https://img.shields.io/codecov/c/github/HbHbNr/adventofcode2021?logo=codecov&logoColor=white)
+[![Python 3.7](https://img.shields.io/badge/Python-3.7-blue?logo=python&logoColor=white)](https://docs.python.org/3.7/whatsnew/changelog.html)
+[![Python 3.8](https://img.shields.io/badge/Python-3.8-blue?logo=python&logoColor=white)](https://docs.python.org/3.8/whatsnew/changelog.html)
+[![Python 3.9](https://img.shields.io/badge/Python-3.9-blue?logo=python&logoColor=white)](https://docs.python.org/3.9/whatsnew/changelog.html)
+[![Python 3.10](https://img.shields.io/badge/Python-3.10-blue?logo=python&logoColor=white)](https://docs.python.org/3.10/whatsnew/changelog.html)
+[![GitHub Workflow Status](https://github.com/HbHbNr/adventofcode2021/actions/workflows/codequality.yml/badge.svg)](https://github.com/HbHbNr/adventofcode2021/actions/workflows/codequality.yml)
+[![Codecov coverage](https://img.shields.io/codecov/c/github/HbHbNr/adventofcode2021?logo=codecov&logoColor=white)](https://app.codecov.io/gh/HbHbNr/adventofcode2021)
 
 # adventofcode2021
 Solutions of https://adventofcode.com/2021/
