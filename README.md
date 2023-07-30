@@ -7,7 +7,7 @@
 [![Codecov coverage](https://img.shields.io/codecov/c/github/HbHbNr/adventofcode2021?logo=codecov&logoColor=white)](https://app.codecov.io/gh/HbHbNr/adventofcode2021)
 
 # adventofcode2021
-Solutions of https://adventofcode.com/2021/ in plain Python
+Solutions for https://adventofcode.com/2021/ in plain Python
 
 # Requirements
 * Python 3 (developed with Python 3.7; tested with 3.7-3.11)
