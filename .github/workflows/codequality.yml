@@ -3,21 +3,18 @@ name: Code quality
 on: [push]
 
 env:
-  codecov-python-version: "3.10"
+  in-depth-python-version: "3.11"
 
 jobs:
 
   flake8:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python ${{ env.in-depth-python-version }}
       uses: actions/setup-python@v3
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ env.in-depth-python-version }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -29,15 +26,12 @@ jobs:
   pylint:
     needs: flake8
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python ${{ env.in-depth-python-version }}
       uses: actions/setup-python@v3
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ env.in-depth-python-version }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -49,15 +43,12 @@ jobs:
   mypy:
     needs: flake8
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python ${{ env.in-depth-python-version }}
       uses: actions/setup-python@v3
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ env.in-depth-python-version }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -69,15 +60,12 @@ jobs:
   pytest:
     needs: flake8
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10"]
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python ${{ env.in-depth-python-version }}
       uses: actions/setup-python@v3
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ env.in-depth-python-version }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -92,10 +80,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ env.codecov-python-version }}
+    - name: Set up Python ${{ env.in-depth-python-version }}
       uses: actions/setup-python@v3
       with:
-        python-version: ${{ env.codecov-python-version }}
+        python-version: ${{ env.in-depth-python-version }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -108,3 +96,23 @@ jobs:
       uses: codecov/codecov-action@v3
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  cqall:
+    needs: flake8
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r dependencies.txt
+    - name: Full code quality testing with ./cqall.sh
+      run: |
+        ./cqall.sh
