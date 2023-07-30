@@ -2,7 +2,7 @@
 [![Python 3.8](https://hbhbnr.github.io/docs/badges/Python-3.8-blue-python-white.svg)](https://docs.python.org/3.8/whatsnew/changelog.html)
 [![Python 3.9](https://hbhbnr.github.io/docs/badges/Python-3.9-blue-python-white.svg)](https://docs.python.org/3.9/whatsnew/changelog.html)
 [![Python 3.10](https://hbhbnr.github.io/docs/badges/Python-3.10-blue-python-white.svg)](https://docs.python.org/3.10/whatsnew/changelog.html)
-[![Python 3.11](https://hbhbnr.github.io/docs/badges/Python-3.11-blue-python-white.svg)](https://docs.python.org/3.10/whatsnew/changelog.html)
+[![Python 3.11](https://hbhbnr.github.io/docs/badges/Python-3.11-blue-python-white.svg)](https://docs.python.org/3.11/whatsnew/changelog.html)
 [![GitHub Workflow Status](https://github.com/HbHbNr/adventofcode2021/actions/workflows/codequality.yml/badge.svg)](https://github.com/HbHbNr/adventofcode2021/actions/workflows/codequality.yml)
 [![Codecov coverage](https://img.shields.io/codecov/c/github/HbHbNr/adventofcode2021?logo=codecov&logoColor=white)](https://app.codecov.io/gh/HbHbNr/adventofcode2021)
 
