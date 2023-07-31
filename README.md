@@ -11,11 +11,13 @@ Solutions for https://adventofcode.com/2021/ in plain Python
 
 # Requirements
 * Python 3 (developed with Python 3.7; tested with 3.7-3.11)
-* Flake8 (optional, for linting)
-* Pylint (optional, for linting)
-* mypy (optional, for static type checking)
-* pytest (optional, for testing)
-* pytest-cov (optional, for coverage) 
+
+Optional:
+* Flake8 (for linting)
+* Pylint (for linting)
+* mypy (for static type checking)
+* pytest (for unit testing)
+* pytest-cov (for code coverage) 
 
 # Code quality
 ## Linting
@@ -27,11 +29,11 @@ Solutions for https://adventofcode.com/2021/ in plain Python
 
     ./mypy.sh
 
-## Testing (including coverage)
+## Testing (including code coverage)
 
     ./pytest.sh
 
-Code coverage report can be found in ``coverage_html_report`` afterwards.
+The code coverage report can be found in ``coverage_html_report`` afterwards.
 
 ## All of the above
 
