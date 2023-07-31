@@ -11,7 +11,7 @@ class TreeNode(NamedTuple):
     value: int
 
     @classmethod
-    def createParent(cls, left: 'TreeNode', right: 'TreeNode') -> 'TreeNode':
+    def createParents(cls, left: 'TreeNode', right: 'TreeNode') -> 'TreeNode':
         return TreeNode(left, right, 0)
 
     @classmethod
@@ -19,7 +19,14 @@ class TreeNode(NamedTuple):
         return TreeNode(None, None, value)
 
     def isLeaf(self):
-        return self.left is not None
+        return self.left is None
+
+    def __str__(self) -> str:
+        if self.isLeaf():
+            string = str(self.value)
+        else:
+            string = f'[{str(self.left)},{str(self.right)}]'
+        return string
 
 
 def main():
@@ -27,6 +34,8 @@ def main():
     print(token)
     token = tokenstream.Token.createBasic(',')
     print(token)
+    treeNode = TreeNode.createParents(TreeNode.createLeaf(1), TreeNode.createLeaf(2))
+    print(treeNode)
 
     util.printresultline('18a', '???')
 
