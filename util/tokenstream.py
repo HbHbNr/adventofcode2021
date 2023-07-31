@@ -32,6 +32,9 @@ class Token(NamedTuple):
     def createInteger(cls, value: int) -> 'Token':
         return Token(TokenType.INTEGER, value)
 
+    def isInteger(self):
+        return self.type == TokenType.INTEGER
+
     def __str__(self):
         string = ''
         if self.type == TokenType.INTEGER:
