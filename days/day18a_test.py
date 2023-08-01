@@ -31,6 +31,12 @@ class TestDay18a(unittest.TestCase):
 
         assert str(treeNode) == '[[1,2],3]'
 
+    def testExampleTokenStream987(self):
+        tokenStream = tokenstream.TokenStream('[9,[8,7]]').stream()
+        treeNode = day18a.TreeNode.parseTokenStream(tokenStream)
+
+        assert str(treeNode) == '[9,[8,7]]'
+
     def testInput(self) -> None:
         # assert a = b
         pass

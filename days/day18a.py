@@ -13,27 +13,26 @@ class TreeNode(NamedTuple):
     @classmethod
     def createParents(cls, left: 'TreeNode', right: 'TreeNode') -> 'TreeNode':
         treeNode = TreeNode(left, right, 0)
-        print("createParents:", treeNode)
+        # print("createParents:", treeNode)
         return treeNode
 
     @classmethod
     def createLeaf(cls, value: int) -> 'TreeNode':
         treeNode = TreeNode(None, None, value)
-        print("createLeaf:", treeNode)
+        # print("createLeaf:", treeNode)
         return treeNode
 
     @classmethod
     def parseTokenStream(cls, tokenStream) -> 'TreeNode':
         token = next(tokenStream)
         if token.isInteger():
+            # the tree node is a single integer
             return TreeNode.createLeaf(token.intvalue)
-        left: 'TreeNode' = cls.parseTokenStream(tokenStream)
+
+        # the tree node is a parent node
+        left: TreeNode = cls.parseTokenStream(tokenStream)
         _ = next(tokenStream)  # comma
-        token = next(tokenStream)
-        if token.isInteger():
-            right = TreeNode.createLeaf(token.intvalue)
-        else:
-            right = cls.parseTokenStream(tokenstream)  # first token already consumed!!!
+        right: TreeNode = cls.parseTokenStream(tokenStream)
         _ = next(tokenStream)  # closing bracket
         return TreeNode.createParents(left, right)
 
@@ -49,7 +48,8 @@ class TreeNode(NamedTuple):
 
 
 def main():
-    for string in ['[1,2]', '[[1,2],3]']:
+    for string in ['[1,2]', '[[1,2],3]', '[9,[8,7]]']:
+        print('***************', string, '***************')
         tokenStream = tokenstream.TokenStream(string).stream()
         treeNode = TreeNode.parseTokenStream(tokenStream)
         print(treeNode)
