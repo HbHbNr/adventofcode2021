@@ -9,6 +9,17 @@ class TokenType(Enum):
     COMMA = 3
     INTEGER = 4
 
+    def toString(self) -> str:
+        if self == TokenType.SQUARE_BRACKET_OPEN:
+            return '['
+        if self == TokenType.SQUARE_BRACKET_CLOSE:
+            return ']'
+        if self == TokenType.COMMA:
+            return ','
+        if self == TokenType.INTEGER:
+            return 'I'
+        raise ValueError(f'{self} has unknown TokenType')
+
 
 class Token(NamedTuple):
 
