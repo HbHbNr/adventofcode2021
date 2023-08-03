@@ -9,11 +9,13 @@ TokenStream = tokenstream.TokenStream
 
 class TestDay18a(unittest.TestCase):
 
-    def testTokenListToString(self):
-        string = '[9,[8,7]]'
-        tokenList = TokenStream(string).asList()
+    def testExampleAddAndReduce(self):
+        tokenList1 = TokenStream('[1,1]').asList()
+        tokenList2 = TokenStream('[2,3]').asList()
+        tokenList3 = TokenStream('[[1,1],[2,3]]').asList()
+        result = day18a.MathHomework.addAndReduce([tokenList1, tokenList2])
 
-        assert day18a.MathHomework.tokenListToString(tokenList) == string
+        assert tokenList3 == result
 
     def testExampleTryExplode(self):
         for originalString, explodedString in [
@@ -52,6 +54,12 @@ class TestDay18a(unittest.TestCase):
             tokenListReduced = day18a.MathHomework.reduce(tokenList)
 
             assert day18a.MathHomework.tokenListToString(tokenListReduced) == reducedString
+
+    def testTokenListToString(self):
+        string = '[9,[8,7]]'
+        tokenList = TokenStream(string).asList()
+
+        assert day18a.MathHomework.tokenListToString(tokenList) == string
 
     def testInput(self) -> None:
         # assert a = b

@@ -5,11 +5,32 @@ from util import util
 from util import tokenstream
 
 # typing.TypeAlias needs at least Python 3.10, so no type hints
-TokenList = List[tokenstream.Token]
+Token = tokenstream.Token
+TokenList = List[Token]
 TokenType = tokenstream.TokenType
+TokenStream = tokenstream.TokenStream
 
 
 class MathHomework:
+
+    @classmethod
+    def addAndReduce(cls, tokenListList: List[TokenList]) -> TokenList:
+        result = tokenListList[0]
+        for i in range(1, len(tokenListList)):
+            nextPart = tokenListList[i]
+            result = cls.createPair(result, nextPart)
+            result = cls.reduce(result)
+        return result
+
+    @classmethod
+    def createPair(cls, left, right) -> TokenList:
+        tokenList: List[Token] = []
+        tokenList.append(Token.createBasic('['))
+        tokenList.extend(left)
+        tokenList.append(Token.createBasic(','))
+        tokenList.extend(right)
+        tokenList.append(Token.createBasic(']'))
+        return tokenList
 
     @classmethod
     def reduce(cls, tokens: TokenList) -> TokenList:
@@ -44,16 +65,16 @@ class MathHomework:
             left = tokens[i + 1]
             right = tokens[i + 3]
             del tokens[i + 1:i + 5]
-            tokens[i] = tokenstream.Token.createInteger(0)
+            tokens[i] = Token.createInteger(0)
             # add left.intValue to first number on left side
             for j in range(i - 1, -1, -1):
                 if tokens[j].type == TokenType.INTEGER:
-                    tokens[j] = tokenstream.Token.createInteger(tokens[j].intvalue + left.intvalue)
+                    tokens[j] = Token.createInteger(tokens[j].intvalue + left.intvalue)
                     break
             # add right.intValue to first number on right side
             for j in range(i + 1, len(tokens)):
                 if tokens[j].type == TokenType.INTEGER:
-                    tokens[j] = tokenstream.Token.createInteger(tokens[j].intvalue + right.intvalue)
+                    tokens[j] = Token.createInteger(tokens[j].intvalue + right.intvalue)
                     break
         return exploded
 
@@ -71,11 +92,11 @@ class MathHomework:
             leftInt: int = math.floor(tokens[i].intvalue / 2)
             rightInt: int = math.ceil(tokens[i].intvalue / 2)
             del tokens[i]
-            tokens.insert(i + 0, tokenstream.Token.createBasic('['))
-            tokens.insert(i + 1, tokenstream.Token.createInteger(leftInt))
-            tokens.insert(i + 2, tokenstream.Token.createBasic(','))
-            tokens.insert(i + 3, tokenstream.Token.createInteger(rightInt))
-            tokens.insert(i + 4, tokenstream.Token.createBasic(']'))
+            tokens.insert(i + 0, Token.createBasic('['))
+            tokens.insert(i + 1, Token.createInteger(leftInt))
+            tokens.insert(i + 2, Token.createBasic(','))
+            tokens.insert(i + 3, Token.createInteger(rightInt))
+            tokens.insert(i + 4, Token.createBasic(']'))
         return split
 
     @classmethod
@@ -107,10 +128,15 @@ def main():
                 print(token.type.toString(), end='')
         print()
 
-    tokenList = [tokenstream.Token.createInteger(19)]
+    tokenList = [Token.createInteger(19)]
     print(MathHomework.tokenListToString(tokenList))
     tokenListReduced = MathHomework.reduce(tokenList)
     print(MathHomework.tokenListToString(tokenListReduced))
+
+    tokenList1 = TokenStream('[1,1]').asList()
+    tokenList2 = TokenStream('[2,3]').asList()
+    result = MathHomework.addAndReduce([tokenList1, tokenList2])
+    print(MathHomework.tokenListToString(result))
 
     util.printresultline('18a', '???')
 
