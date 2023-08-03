@@ -1,26 +1,24 @@
 """Solution for https://adventofcode.com/2021/day/18 part a"""
 from typing import List
+import math
 from util import util
 from util import tokenstream
 
-# typing.TypeAlias needs at least Python 3.10
+# typing.TypeAlias needs at least Python 3.10, so no type hints
 TokenList = List[tokenstream.Token]
+TokenType = tokenstream.TokenType
 
 
 class MathHomework:
-    # pylint: disable=too-few-public-methods
 
     @classmethod
     def reduce(cls, tokens: TokenList) -> TokenList:
         _tokens: TokenList = list(tokens)
-        # print(tokens)
-        # print(_tokens)
 
         run = True
         while run:
             if cls.tryExplode(_tokens):
-                # continue
-                pass
+                continue
             if cls.trySplit(_tokens):
                 continue
             # neither explode nor split was possible: work done
@@ -34,40 +32,57 @@ class MathHomework:
         i = 0
         level = 0
         for i, token in enumerate(tokens):
-            if token.type == tokenstream.TokenType.SQUARE_BRACKET_OPEN:
+            if token.type == TokenType.SQUARE_BRACKET_OPEN:
                 level += 1
-            elif token.type == tokenstream.TokenType.SQUARE_BRACKET_CLOSE:
+            elif token.type == TokenType.SQUARE_BRACKET_CLOSE:
                 level -= 1
             if level == 5:
+                exploded = True
                 break  # i and token keep their values
-        # pair at level 5 found
-        if level == 5:
+        # found pair at level 5
+        if exploded:
             left = tokens[i + 1]
             right = tokens[i + 3]
             del tokens[i + 1:i + 5]
             tokens[i] = tokenstream.Token.createInteger(0)
             # add left.intValue to first number on left side
             for j in range(i - 1, -1, -1):
-                if tokens[j].type == tokenstream.TokenType.INTEGER:
+                if tokens[j].type == TokenType.INTEGER:
                     tokens[j] = tokenstream.Token.createInteger(tokens[j].intvalue + left.intvalue)
                     break
             # add right.intValue to first number on right side
             for j in range(i + 1, len(tokens)):
-                if tokens[j].type == tokenstream.TokenType.INTEGER:
+                if tokens[j].type == TokenType.INTEGER:
                     tokens[j] = tokenstream.Token.createInteger(tokens[j].intvalue + right.intvalue)
                     break
-            exploded = True
         return exploded
 
     @classmethod
-    def trySplit(cls, _: TokenList) -> bool:
-        return False
+    def trySplit(cls, tokens: TokenList) -> bool:
+        split = False
+        i = 0
+        for i, token in enumerate(tokens):
+            if token.type == TokenType.INTEGER:
+                if token.intvalue >= 10:
+                    split = True
+                    break  # i and token keep their values
+        # found regular number 10 or greater
+        if split:
+            leftInt: int = math.floor(tokens[i].intvalue / 2)
+            rightInt: int = math.ceil(tokens[i].intvalue / 2)
+            del tokens[i]
+            tokens.insert(i + 0, tokenstream.Token.createBasic('['))
+            tokens.insert(i + 1, tokenstream.Token.createInteger(leftInt))
+            tokens.insert(i + 2, tokenstream.Token.createBasic(','))
+            tokens.insert(i + 3, tokenstream.Token.createInteger(rightInt))
+            tokens.insert(i + 4, tokenstream.Token.createBasic(']'))
+        return split
 
     @classmethod
     def tokenListToString(cls, tokens: TokenList) -> str:
         stringList: List[str] = []
         for token in tokens:
-            if token.type is tokenstream.TokenType.INTEGER:
+            if token.type is TokenType.INTEGER:
                 stringList.append(str(token.intvalue))
             else:
                 stringList.append(token.type.toString())
@@ -86,11 +101,16 @@ def main():
         tokenList = tokenstream.TokenStream(string).asList()
         tokenListReduced = MathHomework.reduce(tokenList)
         for token in tokenListReduced:
-            if token.type is tokenstream.TokenType.INTEGER:
+            if token.type is TokenType.INTEGER:
                 print(token.intvalue, end='')
             else:
                 print(token.type.toString(), end='')
         print()
+
+    tokenList = [tokenstream.Token.createInteger(19)]
+    print(MathHomework.tokenListToString(tokenList))
+    tokenListReduced = MathHomework.reduce(tokenList)
+    print(MathHomework.tokenListToString(tokenListReduced))
 
     util.printresultline('18a', '???')
 
