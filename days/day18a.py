@@ -1,67 +1,27 @@
 """Solution for https://adventofcode.com/2021/day/18 part a"""
-from typing import NamedTuple, Optional, List
+from typing import List
 from util import util
 from util import tokenstream
 
-
-class TreeNode(NamedTuple):
-
-    left: Optional['TreeNode']
-    right: Optional['TreeNode']
-    value: int
-
-    @classmethod
-    def createParents(cls, left: 'TreeNode', right: 'TreeNode') -> 'TreeNode':
-        treeNode = TreeNode(left, right, 0)
-        # print("createParents:", treeNode)
-        return treeNode
-
-    @classmethod
-    def createLeaf(cls, value: int) -> 'TreeNode':
-        treeNode = TreeNode(None, None, value)
-        # print("createLeaf:", treeNode)
-        return treeNode
-
-    @classmethod
-    def parseTokenStream(cls, tokenStream) -> 'TreeNode':
-        token = next(tokenStream)
-        if token.isInteger():
-            # the tree node is a single integer
-            return TreeNode.createLeaf(token.intvalue)
-
-        # the tree node is a parent node
-        left: TreeNode = cls.parseTokenStream(tokenStream)
-        _ = next(tokenStream)  # comma
-        right: TreeNode = cls.parseTokenStream(tokenStream)
-        _ = next(tokenStream)  # closing bracket
-        return TreeNode.createParents(left, right)
-
-    def isLeaf(self):
-        return self.left is None
-
-    def __str__(self) -> str:
-        if self.isLeaf():
-            string = str(self.value)
-        else:
-            string = f'[{str(self.left)},{str(self.right)}]'
-        return string
+# typing.TypeAlias needs at least Python 3.10
+TokenList = List[tokenstream.Token]
 
 
 class MathHomework:
     # pylint: disable=too-few-public-methods
 
     @classmethod
-    def reduce(cls, tokens: List[tokenstream.Token]) -> List[tokenstream.Token]:
-        _tokens: List[tokenstream.Token] = list(tokens)
+    def reduce(cls, tokens: TokenList) -> TokenList:
+        _tokens: TokenList = list(tokens)
         # print(tokens)
         # print(_tokens)
 
         run = True
         while run:
-            if cls._tryExplode(_tokens):
+            if cls.tryExplode(_tokens):
                 # continue
                 pass
-            if cls._trySplit(_tokens):
+            if cls.trySplit(_tokens):
                 continue
             # neither explode nor split was possible: work done
             run = False
@@ -69,7 +29,7 @@ class MathHomework:
         return _tokens
 
     @classmethod
-    def _tryExplode(cls, tokens: List[tokenstream.Token]) -> bool:
+    def tryExplode(cls, tokens: TokenList) -> bool:
         exploded = False
         i = 0
         level = 0
@@ -100,8 +60,18 @@ class MathHomework:
         return exploded
 
     @classmethod
-    def _trySplit(cls, _: List[tokenstream.Token]) -> bool:
+    def trySplit(cls, _: TokenList) -> bool:
         return False
+
+    @classmethod
+    def tokenListToString(cls, tokens: TokenList) -> str:
+        stringList: List[str] = []
+        for token in tokens:
+            if token.type is tokenstream.TokenType.INTEGER:
+                stringList.append(str(token.intvalue))
+            else:
+                stringList.append(token.type.toString())
+        return ''.join(stringList)
 
 
 def main():
@@ -113,10 +83,9 @@ def main():
 
     for string in ['[[[[[9,8],1],2],3],4]', '[[3,[2,[1,[7,3]]]],[6,[5,[4,[3,2]]]]]']:
         print('***************', string, '***************')
-        tokenStream = tokenstream.TokenStream(string).stream()
-        tokenList = list(tokenStream)
-        tokenList2 = MathHomework.reduce(tokenList)
-        for token in tokenList2:
+        tokenList = tokenstream.TokenStream(string).asList()
+        tokenListReduced = MathHomework.reduce(tokenList)
+        for token in tokenListReduced:
             if token.type is tokenstream.TokenType.INTEGER:
                 print(token.intvalue, end='')
             else:

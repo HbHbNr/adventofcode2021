@@ -79,3 +79,6 @@ class TokenStream:
             if self._debugPrefix is not None:
                 print(self._debugPrefix, token, sep='')
             yield token
+
+    def asList(self) -> List[Token]:
+        return list(self._tokens)
