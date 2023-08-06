@@ -14,6 +14,20 @@ TokenStream = tokenstream.TokenStream
 class MathHomework:
 
     @classmethod
+    def calcMagnitude(cls, tokenStream) -> int:
+        token: Token = next(tokenStream)
+        if token.isInteger():
+            # the tree node is a single integer
+            return token.intvalue
+
+        # the tree node is a parent node
+        leftValue: int = cls.calcMagnitude(tokenStream)
+        _ = next(tokenStream)  # comma
+        rightValue: int = cls.calcMagnitude(tokenStream)
+        _ = next(tokenStream)  # closing bracket
+        return 3 * leftValue + 2 * rightValue
+
+    @classmethod
     def addAndReduce(cls, tokenListList: List[TokenList]) -> TokenList:
         result = tokenListList[0]
         for i in range(1, len(tokenListList)):
@@ -23,7 +37,7 @@ class MathHomework:
         return result
 
     @classmethod
-    def createPair(cls, left, right) -> TokenList:
+    def createPair(cls, left: TokenList, right: TokenList) -> TokenList:
         tokenList: List[Token] = []
         tokenList.append(Token.createBasic('['))
         tokenList.extend(left)
