@@ -1,21 +1,37 @@
 """Unit tests for https://adventofcode.com/2021/day/18 part a"""
 import unittest
+from typing import List
 from days import day18a
 from util import tokenstream
 
 # typing.TypeAlias needs at least Python 3.10, so no type hints
+Token = tokenstream.Token
 TokenStream = tokenstream.TokenStream
 
 
 class TestDay18a(unittest.TestCase):
 
-    def testExampleAddAndReduce(self):
-        tokenList1 = TokenStream('[1,1]').asList()
-        tokenList2 = TokenStream('[2,3]').asList()
-        tokenList3 = TokenStream('[[1,1],[2,3]]').asList()
-        result = day18a.MathHomework.addAndReduce([tokenList1, tokenList2])
+    def testCalcMagnitude(self):
+        for originalString, magnitude in [
+                    ('[[1,2],[[3,4],5]]', 143),
+                    ('[[[[0,7],4],[[7,8],[6,0]]],[8,1]]', 1384),
+                    ('[[[[1,1],[2,2]],[3,3]],[4,4]]', 445),
+                    ('[[[[3,0],[5,3]],[4,4]],[5,5]]', 791),
+                    ('[[[[5,0],[7,4]],[5,5]],[6,6]]', 1137),
+                    ('[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]', 3488)
+                ]:
+            tokenStream = TokenStream(originalString).stream()
+            magnitude2 = day18a.MathHomework.calcMagnitude(tokenStream)
 
-        assert tokenList3 == result
+            assert magnitude2 == magnitude
+
+    def testExampleAddAndReduce(self):
+        tokenListList: List[List[Token]] = []
+        for originalString in ['[1,1]', '[2,2]', '[3,3]', '[4,4]', '[5,5]', '[6,6]']:
+            tokenListList.append(TokenStream(originalString).asList())
+        result = day18a.MathHomework.addAndReduce(tokenListList)
+
+        assert day18a.MathHomework.tokenListToString(result) == '[[[[5,0],[7,4]],[5,5]],[6,6]]'
 
     def testExampleTryExplode(self):
         for originalString, explodedString in [
@@ -32,7 +48,7 @@ class TestDay18a(unittest.TestCase):
             assert day18a.MathHomework.tokenListToString(tokenList) == explodedString
 
     def testExampleTrySplit(self):
-        for originalString, splitString, result in [
+        for originalString, splitString, splitHappened in [
                     ('5', '5', False),
                     ('[5]', '[5]', False),
                     ('15', '[7,8]', True),
@@ -43,7 +59,7 @@ class TestDay18a(unittest.TestCase):
             tokenList = TokenStream(originalString).asList()
             split = day18a.MathHomework.trySplit(tokenList)
 
-            assert split is result
+            assert split is splitHappened
             assert day18a.MathHomework.tokenListToString(tokenList) == splitString
 
     def testExampleTryReduce(self):

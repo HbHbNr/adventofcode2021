@@ -14,13 +14,13 @@ TokenStream = tokenstream.TokenStream
 class MathHomework:
 
     @classmethod
-    def calcMagnitude(cls, tokenStream) -> int:
+    def calcMagnitude(cls, tokenStream: TokenStream) -> int:
         token: Token = next(tokenStream)
         if token.isInteger():
-            # the tree node is a single integer
+            # the token is a single integer
             return token.intvalue
 
-        # the tree node is a parent node
+        # the token starts a parent node
         leftValue: int = cls.calcMagnitude(tokenStream)
         _ = next(tokenStream)  # comma
         rightValue: int = cls.calcMagnitude(tokenStream)
@@ -125,32 +125,11 @@ class MathHomework:
 
 
 def main():
-    # for string in ['[1,2]', '[[1,2],3]', '[9,[8,7]]']:
-    #     print('***************', string, '***************')
-    #     tokenStream = tokenstream.TokenStream(string).stream()
-    #     treeNode = TreeNode.parseTokenStream(tokenStream)
-    #     print(treeNode)
-
-    for string in ['[[[[[9,8],1],2],3],4]', '[[3,[2,[1,[7,3]]]],[6,[5,[4,[3,2]]]]]']:
-        print('***************', string, '***************')
-        tokenList = tokenstream.TokenStream(string).asList()
-        tokenListReduced = MathHomework.reduce(tokenList)
-        for token in tokenListReduced:
-            if token.type is TokenType.INTEGER:
-                print(token.intvalue, end='')
-            else:
-                print(token.type.toString(), end='')
-        print()
-
-    tokenList = [Token.createInteger(19)]
-    print(MathHomework.tokenListToString(tokenList))
-    tokenListReduced = MathHomework.reduce(tokenList)
-    print(MathHomework.tokenListToString(tokenListReduced))
-
-    tokenList1 = TokenStream('[1,1]').asList()
-    tokenList2 = TokenStream('[2,3]').asList()
-    result = MathHomework.addAndReduce([tokenList1, tokenList2])
-    print(MathHomework.tokenListToString(result))
+    # tokenStream = TokenStream('[[1,2],[[3,4],5]]').stream()
+    # print(MathHomework.calcMagnitude(tokenStream))
+    tokenList = TokenStream('[[1,2],[[3,4],5]]').asList()
+    tokenStream = (token for token in tokenList)
+    print(MathHomework.calcMagnitude(tokenStream))
 
     util.printresultline('18a', '???')
 
