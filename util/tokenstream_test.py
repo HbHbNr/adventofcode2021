@@ -40,6 +40,14 @@ class TestTokenStream(unittest.TestCase):
         with self.assertRaises(ValueError):
             tokenstream.TokenStream('[[1,9]#[18,105]]').stream()
 
+    def testTokenStreamDebugPrefix(self):
+        stream = tokenstream.TokenStream('119', debugPrefix='----> ').stream()
+
+        assert next(stream) == tokenstream.Token(tokenstream.TokenType.INTEGER, 119)
+        with self.assertRaises(StopIteration):
+            # buffer is empty now and raises StopIteration exception
+            next(stream)
+
     def testTokenStr(self):
         assert str(tokenstream.Token(tokenstream.TokenType.SQUARE_BRACKET_OPEN, 0)) == 'TokenType.SQUARE_BRACKET_OPEN'
         assert str(tokenstream.Token(tokenstream.TokenType.INTEGER, 1)) == 'TokenType.INTEGER(1)'

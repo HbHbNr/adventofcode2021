@@ -1,5 +1,5 @@
 """Classes for tokens and token streams"""
-from typing import Generator, NamedTuple, List
+from typing import Generator, NamedTuple, List, Optional
 from enum import Enum
 
 
@@ -8,6 +8,17 @@ class TokenType(Enum):
     SQUARE_BRACKET_CLOSE = 2
     COMMA = 3
     INTEGER = 4
+
+    def toString(self) -> str:
+        if self == TokenType.SQUARE_BRACKET_OPEN:
+            return '['
+        if self == TokenType.SQUARE_BRACKET_CLOSE:
+            return ']'
+        if self == TokenType.COMMA:
+            return ','
+        if self == TokenType.INTEGER:
+            return 'I'
+        raise ValueError(f'{self} has unknown TokenType')
 
 
 class Token(NamedTuple):
@@ -32,6 +43,9 @@ class Token(NamedTuple):
     def createInteger(cls, value: int) -> 'Token':
         return Token(TokenType.INTEGER, value)
 
+    def isInteger(self):
+        return self.type == TokenType.INTEGER
+
     def __str__(self):
         string = ''
         if self.type == TokenType.INTEGER:
@@ -44,8 +58,9 @@ class Token(NamedTuple):
 class TokenStream:
     # pylint: disable=too-few-public-methods
 
-    def __init__(self, tokenString: str) -> None:
+    def __init__(self, tokenString: str, debugPrefix: Optional[str] = None) -> None:
         self._tokens: List[Token] = []
+        self._debugPrefix: Optional[str] = debugPrefix
         i = 0
         while i < len(tokenString):
             if not str.isdecimal(tokenString[i]):
@@ -61,4 +76,9 @@ class TokenStream:
 
     def stream(self) -> Generator:
         for token in self._tokens:
+            if self._debugPrefix is not None:
+                print(self._debugPrefix, token, sep='')
             yield token
+
+    def asList(self) -> List[Token]:
+        return list(self._tokens)

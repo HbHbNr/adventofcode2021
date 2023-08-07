@@ -7,7 +7,7 @@
 [![Codecov coverage](https://img.shields.io/codecov/c/github/HbHbNr/adventofcode2021?logo=codecov&logoColor=white)](https://app.codecov.io/gh/HbHbNr/adventofcode2021)
 
 # adventofcode2021
-Solutions for https://adventofcode.com/2021/ in plain Python
+Solutions for https://adventofcode.com/2021/ in pure Python
 
 # Requirements
 * Python 3 (developed with Python 3.7; tested with 3.7-3.11)
@@ -20,6 +20,11 @@ Optional:
 * pytest-cov (for code coverage) 
 
 # Code quality
+
+Install the requirements for code quality checks:
+
+    python -m pip install -r requirements.txt
+
 ## Linting
 
     ./lint_flake8.sh
