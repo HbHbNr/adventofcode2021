@@ -1,5 +1,5 @@
 """Solution for https://adventofcode.com/2021/day/18 part a"""
-from typing import List
+from typing import List, Generator
 import math
 from util import util
 from util import tokenstream
@@ -14,7 +14,15 @@ TokenStream = tokenstream.TokenStream
 class MathHomework:
 
     @classmethod
-    def calcMagnitude(cls, tokenStream: TokenStream) -> int:
+    def readTokenFile(cls, inputfile: str) -> List[TokenList]:
+        tokenListList: List[TokenList] = []
+        for line in util.readinputfile(inputfile):
+            tokenList = TokenStream(line).asList()
+            tokenListList.append(tokenList)
+        return tokenListList
+
+    @classmethod
+    def calcMagnitude(cls, tokenStream: Generator) -> int:
         token: Token = next(tokenStream)
         if token.isInteger():
             # the token is a single integer
@@ -125,13 +133,12 @@ class MathHomework:
 
 
 def main():
-    # tokenStream = TokenStream('[[1,2],[[3,4],5]]').stream()
-    # print(MathHomework.calcMagnitude(tokenStream))
-    tokenList = TokenStream('[[1,2],[[3,4],5]]').asList()
-    tokenStream = (token for token in tokenList)
-    print(MathHomework.calcMagnitude(tokenStream))
+    # tokenListList = MathHomework.readTokenFile('inputfiles/day18_example2.txt')
+    tokenListList = MathHomework.readTokenFile('inputfiles/day18_input.txt')
+    tokenList = MathHomework.addAndReduce(tokenListList)
+    magnitude = MathHomework.calcMagnitude(token for token in tokenList)
 
-    util.printresultline('18a', '???')
+    util.printresultline('18a', magnitude)
 
 
 if __name__ == '__main__':

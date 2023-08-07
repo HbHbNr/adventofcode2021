@@ -11,7 +11,20 @@ TokenStream = tokenstream.TokenStream
 
 class TestDay18a(unittest.TestCase):
 
-    def testCalcMagnitude(self):
+    def testReadTokenFile1(self) -> None:
+        tokenListList = day18a.MathHomework.readTokenFile('inputfiles/day18_example1.txt')
+        tokenList = day18a.MathHomework.addAndReduce(tokenListList)
+
+        assert day18a.MathHomework.tokenListToString(tokenList) == '[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]'
+
+    def testReadTokenFile2(self) -> None:
+        tokenListList = day18a.MathHomework.readTokenFile('inputfiles/day18_example2.txt')
+        tokenList = day18a.MathHomework.addAndReduce(tokenListList)
+        magnitude = day18a.MathHomework.calcMagnitude(token for token in tokenList)
+
+        assert magnitude == 4140
+
+    def testCalcMagnitude(self) -> None:
         for originalString, magnitude in [
                     ('[[1,2],[[3,4],5]]', 143),
                     ('[[[[0,7],4],[[7,8],[6,0]]],[8,1]]', 1384),
@@ -25,7 +38,7 @@ class TestDay18a(unittest.TestCase):
 
             assert magnitude2 == magnitude
 
-    def testExampleAddAndReduce(self):
+    def testExampleAddAndReduce(self) -> None:
         tokenListList: List[List[Token]] = []
         for originalString in ['[1,1]', '[2,2]', '[3,3]', '[4,4]', '[5,5]', '[6,6]']:
             tokenListList.append(TokenStream(originalString).asList())
@@ -33,7 +46,7 @@ class TestDay18a(unittest.TestCase):
 
         assert day18a.MathHomework.tokenListToString(result) == '[[[[5,0],[7,4]],[5,5]],[6,6]]'
 
-    def testExampleTryExplode(self):
+    def testExampleTryExplode(self) -> None:
         for originalString, explodedString in [
                     ('[[[[[9,8],1],2],3],4]', '[[[[0,9],2],3],4]'),
                     ('[7,[6,[5,[4,[3,2]]]]]', '[7,[6,[5,[7,0]]]]'),
@@ -47,7 +60,7 @@ class TestDay18a(unittest.TestCase):
             assert exploded is True
             assert day18a.MathHomework.tokenListToString(tokenList) == explodedString
 
-    def testExampleTrySplit(self):
+    def testExampleTrySplit(self) -> None:
         for originalString, splitString, splitHappened in [
                     ('5', '5', False),
                     ('[5]', '[5]', False),
@@ -62,7 +75,7 @@ class TestDay18a(unittest.TestCase):
             assert split is splitHappened
             assert day18a.MathHomework.tokenListToString(tokenList) == splitString
 
-    def testExampleTryReduce(self):
+    def testExampleTryReduce(self) -> None:
         for originalString, reducedString in [
                     ('[[[[[4,3],4],4],[7,[[8,4],9]]],[1,1]]', '[[[[0,7],4],[[7,8],[6,0]]],[8,1]]')
                 ]:
@@ -71,12 +84,15 @@ class TestDay18a(unittest.TestCase):
 
             assert day18a.MathHomework.tokenListToString(tokenListReduced) == reducedString
 
-    def testTokenListToString(self):
+    def testTokenListToString(self) -> None:
         string = '[9,[8,7]]'
         tokenList = TokenStream(string).asList()
 
         assert day18a.MathHomework.tokenListToString(tokenList) == string
 
     def testInput(self) -> None:
-        # assert a = b
-        pass
+        tokenListList = day18a.MathHomework.readTokenFile('inputfiles/day18_input.txt')
+        tokenList = day18a.MathHomework.addAndReduce(tokenListList)
+        magnitude = day18a.MathHomework.calcMagnitude(token for token in tokenList)
+
+        assert magnitude == 3551
