@@ -9,5 +9,8 @@ Some notes on the techniques, concepts, classes, etc. encountered while solving 
 * Techniques: byte stream, bit stream
 
 ### Day 18
-* Python: `TypeAlias`, `Enum`, `Generator`
+* Python: `Enum`, `Generator`, `Optional`, `NamedTuple`, `TypeAlias`
 * Techniques: tokenizer/token stream
+
+### Day 19
+* Techniques: sensor data matching

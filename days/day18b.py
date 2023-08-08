@@ -1,4 +1,4 @@
-"""Solution for https://adventofcode.com/2021/day/18 part a"""
+"""Solution for https://adventofcode.com/2021/day/18 part b"""
 import itertools
 from days import day18a
 from util import util
