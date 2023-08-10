@@ -1,6 +1,10 @@
 """Solution for https://adventofcode.com/2021/day/19 part a"""
-from typing import List, NamedTuple, Tuple
+from typing import List, NamedTuple, Tuple, Dict
+import itertools
 from util import util
+
+
+DistanceMap = Dict['Distance', List[Tuple['Scanner', 'Coords', 'Coords']]]
 
 
 class Coords(NamedTuple):
@@ -23,10 +27,28 @@ class Scanner:
     def __init__(self, name) -> None:
         self._name: str = name
         self._beaconPositions: List[Coords] = []
+        self._distances: List[Distance] = []
         print(self._name)
 
-    def addBeaconPosition(self, beaconPosition):
+    def addBeaconPosition(self, beaconPosition) -> None:
         self._beaconPositions.append(beaconPosition)
+
+    def calcDistances(self, distanceMap: DistanceMap) -> int:
+        distanceCount = 0
+        for beacon1, beacon2 in itertools.combinations(self._beaconPositions, 2):
+            distance: Distance = Distance(beacon1.x - beacon2.x, beacon1.y - beacon2.y, beacon1.z - beacon2.z)
+            # WIP: normalize distances, e.g. make the longest value the X axis, and the second longstest the Y axis
+            self._distances.append(distance)
+            marker: Tuple['Scanner', 'Coords', 'Coords'] = (self, beacon1, beacon2)
+            if distance not in distanceMap:
+                distanceMap[distance] = [marker]
+            else:
+                distanceMap[distance].append(marker)
+            distanceCount += 1
+        return distanceCount
+
+    def __repr__(self):
+        return f'Scanner("{self._name}")'
 
 
 class ScannerData:
@@ -50,14 +72,25 @@ class ScannerData:
                 beaconCount += 1
         print(f'Found {len(self._scanners)} scanners and {beaconCount} beacons')
 
+        self._distanceMap: DistanceMap = {}
+        for scanner in self._scanners:
+            print(scanner.calcDistances(self._distanceMap))
+
     def getScanners(self) -> List[Scanner]:
         return self._scanners
+
+    def getDistanceMap(self) -> DistanceMap:
+        return self._distanceMap
 
 
 def main():
     lines = util.readinputfile('inputfiles/day19_example.txt')
     # lines = util.readinputfile('inputfiles/day19_input.txt')
-    _ = ScannerData(lines)
+    scannerData = ScannerData(lines)
+    distanceMap = scannerData.getDistanceMap()
+    for distance, markers in distanceMap.items():
+        print(distance)
+        print('   ', markers)
 
     util.printresultline('19a', '???')
 
