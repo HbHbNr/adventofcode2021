@@ -1,30 +1,29 @@
 #!/bin/bash
 
 echo '******************** Linting (1/2) *************************************'
-./lint_flake8.sh
+./lint_flake8.sh "$@"
 if [ $? -ne 0 ]; then
     echo 'Failed'
     exit 1
 fi
 
 echo '******************** Linting (2/2) *************************************'
-./lint_pylint.sh
+./lint_pylint.sh "$@"
 if [ $? -ne 0 ]; then
     echo 'Failed'
     exit 1
 fi
 
 echo '******************** Static type checking ******************************'
-./mypy.sh
+./mypy.sh "$@"
 if [ $? -ne 0 ]; then
     echo 'Failed'
     exit 1
 fi
 
 echo '******************** Unit testing **************************************'
-./pytest.sh
+./pytest.sh "$@"
 if [ $? -ne 0 ]; then
     echo 'Failed'
     exit 1
 fi
-
