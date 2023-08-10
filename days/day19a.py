@@ -1,6 +1,5 @@
 """Solution for https://adventofcode.com/2021/day/19 part a"""
-from typing import List, NamedTuple
-# import math
+from typing import List, NamedTuple, Tuple
 from util import util
 
 
@@ -33,7 +32,7 @@ class Scanner:
 class ScannerData:
     # pylint: disable=too-few-public-methods
 
-    def __init__(self, lines: List[str]) -> None:
+    def __init__(self, lines: Tuple[str, ...]) -> None:
         self._scanners: List[Scanner] = []
         scanner: Scanner
         beaconCount: int = 0
@@ -50,6 +49,9 @@ class ScannerData:
                 scanner.addBeaconPosition(beaconPosition)
                 beaconCount += 1
         print(f'Found {len(self._scanners)} scanners and {beaconCount} beacons')
+
+    def getScanners(self) -> List[Scanner]:
+        return self._scanners
 
 
 def main():

@@ -1,4 +1,4 @@
-"""Unit tests for https://adventofcode.com/2021/day/18 part a"""
+"""Unit tests for https://adventofcode.com/2021/day/18 part b"""
 import unittest
 from typing import List
 import itertools
