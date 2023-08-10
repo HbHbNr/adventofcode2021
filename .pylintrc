@@ -5,7 +5,7 @@ function-naming-style=camelCase
 method-naming-style=camelCase
 module-naming-style=snake_case
 variable-naming-style=camelCase
-good-names=_,i,j,x,y,z,x1,x2,y1,y2
+good-names=_,i,j,x,y,z,x1,x2,y1,y2,dx,dy,dz
 
 [FORMAT]
 expected-line-ending-format=LF
