@@ -1,5 +1,5 @@
 """Solution for https://adventofcode.com/2021/day/19 part a"""
-from typing import List, NamedTuple, Tuple, Dict
+from typing import List, Tuple, Dict
 import itertools
 from util import util
 
@@ -7,18 +7,68 @@ from util import util
 DistanceMap = Dict['Distance', List[Tuple['Scanner', 'Coords', 'Coords']]]
 
 
-class Coords(NamedTuple):
+class Vector:
 
     x: int
     y: int
     z: int
 
+    def __init__(self, x: int, y: int, z: int) -> None:
+        self.x = x
+        self.y = y
+        self.z = z
 
-class Distance(NamedTuple):
+    def rotateAxes(self) -> None:
+        tmp = self.z
+        self.z = self.y
+        self.y = self.x
+        self.x = tmp
 
-    dx: int
-    dy: int
-    dz: int
+    def turnAroundX90(self) -> None:
+        tmp = self.y
+        self.y = -self.z
+        self.z = tmp
+
+    def turnAroundY90(self) -> None:
+        tmp = self.x
+        self.x = self.z
+        self.z = -tmp
+
+    def turnAroundZ90(self) -> None:
+        tmp = self.x
+        self.x = -self.y
+        self.y = tmp
+
+    def turnAroundX180(self) -> None:
+        self.y = -self.y
+        self.z = -self.z
+
+    def turnAroundY180(self) -> None:
+        self.x = -self.x
+        self.z = -self.z
+
+    def turnAroundZ180(self) -> None:
+        self.x = -self.x
+        self.y = -self.y
+
+    def __str__(self):
+        return f'({self.x}/{self.y}/{self.z})'
+
+
+class Coords(Vector):
+    # pylint: disable=too-few-public-methods
+
+    pass
+
+
+class Distance(Vector):
+    # pylint: disable=too-few-public-methods
+
+    def turnLongestToPositiveX(self) -> None:
+        while abs(self.x) < abs(self.y) or abs(self.x) < abs(self.z):
+            self.rotateAxes()
+        if self.x < 0:
+            self.turnAroundY180()
 
 
 class Scanner:
@@ -37,7 +87,7 @@ class Scanner:
         distanceCount = 0
         for beacon1, beacon2 in itertools.combinations(self._beaconPositions, 2):
             distance: Distance = Distance(beacon1.x - beacon2.x, beacon1.y - beacon2.y, beacon1.z - beacon2.z)
-            # WIP: normalize distances, e.g. make the longest value the X axis, and the second longstest the Y axis
+            distance.turnLongestToPositiveX()
             self._distances.append(distance)
             marker: Tuple['Scanner', 'Coords', 'Coords'] = (self, beacon1, beacon2)
             if distance not in distanceMap:
