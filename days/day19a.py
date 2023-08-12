@@ -51,24 +51,55 @@ class Vector:
         self.x = -self.x
         self.y = -self.y
 
+    def reverse(self) -> None:
+        self.x = -self.x
+        self.y = -self.y
+        self.z = -self.z
+
+    def __eq__(self, other) -> bool:
+        return self.x == other.x and self.y == other.y and self.z == other.z
+
+    def __hash__(self) -> int:
+        return(hash(self.__str__()))
+
+    def __repr__(self):
+        return self.__str__()
+
     def __str__(self):
-        return f'({self.x}/{self.y}/{self.z})'
+        return f'V({self.x}/{self.y}/{self.z})'
 
 
 class Coords(Vector):
     # pylint: disable=too-few-public-methods
 
-    pass
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return f'C({self.x}/{self.y}/{self.z})'
 
 
 class Distance(Vector):
     # pylint: disable=too-few-public-methods
 
     def turnLongestToPositiveX(self) -> None:
+        old = str(self)
+        print('  toX_strt:', old, sep='')
         while abs(self.x) < abs(self.y) or abs(self.x) < abs(self.z):
             self.rotateAxes()
+            print('      rotA:', old, '->', self, sep='')
         if self.x < 0:
-            self.turnAroundY180()
+            # self.turnAroundY180()
+            # print('  toX_Y180:', old, '->', self, sep='')
+            self.reverse()
+            print('      rvrs:', old, '->', self, sep='')
+        print('  toX_stop:', old, '->', self, sep='')
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return f'D({self.x}/{self.y}/{self.z})'
 
 
 class Scanner:
@@ -86,7 +117,7 @@ class Scanner:
     def calcDistances(self, distanceMap: DistanceMap) -> int:
         distanceCount = 0
         for beacon1, beacon2 in itertools.combinations(self._beaconPositions, 2):
-            distance: Distance = Distance(beacon1.x - beacon2.x, beacon1.y - beacon2.y, beacon1.z - beacon2.z)
+            distance: Distance = Distance(beacon2.x - beacon1.x, beacon2.y - beacon1.y, beacon2.z - beacon1.z)
             distance.turnLongestToPositiveX()
             self._distances.append(distance)
             marker: Tuple['Scanner', 'Coords', 'Coords'] = (self, beacon1, beacon2)
@@ -98,7 +129,10 @@ class Scanner:
         return distanceCount
 
     def __repr__(self):
-        return f'Scanner("{self._name}")'
+        return self.__str__()
+
+    def __repr__(self):
+        return f'Scanner({self._name})'
 
 
 class ScannerData:
@@ -134,7 +168,8 @@ class ScannerData:
 
 
 def main():
-    lines = util.readinputfile('inputfiles/day19_example.txt')
+    lines = util.readinputfile('inputfiles/day19_example1.txt')
+    # lines = util.readinputfile('inputfiles/day19_example2.txt')
     # lines = util.readinputfile('inputfiles/day19_input.txt')
     scannerData = ScannerData(lines)
     distanceMap = scannerData.getDistanceMap()
