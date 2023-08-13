@@ -60,7 +60,7 @@ class Vector:
         return self.x == other.x and self.y == other.y and self.z == other.z
 
     def __hash__(self) -> int:
-        return(hash(self.__str__()))
+        return hash(self.__str__())
 
     def __repr__(self):
         return self.__str__()
@@ -131,7 +131,7 @@ class Scanner:
     def __repr__(self):
         return self.__str__()
 
-    def __repr__(self):
+    def __str__(self):
         return f'Scanner({self._name})'
 
 
