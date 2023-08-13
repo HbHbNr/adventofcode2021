@@ -82,18 +82,23 @@ class Coords(Vector):
 class Distance(Vector):
     # pylint: disable=too-few-public-methods
 
-    def turnLongestToPositiveX(self) -> None:
-        old = str(self)
-        print('  toX_strt:', old, sep='')
-        while abs(self.x) < abs(self.y) or abs(self.x) < abs(self.z):
-            self.rotateAxes()
-            print('      rotA:', old, '->', self, sep='')
-        if self.x < 0:
-            # self.turnAroundY180()
-            # print('  toX_Y180:', old, '->', self, sep='')
-            self.reverse()
-            print('      rvrs:', old, '->', self, sep='')
-        print('  toX_stop:', old, '->', self, sep='')
+    # def turnLongestToPositiveX(self) -> None:
+    #     old = str(self)
+    #     print('  toX_strt:', old, sep='')
+    #     while abs(self.x) < abs(self.y) or abs(self.x) < abs(self.z):
+    #         self.rotateAxes()
+    #         print('      rotA:', old, '->', self, sep='')
+    #     if self.x < 0:
+    #         # self.turnAroundY180()
+    #         # print('  toX_Y180:', old, '->', self, sep='')
+    #         self.reverse()
+    #         print('      rvrs:', old, '->', self, sep='')
+    #     print('  toX_stop:', old, '->', self, sep='')
+
+    def unify(self) -> None:
+        coords: List[int] = [abs(self.x), abs(self.y), abs(self.z)]
+        coords.sort(reverse=True)
+        self.x, self.y, self.z = coords
 
     def __repr__(self):
         return self.__str__()
@@ -118,7 +123,8 @@ class Scanner:
         distanceCount = 0
         for beacon1, beacon2 in itertools.combinations(self._beaconPositions, 2):
             distance: Distance = Distance(beacon2.x - beacon1.x, beacon2.y - beacon1.y, beacon2.z - beacon1.z)
-            distance.turnLongestToPositiveX()
+            # distance.turnLongestToPositiveX()
+            distance.unify()
             self._distances.append(distance)
             marker: Tuple['Scanner', 'Coords', 'Coords'] = (self, beacon1, beacon2)
             if distance not in distanceMap:
@@ -174,8 +180,9 @@ def main():
     scannerData = ScannerData(lines)
     distanceMap = scannerData.getDistanceMap()
     for distance, markers in distanceMap.items():
-        print(distance)
-        print('   ', markers)
+        if len(markers) > 1:
+            print(distance)
+            print('   ', markers)
 
     util.printresultline('19a', '???')
 

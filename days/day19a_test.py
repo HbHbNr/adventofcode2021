@@ -82,11 +82,17 @@ class TestDay19a(unittest.TestCase):
         coords.turnAroundZ180()
         assert str(coords) == 'C(1/2/3)'
 
-    def testDistanceTurnLongestToPositiveX(self):
+    # def testDistanceTurnLongestToPositiveX(self):
+    #     distance = Distance(1, 2, -3)
+    #     assert str(distance) == 'D(1/2/-3)'
+    #     distance.turnLongestToPositiveX()
+    #     assert str(distance) == 'D(3/-1/-2)'
+
+    def testDistanceUnify(self):
         distance = Distance(1, 2, -3)
         assert str(distance) == 'D(1/2/-3)'
-        distance.turnLongestToPositiveX()
-        assert str(distance) == 'D(3/-1/-2)'
+        distance.unify()
+        assert str(distance) == 'D(3/2/1)'
 
     def testExample(self) -> None:
         lines = util.readinputfile('inputfiles/day19_example2.txt')
