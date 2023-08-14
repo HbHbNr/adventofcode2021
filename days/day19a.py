@@ -4,7 +4,7 @@ import itertools
 from util import util
 
 
-DistanceMap = Dict['Distance', List[Tuple['Scanner', 'Coords', 'Coords']]]
+DistanceMap = Dict['Distance', List[Tuple['Scanner', 'Beacon', 'Beacon']]]
 
 
 class Vector:
@@ -82,6 +82,11 @@ class Coords(Vector):
 class Distance(Vector):
     # pylint: disable=too-few-public-methods
 
+    @classmethod
+    def betweenPositions(cls, position1: Coords, position2: Coords) -> 'Distance':
+        distance = Distance(position2.x - position1.x, position2.y - position1.y, position2.z - position1.z)
+        return distance
+
     # def turnLongestToPositiveX(self) -> None:
     #     old = str(self)
     #     print('  toX_strt:', old, sep='')
@@ -107,26 +112,44 @@ class Distance(Vector):
         return f'D({self.x}/{self.y}/{self.z})'
 
 
+class Beacon:
+    # pylint: disable=too-few-public-methods
+
+    def __init__(self, name: str, scanner: 'Scanner', position: Coords):
+        self._name = name
+        self._scanner: 'Scanner' = scanner
+        self._position: Coords = position
+
+    def getPosition(self) -> Coords:
+        return self._position
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return f'Beacon({self._name}:{self._position.x}/{self._position.y}/{self._position.z})'
+
+
 class Scanner:
     # pylint: disable=too-few-public-methods
 
-    def __init__(self, name) -> None:
+    def __init__(self, name: str) -> None:
         self._name: str = name
-        self._beaconPositions: List[Coords] = []
+        self._beacons: List[Beacon] = []
         self._distances: List[Distance] = []
         print(self._name)
 
-    def addBeaconPosition(self, beaconPosition) -> None:
-        self._beaconPositions.append(beaconPosition)
+    def addBeacon(self, beacon: Beacon) -> None:
+        self._beacons.append(beacon)
 
     def calcDistances(self, distanceMap: DistanceMap) -> int:
         distanceCount = 0
-        for beacon1, beacon2 in itertools.combinations(self._beaconPositions, 2):
-            distance: Distance = Distance(beacon2.x - beacon1.x, beacon2.y - beacon1.y, beacon2.z - beacon1.z)
+        for beacon1, beacon2 in itertools.combinations(self._beacons, 2):
+            distance: Distance = Distance.betweenPositions(beacon1.getPosition(), beacon2.getPosition())
             # distance.turnLongestToPositiveX()
             distance.unify()
             self._distances.append(distance)
-            marker: Tuple['Scanner', 'Coords', 'Coords'] = (self, beacon1, beacon2)
+            marker: Tuple['Scanner', Beacon, Beacon] = (self, beacon1, beacon2)
             if distance not in distanceMap:
                 distanceMap[distance] = [marker]
             else:
@@ -152,13 +175,13 @@ class ScannerData:
             if line == '':
                 continue
             if line[1] == '-':
-                scanner = Scanner(line[4:-4])
+                scanner = Scanner(line[12:-4])
                 # print(f'New scanner: {scanner}')
                 self._scanners.append(scanner)
             else:
                 x, y, z = line.split(',')
-                beaconPosition = Coords(int(x), int(y), int(z))
-                scanner.addBeaconPosition(beaconPosition)
+                beacon = Beacon(str(beaconCount), scanner, Coords(int(x), int(y), int(z)))
+                scanner.addBeacon(beacon)
                 beaconCount += 1
         print(f'Found {len(self._scanners)} scanners and {beaconCount} beacons')
 
@@ -174,8 +197,8 @@ class ScannerData:
 
 
 def main():
-    lines = util.readinputfile('inputfiles/day19_example1.txt')
-    # lines = util.readinputfile('inputfiles/day19_example2.txt')
+    # lines = util.readinputfile('inputfiles/day19_example1.txt')
+    lines = util.readinputfile('inputfiles/day19_example2.txt')
     # lines = util.readinputfile('inputfiles/day19_input.txt')
     scannerData = ScannerData(lines)
     distanceMap = scannerData.getDistanceMap()
