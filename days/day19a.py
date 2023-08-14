@@ -5,6 +5,8 @@ from util import util
 
 
 DistanceMap = Dict['Distance', List[Tuple['Scanner', 'Beacon', 'Beacon']]]
+# OverlappingMap = Dict[Tuple['Scanner', 'Scanner'], Tuple['Beacon', 'Beacon']]
+OverlappingMap = Dict[Tuple['Scanner', 'Scanner'], int]
 
 
 class Vector:
@@ -123,6 +125,9 @@ class Beacon:
     def getPosition(self) -> Position:
         return self._position
 
+    def __lt__(self, other: 'Beacon') -> bool:
+        return self._name < other._name
+
     def __repr__(self):
         return self.__str__()
 
@@ -157,6 +162,9 @@ class Scanner:
             distanceCount += 1
         return distanceCount
 
+    def __lt__(self, other: 'Scanner') -> bool:
+        return self._name < other._name
+
     def __repr__(self):
         return self.__str__()
 
@@ -189,11 +197,26 @@ class ScannerData:
         for scanner in self._scanners:
             print(scanner.calcDistances(self._distanceMap))
 
+        self._overlappingMap: OverlappingMap = {}
+        for _, markers in self._distanceMap.items():
+            if len(markers) > 1:
+                for marker1, marker2 in itertools.combinations(markers, 2):
+                    scanner1: Scanner = marker1[0]
+                    scanner2: Scanner = marker2[0]
+                    scannerPair = (scanner1, scanner2)
+                    if scannerPair not in self._overlappingMap:
+                        self._overlappingMap[scannerPair] = 1
+                    else:
+                        self._overlappingMap[scannerPair] += 1
+
     def getScanners(self) -> List[Scanner]:
         return self._scanners
 
     def getDistanceMap(self) -> DistanceMap:
         return self._distanceMap
+
+    def getOverlappingMap(self) -> OverlappingMap:
+        return self._overlappingMap
 
 
 def main():
@@ -201,11 +224,14 @@ def main():
     lines = util.readinputfile('inputfiles/day19_example2.txt')
     # lines = util.readinputfile('inputfiles/day19_input.txt')
     scannerData = ScannerData(lines)
-    distanceMap = scannerData.getDistanceMap()
-    for distance, markers in distanceMap.items():
-        if len(markers) > 1:
-            print(distance)
-            print('   ', markers)
+    # distanceMap = scannerData.getDistanceMap()
+    # for distance, markers in distanceMap.items():
+    #     if len(markers) > 1:
+    #         print(distance)
+    #         print('   ', markers)
+    overlappingMap = scannerData.getOverlappingMap()
+    for scannerPair, counter in sorted(overlappingMap.items()):
+        print(f'Overlapping of {scannerPair}: {counter}')
 
     util.printresultline('19a', '???')
 
