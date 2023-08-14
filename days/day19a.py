@@ -69,7 +69,7 @@ class Vector:
         return f'V({self.x}/{self.y}/{self.z})'
 
 
-class Coords(Vector):
+class Position(Vector):
     # pylint: disable=too-few-public-methods
 
     def __repr__(self):
@@ -83,7 +83,7 @@ class Distance(Vector):
     # pylint: disable=too-few-public-methods
 
     @classmethod
-    def betweenPositions(cls, position1: Coords, position2: Coords) -> 'Distance':
+    def betweenPositions(cls, position1: Position, position2: Position) -> 'Distance':
         distance = Distance(position2.x - position1.x, position2.y - position1.y, position2.z - position1.z)
         return distance
 
@@ -115,12 +115,12 @@ class Distance(Vector):
 class Beacon:
     # pylint: disable=too-few-public-methods
 
-    def __init__(self, name: str, scanner: 'Scanner', position: Coords):
+    def __init__(self, name: str, scanner: 'Scanner', position: Position):
         self._name = name
         self._scanner: 'Scanner' = scanner
-        self._position: Coords = position
+        self._position: Position = position
 
-    def getPosition(self) -> Coords:
+    def getPosition(self) -> Position:
         return self._position
 
     def __repr__(self):
@@ -180,7 +180,7 @@ class ScannerData:
                 self._scanners.append(scanner)
             else:
                 x, y, z = line.split(',')
-                beacon = Beacon(str(beaconCount), scanner, Coords(int(x), int(y), int(z)))
+                beacon = Beacon(str(beaconCount), scanner, Position(int(x), int(y), int(z)))
                 scanner.addBeacon(beacon)
                 beaconCount += 1
         print(f'Found {len(self._scanners)} scanners and {beaconCount} beacons')
