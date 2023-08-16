@@ -178,8 +178,8 @@ class ScannerData:
 
     def __init__(self, lines: Tuple[str, ...]) -> None:
         self._scanners: List[Scanner] = []
+        self._beacons: List[Beacon] = []
         scanner: Scanner
-        beaconCount: int = 0
         for line in lines:
             if line == '':
                 continue
@@ -189,10 +189,10 @@ class ScannerData:
                 self._scanners.append(scanner)
             else:
                 x, y, z = line.split(',')
-                beacon = Beacon(str(beaconCount), scanner, Position(int(x), int(y), int(z)))
+                beacon = Beacon(str(len(self._beacons)), scanner, Position(int(x), int(y), int(z)))
+                self._beacons.append(beacon)
                 scanner.addBeacon(beacon)
-                beaconCount += 1
-        print(f'Found {len(self._scanners)} scanners and {beaconCount} beacons')
+        print(f'Found {len(self._scanners)} scanners and {len(self._beacons)} beacons')
 
         self._distanceMap: DistanceMap = {}
         for scanner in self._scanners:
@@ -209,6 +209,9 @@ class ScannerData:
             for beacon, beaconList in overlappingBeaconMap.items():
                 print(f'{beacon}: {beaconList}')
             print()
+
+        self._realBeacons = self.filterOverlappingBeacons()
+        print(self._realBeacons)
 
     @classmethod
     def addToOverlappingScannerMap(cls, overlappingScannerMap: OverlappingScannerMap,
@@ -234,7 +237,7 @@ class ScannerData:
                                      'but now found {scanner1Beacon0} and {scanner1Beacon1}')
                 # so beaconList has 2 entries, but only might be correct:
                 if len(beaconList) == 2:
-                    # TODO: make 4 checks and remove the wrong entry
+                    # TO------DO: make 4 checks and remove the wrong entry
                     if scanner1Beacon0 in beaconList:
                         beaconList.clear()
                         beaconList.append(scanner1Beacon0)
@@ -247,6 +250,17 @@ class ScannerData:
                 else:
                     raise ValueError(f'BeaconList {beaconList} has too many entries: {len(beaconList)}')
 
+    def filterOverlappingBeacons(self) -> List[Beacon]:
+        realBeacons = self._beacons.copy()
+        # Dict['Beacon', List['Beacon']]
+        for overlappingBeaconMap in self._overlappingScannerMap.values():
+            for beacon, beaconList in overlappingBeaconMap.items():
+                if beacon in realBeacons:
+                    overlappingBeacon = beaconList[0]
+                    if overlappingBeacon in realBeacons:
+                        realBeacons.remove(overlappingBeacon)
+        return realBeacons
+
     def getScanners(self) -> List[Scanner]:
         return self._scanners
 
@@ -256,12 +270,15 @@ class ScannerData:
     def getOverlappingScannerMap(self) -> OverlappingScannerMap:
         return self._overlappingScannerMap
 
+    def getRealBeacons(self) -> List[Beacon]:
+        return self._realBeacons
+
 
 def main():
     # lines = util.readinputfile('inputfiles/day19_example1.txt')
     lines = util.readinputfile('inputfiles/day19_example2.txt')
     # lines = util.readinputfile('inputfiles/day19_input.txt')
-    _ = ScannerData(lines)
+    scannerData = ScannerData(lines)
 
     # distanceMap = scannerData.getDistanceMap()
     # for distance, markers in distanceMap.items():
@@ -273,7 +290,9 @@ def main():
     # for scannerPair, counter in sorted(overlappingScannerMap.items()):
     #     print(f'Overlapping of {scannerPair}: {counter}')
 
-    util.printresultline('19a', '???')
+    realBeacons = scannerData.getRealBeacons()
+
+    util.printresultline('19a', len(realBeacons))
 
 
 if __name__ == '__main__':
