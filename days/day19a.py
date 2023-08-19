@@ -207,6 +207,13 @@ class ScannerData:
             if len(scannerBeaconPairs) > 1:
                 for scannerBeaconPair0, scannerBeaconPair1 in itertools.combinations(scannerBeaconPairs, 2):
                     ScannerData.addToOverlappingScannerMap(self._overlappingScannerMap, scannerBeaconPair0, scannerBeaconPair1)
+
+        self.cleanOverlappingScannerMap()
+
+        self._realBeacons = self.filterOverlappingBeacons()
+        print(self._realBeacons)
+
+    def cleanOverlappingScannerMap(self) -> None:
         scannerPairs: List[ScannerPair] = list(self._overlappingScannerMap.keys())
         for scannerPair in scannerPairs:
             overlappingBeaconMap: OverlappingBeaconMap = self._overlappingScannerMap[scannerPair]
@@ -218,9 +225,6 @@ class ScannerData:
                 for beacon, beaconList in overlappingBeaconMap.items():
                     print(f'{beacon}: {beaconList}')
                 print()
-
-        self._realBeacons = self.filterOverlappingBeacons()
-        print(self._realBeacons)
 
     @classmethod
     def addToOverlappingScannerMap(cls, overlappingScannerMap: OverlappingScannerMap,
