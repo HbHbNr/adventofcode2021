@@ -43,3 +43,4 @@ class TestDay19a(unittest.TestCase):
         scannerData: ScannerData = day19a.ScannerData(lines)
 
         assert len(scannerData.getScanners()) == 28
+        # assert len(scannerData.getRealBeacons()) == 362  # 362 is too high
