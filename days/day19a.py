@@ -1,5 +1,5 @@
 """Solution for https://adventofcode.com/2021/day/19 part a"""
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Set, Optional
 import itertools
 from util import util, vector
 
@@ -147,7 +147,7 @@ class ScannerData:
                     ScannerData.addToOverlappingScannerMap(self._overlappingScannerMap, scannerBeaconPair0, scannerBeaconPair1)
 
         self.cleanOverlappingScannerMap()
-
+        self._scannerDependencyPath = self.findScannerDependencyPath()
         self._realBeacons = self.filterOverlappingBeacons()
         print(self._realBeacons)
 
@@ -167,7 +167,7 @@ class ScannerData:
             if scanner0Beacon not in overlappingScannerMap[scannerPair]:
                 overlappingScannerMap[scannerPair][scanner0Beacon] = [scanner1Beacon0, scanner1Beacon1]
             else:
-                beaconList = overlappingScannerMap[scannerPair][scanner0Beacon]
+                beaconList: List[Beacon] = overlappingScannerMap[scannerPair][scanner0Beacon]
                 if len(beaconList) == 1:
                     if beaconList[0] == scanner1Beacon0 or beaconList[0] == scanner1Beacon1:
                         continue  # only one entry, and that one is right
@@ -175,7 +175,6 @@ class ScannerData:
                                      'but now found {scanner1Beacon0} and {scanner1Beacon1}')
                 # so beaconList has 2 entries, but only might be correct:
                 if len(beaconList) == 2:
-                    # TO------DO: make 4 checks and remove the wrong entry
                     if scanner1Beacon0 in beaconList:
                         beaconList.clear()
                         beaconList.append(scanner1Beacon0)
@@ -201,19 +200,50 @@ class ScannerData:
                     print(f'{beacon}: {beaconList[0]}')
                 print()
 
+    def findScannerDependencyPath(self) -> List[ScannerPair]:
+        # We know which scanners have overlapping beacons, now we need to find a path from
+        # scanner 0 to all the other scanners. The dictionary self._overlappingScannerMap has
+        # all scanner pairs as keys, but in a random order. We need to order this list
+        # depending on the overlapping beacons.
+        scannerDependencyPath: List[ScannerPair] = []
+        fixedScanners: Set[Scanner] = {self._scanners[0]}  # at start, only scanner 0 is fixed
+        floatingScannerPairs: List[ScannerPair] = list(self._overlappingScannerMap.keys())
+        while len(fixedScanners) < len(self._scanners):
+            for i in range(len(floatingScannerPairs)):  # pylint: disable=consider-using-enumerate
+                floatingScannerPair = floatingScannerPairs[i]
+                fixedScannerPair: ScannerPair = floatingScannerPair
+                newFixedScanner: Optional[Scanner] = None
+                if floatingScannerPair[0] in fixedScanners:
+                    # left side of the pair is already fixed
+                    newFixedScanner = floatingScannerPair[1]
+                elif floatingScannerPair[1] in fixedScanners:
+                    # right side of the pair is already fixed
+                    newFixedScanner = floatingScannerPair[0]
+                    fixedScannerPair = (floatingScannerPair[1], floatingScannerPair[0])  # swap
+                if newFixedScanner is not None:
+                    print(fixedScannerPair)
+                    print(newFixedScanner)
+                    fixedScanners.add(newFixedScanner)
+                    scannerDependencyPath.append(fixedScannerPair)
+                    del floatingScannerPairs[i]
+                    break
+        return scannerDependencyPath
+
     def filterOverlappingBeacons(self) -> List[Beacon]:
         realBeacons = self._beacons.copy()
         # Dict['Beacon', List['Beacon']]
-        for scannerPair, overlappingBeaconMap in self._overlappingScannerMap.items():
-            # this direct check needs to be a chain of references instead, to
-            # decide if the left or the right beacon is actually overlapping
-            if scannerPair == (self._scanners[2], self._scanners[4]):
-                for overlappingBeacon in overlappingBeaconMap.keys():
+        for scannerPair in self._scannerDependencyPath:
+            if scannerPair in self._overlappingScannerMap:
+                overlappingBeaconMap = self._overlappingScannerMap[scannerPair]
+                for beaconList in overlappingBeaconMap.values():
+                    overlappingBeacon = beaconList[0]
                     if overlappingBeacon in realBeacons:
                         realBeacons.remove(overlappingBeacon)
             else:
-                for beaconList in overlappingBeaconMap.values():
-                    overlappingBeacon = beaconList[0]
+                # the dependency is the opposite direction
+                scannerPair = (scannerPair[1], scannerPair[0])
+                overlappingBeaconMap = self._overlappingScannerMap[scannerPair]
+                for overlappingBeacon in overlappingBeaconMap.keys():
                     if overlappingBeacon in realBeacons:
                         realBeacons.remove(overlappingBeacon)
         return realBeacons
@@ -226,6 +256,9 @@ class ScannerData:
 
     def getOverlappingScannerMap(self) -> OverlappingScannerMap:
         return self._overlappingScannerMap
+
+    def getScannerDependencyPath(self) -> List[ScannerPair]:
+        return self._scannerDependencyPath
 
     def getRealBeacons(self) -> List[Beacon]:
         return self._realBeacons
@@ -247,6 +280,8 @@ def main():
     # for scannerPair, counter in sorted(overlappingScannerMap.items()):
     #     print(f'Overlapping of {scannerPair}: {counter}')
 
+    scannerDependencyPath = scannerData.getScannerDependencyPath()
+    print(scannerDependencyPath)
     realBeacons = scannerData.getRealBeacons()
 
     util.printresultline('19a', len(realBeacons))

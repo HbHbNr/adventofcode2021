@@ -12,12 +12,6 @@ ScannerData = day19a.ScannerData
 
 class TestDay19a(unittest.TestCase):
 
-    # def testDistanceTurnLongestToPositiveX(self):
-    #     distance = Distance(1, 2, -3)
-    #     assert str(distance) == 'D(1/2/-3)'
-    #     distance.turnLongestToPositiveX()
-    #     assert str(distance) == 'D(3/-1/-2)'
-
     def testDistanceUnify(self):
         distance = Distance(1, 2, -3)
         assert str(distance) == 'D(1/2/-3)'
@@ -27,8 +21,22 @@ class TestDay19a(unittest.TestCase):
     def testExample(self) -> None:
         lines = util.readinputfile('inputfiles/day19_example2.txt')
         scannerData: ScannerData = day19a.ScannerData(lines)
+        scanners = scannerData.getScanners()
 
-        assert len(scannerData.getScanners()) == 5
+        assert len(scanners) == 5
+
+        scanner0 = scanners[0]
+        scanner1 = scanners[1]
+        scanner2 = scanners[2]
+        scanner3 = scanners[3]
+        scanner4 = scanners[4]
+        scannerDependencyPath = scannerData.getScannerDependencyPath()
+        assert scannerDependencyPath == [(scanner0, scanner1),
+                                         (scanner1, scanner4),
+                                         (scanner4, scanner2),
+                                         (scanner1, scanner3)]
+
+        assert len(scannerData.getRealBeacons()) == 79
 
     def testInput(self) -> None:
         lines = util.readinputfile('inputfiles/day19_input.txt')
