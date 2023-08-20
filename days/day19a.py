@@ -151,19 +151,6 @@ class ScannerData:
         self._realBeacons = self.filterOverlappingBeacons()
         print(self._realBeacons)
 
-    def cleanOverlappingScannerMap(self) -> None:
-        scannerPairs: List[ScannerPair] = list(self._overlappingScannerMap.keys())
-        for scannerPair in scannerPairs:
-            overlappingBeaconMap: OverlappingBeaconMap = self._overlappingScannerMap[scannerPair]
-            if len(overlappingBeaconMap) < 12:
-                # the two scanners do not have at least 12 overlapping beacons
-                del self._overlappingScannerMap[scannerPair]
-            else:
-                print(scannerPair)
-                for beacon, beaconList in overlappingBeaconMap.items():
-                    print(f'{beacon}: {beaconList[0]}')
-                print()
-
     @classmethod
     def addToOverlappingScannerMap(cls, overlappingScannerMap: OverlappingScannerMap,
                                    scannerBeaconPair0: ScannerBeaconPair, scannerBeaconPair1: ScannerBeaconPair) -> None:
@@ -200,6 +187,19 @@ class ScannerData:
                                          'but now found {scanner1Beacon0} and {scanner1Beacon1}')
                 else:
                     raise ValueError(f'BeaconList {beaconList} has too many entries: {len(beaconList)}')
+
+    def cleanOverlappingScannerMap(self) -> None:
+        scannerPairs: List[ScannerPair] = list(self._overlappingScannerMap.keys())
+        for scannerPair in scannerPairs:
+            overlappingBeaconMap: OverlappingBeaconMap = self._overlappingScannerMap[scannerPair]
+            if len(overlappingBeaconMap) < 12:
+                # the two scanners do not have at least 12 overlapping beacons
+                del self._overlappingScannerMap[scannerPair]
+            else:
+                print(scannerPair)
+                for beacon, beaconList in overlappingBeaconMap.items():
+                    print(f'{beacon}: {beaconList[0]}')
+                print()
 
     def filterOverlappingBeacons(self) -> List[Beacon]:
         realBeacons = self._beacons.copy()
