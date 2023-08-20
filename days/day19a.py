@@ -161,7 +161,7 @@ class ScannerData:
             else:
                 print(scannerPair)
                 for beacon, beaconList in overlappingBeaconMap.items():
-                    print(f'{beacon}: {beaconList}')
+                    print(f'{beacon}: {beaconList[0]}')
                 print()
 
     @classmethod
@@ -204,8 +204,14 @@ class ScannerData:
     def filterOverlappingBeacons(self) -> List[Beacon]:
         realBeacons = self._beacons.copy()
         # Dict['Beacon', List['Beacon']]
-        for overlappingBeaconMap in self._overlappingScannerMap.values():
-            if len(overlappingBeaconMap) >= 12:
+        for scannerPair, overlappingBeaconMap in self._overlappingScannerMap.items():
+            # this direct check needs to be a chain of references instead, to
+            # decide if the left or the right beacon is actually overlapping
+            if scannerPair == (self._scanners[2], self._scanners[4]):
+                for overlappingBeacon in overlappingBeaconMap.keys():
+                    if overlappingBeacon in realBeacons:
+                        realBeacons.remove(overlappingBeacon)
+            else:
                 for beaconList in overlappingBeaconMap.values():
                     overlappingBeacon = beaconList[0]
                     if overlappingBeacon in realBeacons:
