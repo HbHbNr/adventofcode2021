@@ -7,7 +7,12 @@ Vector = util.vector.Vector
 
 class TestVector(unittest.TestCase):
 
-    def testVectorRotateAxes(self) -> None:
+    def testClone(self) -> None:
+        vector1 = Vector(1, 2, 3)
+        vector2 = vector1.clone()
+        assert vector1 == vector2
+
+    def testRotateAxes(self) -> None:
         vector = Vector(1, 2, 3)
         assert str(vector) == 'V(1/2/3)'
         vector.rotateAxes()
@@ -17,7 +22,7 @@ class TestVector(unittest.TestCase):
         vector.rotateAxes()
         assert str(vector) == 'V(1/2/3)'
 
-    def testVectorTurnAroundX90(self) -> None:
+    def testTurnAroundX90(self) -> None:
         vector = Vector(1, 2, 3)
         assert str(vector) == 'V(1/2/3)'
         vector.turnAroundX90()
@@ -29,7 +34,7 @@ class TestVector(unittest.TestCase):
         vector.turnAroundX90()
         assert str(vector) == 'V(1/2/3)'
 
-    def testVectorTurnAroundY90(self) -> None:
+    def testTurnAroundY90(self) -> None:
         vector = Vector(1, 2, 3)
         assert str(vector) == 'V(1/2/3)'
         vector.turnAroundY90()
@@ -41,7 +46,7 @@ class TestVector(unittest.TestCase):
         vector.turnAroundY90()
         assert str(vector) == 'V(1/2/3)'
 
-    def testVectorTurnAroundZ90(self) -> None:
+    def testTurnAroundZ90(self) -> None:
         vector = Vector(1, 2, 3)
         assert str(vector) == 'V(1/2/3)'
         vector.turnAroundZ90()
@@ -53,7 +58,7 @@ class TestVector(unittest.TestCase):
         vector.turnAroundZ90()
         assert str(vector) == 'V(1/2/3)'
 
-    def testVectorTurnAroundX180(self) -> None:
+    def testTurnAroundX180(self) -> None:
         vector = Vector(1, 2, 3)
         assert str(vector) == 'V(1/2/3)'
         vector.turnAroundX180()
@@ -61,7 +66,7 @@ class TestVector(unittest.TestCase):
         vector.turnAroundX180()
         assert str(vector) == 'V(1/2/3)'
 
-    def testVectorTurnAroundY180(self) -> None:
+    def testTurnAroundY180(self) -> None:
         vector = Vector(1, 2, 3)
         assert str(vector) == 'V(1/2/3)'
         vector.turnAroundY180()
@@ -69,10 +74,25 @@ class TestVector(unittest.TestCase):
         vector.turnAroundY180()
         assert str(vector) == 'V(1/2/3)'
 
-    def testVectorTurnAroundZ180(self) -> None:
+    def testTurnAroundZ180(self) -> None:
         vector = Vector(1, 2, 3)
         assert str(vector) == 'V(1/2/3)'
         vector.turnAroundZ180()
         assert str(vector) == 'V(-1/-2/3)'
         vector.turnAroundZ180()
         assert str(vector) == 'V(1/2/3)'
+
+    def testReverse(self) -> None:
+        vector1 = Vector(1, 2, 3)
+        vector2 = vector1.clone().reverse()
+        assert vector1.x == -vector2.x
+        assert vector1.y == -vector2.y
+        assert vector1.z == -vector2.z
+
+    def testHash(self) -> None:
+        vector = Vector(1, 2, 3)
+        assert hash(vector) != 0
+
+    def testRepr(self) -> None:
+        vector = Vector(1, 2, 3)
+        assert repr(vector) == str(vector)

@@ -12,43 +12,54 @@ class Vector:
         self.y = y
         self.z = z
 
-    def rotateAxes(self) -> None:
+    def clone(self) -> 'Vector':
+        return Vector(self.x, self.y, self.z)
+
+    def rotateAxes(self) -> 'Vector':
         tmp = self.z
         self.z = self.y
         self.y = self.x
         self.x = tmp
+        return self
 
-    def turnAroundX90(self) -> None:
+    def turnAroundX90(self) -> 'Vector':
         tmp = self.y
         self.y = -self.z
         self.z = tmp
+        return self
 
-    def turnAroundY90(self) -> None:
+    def turnAroundY90(self) -> 'Vector':
         tmp = self.x
         self.x = self.z
         self.z = -tmp
+        return self
 
-    def turnAroundZ90(self) -> None:
+    def turnAroundZ90(self) -> 'Vector':
         tmp = self.x
         self.x = -self.y
         self.y = tmp
+        return self
 
-    def turnAroundX180(self) -> None:
+    def turnAroundX180(self) -> 'Vector':
         self.y = -self.y
         self.z = -self.z
+        return self
 
-    def turnAroundY180(self) -> None:
+    def turnAroundY180(self) -> 'Vector':
         self.x = -self.x
         self.z = -self.z
+        return self
 
-    def turnAroundZ180(self) -> None:
+    def turnAroundZ180(self) -> 'Vector':
         self.x = -self.x
         self.y = -self.y
+        return self
 
-    def reverse(self) -> None:
+    def reverse(self) -> 'Vector':
         self.x = -self.x
         self.y = -self.y
         self.z = -self.z
+        return self
 
     def __eq__(self, other) -> bool:
         return self.x == other.x and self.y == other.y and self.z == other.z
