@@ -1,18 +1,24 @@
 """A class for matrices"""
-from typing import List
+from typing import NamedTuple
 
 
-class Matrix3x3:
+class Matrix3x3(NamedTuple):
 
-    _aij: List[int]
+    a11: int
+    a12: int
+    a13: int
+    a21: int
+    a22: int
+    a23: int
+    a31: int
+    a32: int
+    a33: int
 
-    def __init__(self, xyz: List[int]) -> None:
-        if len(xyz) != 9:
-            raise ValueError('intialization list needs to contain 9 integers')
-        self._aij = xyz.copy()
+    # def __init__(self, aij: Iterable[int]) -> None:
+    #     self.aij = tuple(aij)
 
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
-        return 'M({}/{}/{} {}/{}/{} {}/{}/{})'.format(*self._aij)  # pylint: disable=consider-using-f-string
+        return f'M({self.a11}/{self.a12}/{self.a13} {self.a21}/{self.a22}/{self.a23} {self.a31}/{self.a32}/{self.a33})'
