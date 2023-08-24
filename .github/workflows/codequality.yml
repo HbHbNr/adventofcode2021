@@ -41,7 +41,7 @@ jobs:
         ./lint_pylint.sh
 
   mypy:
-    needs: flake8
+    needs: pylint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -58,7 +58,7 @@ jobs:
         ./mypy.sh
 
   pytest:
-    needs: flake8
+    needs: mypy
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -98,7 +98,7 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   cqall:
-    needs: flake8
+    needs: pytest
     runs-on: ubuntu-latest
     strategy:
       matrix:
