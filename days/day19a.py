@@ -42,10 +42,10 @@ class Distance(vector.Vector):
     #         print('      rvrs:', old, '->', self, sep='')
     #     print('  toX_stop:', old, '->', self, sep='')
 
-    def unify(self) -> None:
+    def unify(self) -> 'Distance':
         coords: List[int] = [abs(self.x), abs(self.y), abs(self.z)]
         coords.sort(reverse=True)
-        self.x, self.y, self.z = coords
+        return Distance(*coords)
 
     def __repr__(self):
         return self.__str__()
@@ -91,7 +91,7 @@ class Scanner:
         distanceCount = 0
         for beacon1, beacon2 in itertools.combinations(self._beacons, 2):
             distance: Distance = Distance.betweenPositions(beacon1.getPosition(), beacon2.getPosition())
-            distance.unify()
+            distance = distance.unify()
             self._distances.append(distance)
             scannerBeaconPair: ScannerBeaconPair = (self, beacon1, beacon2)
             if distance not in distanceMap:

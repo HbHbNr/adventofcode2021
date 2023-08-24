@@ -15,7 +15,7 @@ class TestDay19a(unittest.TestCase):
     def testDistanceUnify(self):
         distance = Distance(1, 2, -3)
         assert str(distance) == 'D(1/2/-3)'
-        distance.unify()
+        distance = distance.unify()
         assert str(distance) == 'D(3/2/1)'
 
     def testExample(self) -> None:

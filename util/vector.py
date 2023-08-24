@@ -1,65 +1,39 @@
 """A class for vectors"""
+from typing import NamedTuple
 
 
-class Vector:
+class Vector(NamedTuple):
 
     x: int
     y: int
     z: int
 
-    def __init__(self, x: int, y: int, z: int) -> None:
-        self.x = x
-        self.y = y
-        self.z = z
-
-    def clone(self) -> 'Vector':
+    def copy(self) -> 'Vector':
         return Vector(self.x, self.y, self.z)
 
     def rotateAxes(self) -> 'Vector':
-        tmp = self.z
-        self.z = self.y
-        self.y = self.x
-        self.x = tmp
-        return self
+        return Vector(self.z, self.x, self.y)
 
     def turnAroundX90(self) -> 'Vector':
-        tmp = self.y
-        self.y = -self.z
-        self.z = tmp
-        return self
+        return Vector(self.x, -self.z, self.y)
 
     def turnAroundY90(self) -> 'Vector':
-        tmp = self.x
-        self.x = self.z
-        self.z = -tmp
-        return self
+        return Vector(self.z, self.y, -self.x)
 
     def turnAroundZ90(self) -> 'Vector':
-        tmp = self.x
-        self.x = -self.y
-        self.y = tmp
-        return self
+        return Vector(-self.y, self.x, self.z)
 
     def turnAroundX180(self) -> 'Vector':
-        self.y = -self.y
-        self.z = -self.z
-        return self
+        return Vector(self.x, -self.y, -self.z)
 
     def turnAroundY180(self) -> 'Vector':
-        self.x = -self.x
-        self.z = -self.z
-        return self
+        return Vector(-self.x, self.y, -self.z)
 
     def turnAroundZ180(self) -> 'Vector':
-        self.x = -self.x
-        self.y = -self.y
-        return self
+        return Vector(-self.x, -self.y, self.z)
 
     def reverse(self) -> 'Vector':
-        self.x = -self.x
-        self.y = -self.y
-        self.z = -self.z
-        return self
+        return Vector(-self.x, -self.y, -self.z)
 
     def __eq__(self, other) -> bool:
         return self.x == other.x and self.y == other.y and self.z == other.z
