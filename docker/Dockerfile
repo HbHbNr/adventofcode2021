@@ -7,4 +7,4 @@ COPY inputfiles inputfiles
 COPY util util
 COPY *.sh .
 
-CMD ./runall.sh
+CMD ["./runall.sh"]
